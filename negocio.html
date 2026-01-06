@@ -1,0 +1,203 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maf Sazón - Menú Interactivo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --naranja: #f39200; --blanco: #ffffff; --fondo: #1a1a1a; --rojo: #be1622; }
+        body { font-family: 'Montserrat', sans-serif; margin: 0; background-color: var(--fondo); background-image: url('https://www.transparenttextures.com/patterns/dark-matter.png'); color: white; padding-bottom: 120px; }
+        header { text-align: center; padding: 30px 20px; background: white; border-bottom: 8px solid var(--rojo); }
+        .logo-principal { width: 120px; border-radius: 50%; }
+        header h1 { color: var(--rojo); margin: 0; font-size: 2rem; }
+        .titulo-seccion { font-family: 'Dancing Script', cursive; color: var(--blanco); font-size: 2.2rem; text-align: center; margin: 35px auto 15px; padding: 10px; background-color: var(--naranja); border-radius: 10px; width: 85%; }
+        .menu-container { padding: 0 20px; max-width: 600px; margin: auto; }
+        .item { margin-bottom: 15px; border-bottom: 1px dotted rgba(255,255,255,0.2); padding-bottom: 10px; }
+        .item-header { display: flex; justify-content: space-between; align-items: center; }
+        .nombre { font-weight: bold; font-size: 0.95rem; text-transform: uppercase; flex: 1; }
+        .controles { display: flex; align-items: center; gap: 10px; background: #2c2c2c; padding: 5px 10px; border-radius: 20px; }
+        .btn-cant { background: var(--naranja); border: none; color: white; width: 28px; height: 28px; border-radius: 50%; font-weight: bold; cursor: pointer; }
+        .cantidad { font-weight: bold; min-width: 20px; text-align: center; }
+        .descripcion { font-size: 0.8rem; color: #ccc; margin-top: 5px; line-height: 1.4; }
+        .contenedor-rellenos { display: none; margin-top: 10px; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 8px; border-left: 3px solid var(--naranja); }
+        .select-relleno { width: 100%; padding: 8px; margin-bottom: 5px; background: #333; color: white; border: 1px solid #555; border-radius: 5px; font-size: 0.85rem; }
+        .btn-whatsapp { position: fixed; bottom: 20px; left: 5%; width: 90%; background: #25d366; color: white; text-align: center; padding: 18px; text-decoration: none; font-weight: bold; border-radius: 50px; font-size: 1.1rem; box-shadow: 0 4px 15px rgba(0,0,0,0.5); z-index: 1000; display: flex; justify-content: center; align-items: center; gap: 10px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="C:\Users\Pc Ailyn\Downloads\logo maf sazon.jpg" alt="Maf Sazón" class="logo-principal">
+    <h1>Maf Sazón</h1>
+    <p style="color: #333; font-weight: bold; margin: 5px 0 0;">Comida Típica Venezolana</p>
+</header>
+
+<div class="menu-container">
+    
+    <div class="titulo-seccion">Arepas</div>
+    <div class="item" data-nombre="Arepa Pabellón">
+        <div class="item-header"><span class="nombre">Pabellón</span><div class="controles"><button class="btn-cant" onclick="cambiar(this,-1)">-</button><span class="cantidad">0</span><button class="btn-cant" onclick="cambiar(this,1)">+</button></div></div>
+        <div class="descripcion">Carne mechada, porotos negros, tajadas y queso.</div>
+    </div>
+    <div class="item" data-nombre="Arepa Dominó">
+        <div class="item-header"><span class="nombre">Dominó</span><div class="controles"><button class="btn-cant" onclick="cambiar(this,-1)">-</button><span class="cantidad">0</span><button class="btn-cant" onclick="cambiar(this,1)">+</button></div></div>
+        <div class="descripcion">Porotos negros y queso.</div>
+    </div>
+    <div class="item" data-nombre="Arepa 1 Relleno" data-tipo="arepa" data-cant-rellenos="1">
+        <div class="item-header"><span class="nombre">1 Relleno</span><div class="controles"><button class="btn-cant" onclick="cambiar(this,-1)">-</button><span class="cantidad">0</span><button class="btn-cant" onclick="cambiar(this,1)">+</button></div></div>
+        <div class="contenedor-rellenos"></div>
+    </div>
+    <div class="item" data-nombre="Arepa 2 Rellenos" data-tipo="arepa" data-cant-rellenos="2">
+        <div class="item-header"><span class="nombre">2 Rellenos</span><div class="controles"><button class="btn-cant" onclick="cambiar(this,-1)">-</button><span class="cantidad">0</span><button class="btn-cant" onclick="cambiar(this,1)">+</button></div></div>
+        <div class="contenedor-rellenos"></div>
+    </div>
+    <div class="item" data-nombre="Arepa 3 Rellenos" data-tipo="arepa" data-cant-rellenos="3">
+        <div class="item-header"><span class="nombre">3 Rellenos</span><div class="controles"><button class="btn-cant" onclick="cambiar(this,-1)">-</button><span class="cantidad">0</span><button class="btn-cant" onclick="cambiar(this,1)">+</button></div></div>
+        <div class="contenedor-rellenos"></div>
+    </div>
+
+    <div class="titulo-seccion">Cachapas</div>
+    <div class="item" data-nombre="Cachapa con Queso"><div class="item-header"><span class="nombre">Con Queso</span><div class="controles"><button class="btn-cant" onclick="cambiar(this,-1)">-</button><span class="cantidad">0</span><button class="btn-cant" onclick="cambiar(this,1)">+</button></div></div></div>
+    <div class="item" data-nombre="Cachapa Jamón y Queso"><div class="item-header"><span class="nombre">Con Jamón y Queso</span><div class="controles"><button class="btn-cant" onclick="cambiar(this,-1)">-</button><span class="cantidad">0</span><button class="btn-cant" onclick="cambiar(this,1)">+</button></div></div></div>
+    <div class="item" data-nombre="Cachapa Queso y Mechada"><div class="item-header"><span class="nombre">Con Queso y Mechada</span><div class="controles"><button class="btn-cant" onclick="cambiar(this,-1)">-</button><span class="cantidad">0</span><button class="btn-cant" onclick="cambiar(this,1)">+</button></div></div></div>
+    <div class="item" data-nombre="Cachapa Verduras"><div class="item-header"><span class="nombre">Verduras Salteadas</span><div class="controles"><button class="btn-cant" onclick="cambiar(this,-1)">-</button><span class="cantidad">0</span><button class="btn-cant" onclick="cambiar(this,1)">+</button></div></div></div>
+    <div class="item" data-nombre="Adicional Arepa/Cachapa" data-tipo="adicional" data-cant-rellenos="1">
+        <div class="item-header"><span class="nombre">Agregar Adicional</span><div class="controles"><button class="btn-cant" onclick="cambiar(this,-1)">-</button><span class="cantidad">0</span><button class="btn-cant" onclick="cambiar(this,1)">+</button></div></div>
+        <div class="contenedor-rellenos"></div>
+    </div>
+
+    <div class="titulo-seccion">Empanadas</div>
+    <div class="item" data-nombre="Empanada 1 Relleno" data-tipo="empanada" data-cant-rellenos="1">
+        <div class="item-header"><span class="nombre">1 Relleno</span><div class="controles"><button class="btn-cant" onclick="cambiar(this,-1)">-</button><span class="cantidad">0</span><button class="btn-cant" onclick="cambiar(this,1)">+</button></div></div>
+        <div class="contenedor-rellenos"></div>
+    </div>
+    <div class="item" data-nombre="Empanada Pabellón"><div class="item-header"><span class="nombre">Pabellón</span><div class="controles"><button class="btn-cant" onclick="cambiar(this,-1)">-</button><span class="cantidad">0</span><button class="btn-cant" onclick="cambiar(this,1)">+</button></div></div></div>
+    <div class="item" data-nombre="Empanada Dominó"><div class="item-header"><span class="nombre">Dominó</span><div class="controles"><button class="btn-cant" onclick="cambiar(this,-1)">-</button><span class="cantidad">0</span><button class="btn-cant" onclick="cambiar(this,1)">+</button></div></div></div>
+
+    <div class="titulo-seccion">Patacón</div>
+    <div class="item" data-nombre="Patacón Pollo"><div class="item-header"><span class="nombre">Pollo</span><div class="controles"><button class="btn-cant" onclick="cambiar(this,-1)">-</button><span class="cantidad">0</span><button class="btn-cant" onclick="cambiar(this,1)">+</button></div></div></div>
+    <div class="item" data-nombre="Patacón Carne"><div class="item-header"><span class="nombre">Carne</span><div class="controles"><button class="btn-cant" onclick="cambiar(this,-1)">-</button><span class="cantidad">0</span><button class="btn-cant" onclick="cambiar(this,1)">+</button></div></div></div>
+    <div class="item" data-nombre="Patacón Mixto"><div class="item-header"><span class="nombre">Mixto (Carne y Pollo)</span><div class="controles"><button class="btn-cant" onclick="cambiar(this,-1)">-</button><span class="cantidad">0</span><button class="btn-cant" onclick="cambiar(this,1)">+</button></div></div></div>
+    <div class="item" data-nombre="Patacón Verduras"><div class="item-header"><span class="nombre">Verduras Salteadas</span><div class="controles"><button class="btn-cant" onclick="cambiar(this,-1)">-</button><span class="cantidad">0</span><button class="btn-cant" onclick="cambiar(this,1)">+</button></div></div></div>
+
+    <div class="titulo-seccion">Tequeños</div>
+    <div class="item" data-nombre="Tequeños Media Docena (6)"><div class="item-header"><span class="nombre">Media Docena (6)</span><div class="controles"><button class="btn-cant" onclick="cambiar(this,-1)">-</button><span class="cantidad">0</span><button class="btn-cant" onclick="cambiar(this,1)">+</button></div></div></div>
+    <div class="item" data-nombre="Tequeños Docena (12)"><div class="item-header"><span class="nombre">Docena (12)</span><div class="controles"><button class="btn-cant" onclick="cambiar(this,-1)">-</button><span class="cantidad">0</span><button class="btn-cant" onclick="cambiar(this,1)">+</button></div></div></div>
+
+    <div class="titulo-seccion">Especiales</div>
+    <div class="item" data-nombre="Pollo a la Broaster">
+        <div class="item-header"><span class="nombre">Pollo a la Broaster</span><div class="controles"><button class="btn-cant" onclick="cambiar(this,-1)">-</button><span class="cantidad">0</span><button class="btn-cant" onclick="cambiar(this,1)">+</button></div></div>
+        <div class="descripcion">5 arepitas fritas, ensalada y salsa de ajo.</div>
+    </div>
+    <div class="item" data-nombre="Pabellón Tradicional">
+        <div class="item-header"><span class="nombre">Pabellón Tradicional</span><div class="controles"><button class="btn-cant" onclick="cambiar(this,-1)">-</button><span class="cantidad">0</span><button class="btn-cant" onclick="cambiar(this,1)">+</button></div></div>
+        <div class="descripcion">Arroz, caraotas, carne mechada, 3 arepitas y queso.</div>
+    </div>
+    <div class="item" data-nombre="Pabellón Vegano">
+        <div class="item-header"><span class="nombre">Pabellón Vegano</span><div class="controles"><button class="btn-cant" onclick="cambiar(this,-1)">-</button><span class="cantidad">0</span><button class="btn-cant" onclick="cambiar(this,1)">+</button></div></div>
+        <div class="descripcion">Arroz, porotos negros (caraotas), verduras salteadas y 3 arepitas.</div>
+    </div>
+
+    <div class="titulo-seccion">Bebidas</div>
+    <div class="bebidas-grid">
+        <div class="item" data-nombre="Nestea"><div class="item-header"><span class="nombre">Nestea</span><div class="controles"><button class="btn-cant" onclick="cambiar(this,-1)">-</button><span class="cantidad">0</span><button class="btn-cant" onclick="cambiar(this,1)">+</button></div></div></div>
+        <div class="item" data-nombre="Malta Polar"><div class="item-header"><span class="nombre">Malta</span><div class="controles"><button class="btn-cant" onclick="cambiar(this,-1)">-</button><span class="cantidad">0</span><button class="btn-cant" onclick="cambiar(this,1)">+</button></div></div></div>
+        <div class="item" data-nombre="Agua de Panela"><div class="item-header"><span class="nombre">Panela</span><div class="controles"><button class="btn-cant" onclick="cambiar(this,-1)">-</button><span class="cantidad">0</span><button class="btn-cant" onclick="cambiar(this,1)">+</button></div></div></div>
+        <div class="item" data-nombre="Gaseosa"><div class="item-header"><span class="nombre">Gaseosa</span><div class="controles"><button class="btn-cant" onclick="cambiar(this,-1)">-</button><span class="cantidad">0</span><button class="btn-cant" onclick="cambiar(this,1)">+</button></div></div></div>
+    </div>
+
+</div>
+
+<a href="#" onclick="enviarPedido()" class="btn-whatsapp">
+    🛒 ENVIAR PEDIDO (<span id="total-cont">0</span>)
+</a>
+
+<script>
+    const opcionesArepa = ["Queso", "Jamón y Queso", "Pollo Guisado", "Reina Pepiada", "Verduras Salteadas", "Carne Mechada", "Carne Picada", "Salchicha", "Chorizo", "Perico"];
+    const opcionesEmpanada = ["Queso", "Jamón y Queso", "Pollo", "Verduras", "Carne Mechada", "Carne Picada"];
+    const opcionesAdicionales = ["Aguacate", "Queso", "Chicharrón"];
+
+    let carrito = {};
+
+    function cambiar(boton, cambio) {
+        const itemElemento = boton.closest('.item');
+        const nombre = itemElemento.getAttribute('data-nombre');
+        const cantRellenos = parseInt(itemElemento.getAttribute('data-cant-rellenos') || 0);
+        const tipo = itemElemento.getAttribute('data-tipo');
+        const cantidadElemento = itemElemento.querySelector('.cantidad');
+        const contenedorRellenos = itemElemento.querySelector('.contenedor-rellenos');
+        
+        let cant = parseInt(cantidadElemento.innerText);
+        cant = Math.max(0, cant + cambio);
+        cantidadElemento.innerText = cant;
+
+        if (cant > 0) {
+            carrito[nombre] = { cantidad: cant };
+            if (cantRellenos > 0) {
+                contenedorRellenos.style.display = "block";
+                generarSelects(contenedorRellenos, cant, cantRellenos, tipo);
+            }
+        } else {
+            delete carrito[nombre];
+            if (contenedorRellenos) {
+                contenedorRellenos.style.display = "none";
+                contenedorRellenos.innerHTML = "";
+            }
+        }
+        document.getElementById('total-cont').innerText = Object.values(carrito).reduce((a, b) => a + b.cantidad, 0);
+    }
+
+    function generarSelects(contenedor, cantUnidades, cantRellenos, tipo) {
+        contenedor.innerHTML = "";
+        let opciones = opcionesArepa;
+        if(tipo === 'empanada') opciones = opcionesEmpanada;
+        if(tipo === 'adicional') opciones = opcionesAdicionales;
+        
+        for (let i = 1; i <= cantUnidades; i++) {
+            const label = document.createElement('div');
+            label.style.fontSize = "0.7rem"; label.style.marginBottom = "5px";
+            label.innerText = `Opción para unidad #${i}:`;
+            contenedor.appendChild(label);
+            
+            for (let j = 0; j < cantRellenos; j++) {
+                const select = document.createElement('select');
+                select.className = "select-relleno";
+                select.innerHTML = `<option value="">-- Seleccionar --</option>` + 
+                                   opciones.map(opt => `<option value="${opt}">${opt}</option>`).join('');
+                contenedor.appendChild(select);
+            }
+        }
+    }
+
+    function enviarPedido() {
+        const telefono = "5491165595353";
+        if (Object.keys(carrito).length === 0) return alert("Selecciona algo primero");
+        
+        let msg = "¡Hola Maf Sazón! 🇻🇪 Mi pedido es:\n\n";
+        const items = document.querySelectorAll('.item');
+
+        items.forEach(item => {
+            const cant = parseInt(item.querySelector('.cantidad').innerText);
+            if (cant > 0) {
+                const nombre = item.getAttribute('data-nombre');
+                msg += `🔸 ${cant}x ${nombre}`;
+                
+                const selects = item.querySelectorAll('.select-relleno');
+                if (selects.length > 0) {
+                    let elegidos = [];
+                    selects.forEach(s => { if(s.value) elegidos.push(s.value); });
+                    if (elegidos.length > 0) msg += ` [${elegidos.join(' + ')}]`;
+                }
+                msg += "\n";
+            }
+        });
+
+        msg += "\n¿Me confirman precio total?";
+        window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+</script>
+
+</body>
+</html>
