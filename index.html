@@ -25,7 +25,6 @@
             padding-bottom: 120px;
         }
 
-        /* Header Tricolor Elegante */
         .header {
             background: linear-gradient(180deg, var(--ven-red) 0%, #a00d1d 100%);
             text-align: center;
@@ -69,10 +68,8 @@
             font-weight: bold;
             margin: 30px 0 15px;
             text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
-        /* Tarjeta Estilo Imagen Subida */
         .producto-card {
             background-color: var(--card-bg);
             border-radius: 12px;
@@ -96,41 +93,36 @@
             padding: 12px 15px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
         }
 
-        .contenido h3 {
-            margin: 0;
-            font-size: 1.1rem;
-            font-weight: 700;
-        }
+        .contenido h3 { margin: 0; font-size: 1.1rem; }
 
         .descripcion {
             font-size: 0.75rem;
             color: var(--text-gray);
             margin-top: 4px;
-            line-height: 1.2;
         }
 
-        /* Selector Punteado */
-        .selector-rellenos {
-            width: 85%;
-            padding: 6px;
+        .selector-rellenos, .input-notas {
+            width: 90%;
+            padding: 8px;
             border: 1px dashed var(--ven-blue);
             border-radius: 5px;
             background: #f9f9f9;
             margin-top: 8px;
             font-family: inherit;
             font-size: 0.85rem;
-            color: var(--text-dark);
         }
 
-        /* Cápsula de Cantidad */
+        .input-notas {
+            border: 1px solid #ddd;
+            background: #fff;
+        }
+
         .controles-wrapper {
             position: absolute;
             right: 12px;
-            top: 50%;
-            transform: translateY(-50%);
+            top: 25px; /* Ajustado para que no tape el texto */
         }
 
         .capsula {
@@ -151,20 +143,14 @@
             font-weight: bold;
             font-size: 1.3rem;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         .cant-num {
             color: white;
             font-weight: bold;
-            margin: 0 12px;
-            min-width: 15px;
-            text-align: center;
+            margin: 0 10px;
         }
 
-        /* Footer */
         .footer-total {
             position: fixed;
             bottom: 0;
@@ -185,132 +171,129 @@
             font-weight: bold;
             width: 100%;
             max-width: 400px;
-            font-size: 1rem;
             cursor: pointer;
         }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <img src="logo.jpg" alt="Maf Sazón">
-        <h2 style="color: white; margin-top: 10px;">Maf Sazón</h2>
-    </div>
+<div class="header">
+    <img src="logo.jpg" alt="Maf Sazón">
+    <h2 style="color: white; margin-top: 10px;">Maf Sazón</h2>
+</div>
 
-    <div class="container" id="menu-box">
-        </div>
+<div class="container" id="menu-box"></div>
 
-    <div class="footer-total">
-        <div id="total-val" style="color: #333; font-weight: bold; margin-bottom: 10px; font-size: 1.3rem;">Total: $0.00</div>
-        <button class="btn-whatsapp" onclick="enviarPedido()">ENVIAR PEDIDO POR WHATSAPP</button>
-    </div>
+<div class="footer-total">
+    <div id="total-val" style="color: #333; font-weight: bold; margin-bottom: 10px; font-size: 1.3rem;">Total: $0.00</div>
+    <button class="btn-whatsapp" onclick="enviarPedido()">ENVIAR PEDIDO POR WHATSAPP</button>
+</div>
 
-    <script>
-        const rellenosArepas = "Queso, Jamón y Queso, Pollo Guisado, Reina Pepiada, Verduras Salteadas, Carne Mechada, Carne Picada, Salchicha, Chorizo, Perico";
-        const rellenosEmpanadas = "Queso, Jamón y Queso, Pollo, Verduras, Carne Mechada, Carne Picada";
+<script>
+    const rellenosArepas = "Queso, jamon y queso, pollo guisado, reina pepiada, verduras salteadas, carne mechada, carne picada, salchica, chorizo, perico.";
+    const rellenosEmpanadas = "Queso, jamon y queso, pollo, verduras, carne mechada, carne picada.";
 
-        const menu = [
-            { cat: "Arepas", items: [
-                { n: "Arepa Personalizada", p: 5, opts: [{n: "1 Relleno", p: 5}, {n: "2 Rellenos", p: 9}, {n: "3 Rellenos", p: 12}], det: rellenosArepas },
-                { n: "Arepa Pabellón", p: 10, det: "Carne mechada, caraotas, tajadas y queso" },
-                { n: "Arepa Dominó", p: 9, det: "Caraotas negras y queso" }
-            ]},
-            { cat: "Empanadas", items: [
-                { n: "Empanada", p: 4, opts: [{n: "1 Relleno", p: 4}, {n: "Pabellón", p: 8}, {n: "Dominó", p: 7}], det: rellenosEmpanadas }
-            ]},
-            { cat: "Cachapas", items: [
-                { n: "Cachapa con Queso de Mano", p: 12 },
-                { n: "Cachapa con Verduras Salteadas", p: 13 },
-                { n: "Adicionales", p: 3, opts: [{n: "Aguacate", p: 3}, {n: "Queso Extra", p: 2}, {n: "Chicharrón", p: 4}] }
-            ]},
-            { cat: "Patacón", items: [
-                { n: "Patacón de Pollo", p: 10 },
-                { n: "Patacón de Carne", p: 10 },
-                { n: "Patacón Mixto", p: 12 },
-                { n: "Patacón Verduras Salteadas", p: 9 }
-            ]},
-            { cat: "Tequeños", items: [
-                { n: "Media Docena (6)", p: 7 },
-                { n: "Docena (12)", p: 12 }
-            ]},
-            { cat: "Especiales", items: [
-                { n: "Pabellón Vegano", p: 11, det: "Arroz, caraotas, verduras salteadas y 3 arepitas" }
-            ]},
-            { cat: "Bebidas", items: [
-                { n: "Malta / Papelón", p: 3 },
-                { n: "Nestea", p: 3.5 },
-                { n: "Gaseosas", p: 2.5 }
-            ]}
-        ];
+    const menu = [
+        { cat: "Arepas", items: [
+            { n: "Arepa Personalizada", p: 5, opts: [{n: "1 Relleno", p: 5}, {n: "2 Rellenos", p: 9}, {n: "3 Rellenos", p: 12}], det: rellenosArepas, nota: "Ej: Una de carne, otra de jamón" },
+            { n: "Arepa Pabellón", p: 10, det: "Carne mechada, caraotas, tajadas y queso" },
+            { n: "Arepa Dominó", p: 9, det: "Caraotas negras y queso" }
+        ]},
+        { cat: "Empanadas", items: [
+            { n: "Empanada", p: 4, opts: [{n: "1 Relleno", p: 4}, {n: "Pabellón", p: 8}, {n: "Dominó", p: 7}], det: rellenosEmpanadas, nota: "Indica los sabores aquí" }
+        ]},
+        { cat: "Cachapas", items: [
+            { n: "Cachapa con Queso de Mano", p: 12 },
+            { n: "Cachapa con Verduras Salteadas", p: 13 },
+            { n: "Adicionales", p: 3, opts: [{n: "Aguacate", p: 3}, {n: "Queso Extra", p: 2}, {n: "Chicharrón", p: 4}] }
+        ]},
+        { cat: "Patacón", items: [
+            { n: "Pollo", p: 10 }, { n: "Carne", p: 10 }, { n: "Mixto", p: 12 }, { n: "Verduras Salteadas", p: 9 }
+        ]},
+        { cat: "Tequeños", items: [
+            { n: "Media Docena (6)", p: 7 }, { n: "Docena (12)", p: 12 }
+        ]},
+        { cat: "Especiales", items: [
+            { n: "Pabellón Vegano", p: 11, det: "Arroz, caraotas, verduras salteadas y 3 arepitas" }
+        ]},
+        { cat: "Bebidas", items: [
+            { n: "Nestea", p: 3.5 }, { n: "Agua de Panela", p: 3 }, { n: "Gaseosas", p: 2.5 }, { n: "Malta / Papelón", p: 3 }
+        ]}
+    ];
 
-        let pedido = {};
+    let pedido = {};
 
-        function init() {
-            const box = document.getElementById('menu-box');
-            menu.forEach(seccion => {
-                box.innerHTML += `<div class="categoria-titulo">${seccion.cat}</div>`;
-                seccion.items.forEach((item, i) => {
-                    const id = `${seccion.cat}-${i}`.replace(/\s+/g, '');
-                    pedido[id] = { nombre: item.n, cant: 0, precio: item.p };
-                    
-                    box.innerHTML += `
-                        <div class="producto-card">
-                            <div class="barra-azul"></div>
-                            <div class="contenido">
-                                <h3>${item.n}</h3>
-                                ${item.det ? `<div class="descripcion">${item.det}</div>` : ''}
-                                ${item.opts ? `
-                                    <select class="selector-rellenos" onchange="cambiarPrecio('${id}', this)">
-                                        ${item.opts.map(o => `<option value="${o.p}">${o.n} - $${o.p}</option>`).join('')}
-                                    </select>
-                                ` : `<div style="font-weight:bold; color:var(--ven-blue); margin-top:5px;">$${item.p.toFixed(2)}</div>`}
-                            </div>
-                            <div class="controles-wrapper">
-                                <div class="capsula">
-                                    <button class="btn-op" onclick="updateCant('${id}', -1)">-</button>
-                                    <span class="cant-num" id="cant-${id}">0</span>
-                                    <button class="btn-op" onclick="updateCant('${id}', 1)">+</button>
-                                </div>
+    function init() {
+        const box = document.getElementById('menu-box');
+        menu.forEach(seccion => {
+            box.innerHTML += `<div class="categoria-titulo">${seccion.cat}</div>`;
+            seccion.items.forEach((item, i) => {
+                const id = `${seccion.cat}-${i}`.replace(/\s+/g, '');
+                pedido[id] = { nombre: item.n, cant: 0, precio: item.p, variante: item.opts ? item.opts[0].n : "" };
+                
+                box.innerHTML += `
+                    <div class="producto-card">
+                        <div class="barra-azul"></div>
+                        <div class="contenido">
+                            <h3>${item.n}</h3>
+                            ${item.det ? `<div class="descripcion">${item.det}</div>` : ''}
+                            ${item.opts ? `
+                                <select class="selector-rellenos" onchange="cambiarPrecio('${id}', this)">
+                                    ${item.opts.map(o => `<option value="${o.p}">${o.n} - $${o.p}</option>`).join('')}
+                                </select>
+                            ` : `<div style="font-weight:bold; color:var(--ven-blue); margin-top:5px;">$${item.p.toFixed(2)}</div>`}
+                            <input type="text" id="nota-${id}" class="input-notas" placeholder="${item.nota || 'Notas o gustos...'}">
+                        </div>
+                        <div class="controles-wrapper">
+                            <div class="capsula">
+                                <button class="btn-op" onclick="updateCant('${id}', -1)">-</button>
+                                <span class="cant-num" id="cant-${id}">0</span>
+                                <button class="btn-op" onclick="updateCant('${id}', 1)">+</button>
                             </div>
                         </div>
-                    `;
-                });
+                    </div>
+                `;
             });
-        }
+        });
+    }
 
-        function cambiarPrecio(id, el) {
-            pedido[id].precio = parseFloat(el.value);
-            pedido[id].variante = el.options[el.selectedIndex].text;
-            calc();
-        }
+    function cambiarPrecio(id, el) {
+        pedido[id].precio = parseFloat(el.value);
+        pedido[id].variante = el.options[el.selectedIndex].text.split(' -')[0];
+        calc();
+    }
 
-        function updateCant(id, d) {
-            pedido[id].cant = Math.max(0, pedido[id].cant + d);
-            document.getElementById(`cant-${id}`).innerText = pedido[id].cant;
-            calc();
-        }
+    function updateCant(id, d) {
+        pedido[id].cant = Math.max(0, pedido[id].cant + d);
+        document.getElementById(`cant-${id}`).innerText = pedido[id].cant;
+        calc();
+    }
 
-        function calc() {
-            let total = 0;
-            for (let k in pedido) total += pedido[k].cant * pedido[k].precio;
-            document.getElementById('total-val').innerText = `Total: $${total.toFixed(2)}`;
-        }
+    function calc() {
+        let total = 0;
+        for (let k in pedido) total += pedido[k].cant * pedido[k].precio;
+        document.getElementById('total-val').innerText = `Total: $${total.toFixed(2)}`;
+    }
 
-        function enviarPedido() {
-            let msg = "*PEDIDO MAF SAZÓN*%0A%0A";
-            let tiene = false;
-            for (let k in pedido) {
-                if (pedido[k].cant > 0) {
-                    msg += `• ${pedido[k].nombre} ${pedido[k].variante || ''} x${pedido[k].cant}%0A`;
-                    tiene = true;
-                }
+    function enviarPedido() {
+        let msg = "*PEDIDO MAF SAZÓN*%0A%0A";
+        let tiene = false;
+        for (let k in pedido) {
+            if (pedido[k].cant > 0) {
+                let nota = document.getElementById(`nota-${k}`).value;
+                msg += `• *${pedido[k].nombre}* x${pedido[k].cant}`;
+                if (pedido[k].variante) msg += ` (${pedido[k].variante})`;
+                if (nota) msg += `%0A  _Nota: ${nota}_`;
+                msg += `%0A`;
+                tiene = true;
             }
-            if (!tiene) return alert("Selecciona productos");
-            msg += `%0A*${document.getElementById('total-val').innerText}*`;
-            window.open(`https://wa.me/TUNUMERO?text=${msg}`);
         }
+        if (!tiene) return alert("Selecciona productos");
+        msg += `%0A*${document.getElementById('total-val').innerText}*`;
+        window.open(`https://wa.me/5491111111111?text=${msg}`); // CAMBIA EL NÚMERO AQUÍ
+    }
 
-        init();
-    </script>
+    init();
+</script>
 </body>
 </html>
