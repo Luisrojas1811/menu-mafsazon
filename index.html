@@ -19,7 +19,7 @@
             margin: 0;
             background-color: var(--bg-dark);
             color: white;
-            padding-bottom: 120px;
+            padding-bottom: 140px;
         }
 
         .header {
@@ -54,6 +54,7 @@
             font-size: 1.4rem;
             font-weight: bold;
             margin: 30px 0 15px;
+            text-transform: uppercase;
         }
 
         .producto-card {
@@ -76,17 +77,17 @@
 
         .selector-rellenos {
             width: 85%;
-            padding: 5px;
+            padding: 8px;
             border: 1px dashed var(--ven-blue);
             border-radius: 4px;
             margin-top: 8px;
             font-family: inherit;
             color: #555;
+            background: #f9f9f9;
         }
 
         .precio-fijo { font-weight: bold; color: #555; margin-top: 5px; }
 
-        /* CONTROLES + y - */
         .controles-posicion {
             position: absolute;
             right: 15px;
@@ -119,8 +120,6 @@
             transition: 0.2s;
         }
 
-        .btn-accion:active { transform: scale(0.9); }
-
         .cantidad-valor {
             color: white;
             font-weight: bold;
@@ -130,7 +129,6 @@
             text-align: center;
         }
 
-        /* FOOTER */
         .footer-pedido {
             position: fixed;
             bottom: 0;
@@ -140,6 +138,7 @@
             box-shadow: 0 -5px 15px rgba(0,0,0,0.3);
             text-align: center;
             box-sizing: border-box;
+            z-index: 100;
         }
 
         .btn-whatsapp {
@@ -163,8 +162,7 @@
         <h2 style="color:white; margin:10px 0 0;">Maf Sazón</h2>
     </div>
 
-    <div class="container" id="menu-lista">
-        </div>
+    <div class="container" id="menu-lista"></div>
 
     <div class="footer-pedido">
         <div id="total-final" style="color:#333; font-weight:bold; margin-bottom:10px; font-size:1.2rem;">Total: $0.00</div>
@@ -184,13 +182,13 @@
                 { id: "c1", nom: "Cachapa con Queso", p: 12 },
                 { id: "c2", nom: "Cachapa con Todo", p: 15 }
             ]},   
-             { cat: "patacón", items: [
-                { id: "c1", nom: "Pollo", p: 12 },
-                { id: "c2", nom: "Carne", p: 15 }
-                { id: "c2", nom: "Mixto (Carne y pollo)", p: 15 }
-                { id: "c2", nom: "Verduras salteadas", p: 15 }
+            { cat: "Patacón", items: [
+                { id: "p1", nom: "Patacón de Pollo", p: 12 },
+                { id: "p2", nom: "Patacón de Carne", p: 15 },
+                { id: "p3", nom: "Patacón Mixto", p: 15 },
+                { id: "p4", nom: "Patacón Verduras", p: 15 }
             ]},
-            { cat: "tequeños", items: [
+            { cat: "Tequeños", items: [
                 { id: "t1", nom: "Tequeños x6", p: 7 },
                 { id: "t2", nom: "Tequeños x12", p: 12 }
             ]},
@@ -208,7 +206,7 @@
             menu.forEach(seccion => {
                 lista.innerHTML += `<div class="categoria-titulo">${seccion.cat}</div>`;
                 seccion.items.forEach(item => {
-                    pedido[item.id] = { cant: 0, precio: item.p || item.ops[0].p, nombre: item.nom };
+                    pedido[item.id] = { cant: 0, precio: item.p || item.ops[0].p, nombre: item.nom, detalle: "" };
                     
                     let selector = item.ops ? 
                         `<select class="selector-rellenos" onchange="cambiarPrecio('${item.id}', this)">
@@ -237,6 +235,7 @@
 
         function cambiarPrecio(id, el) {
             pedido[id].precio = parseFloat(el.value);
+            pedido[id].detalle = el.options[el.selectedIndex].text.split(' - ')[0];
             actualizarTotal();
         }
 
@@ -253,12 +252,17 @@
         }
 
         function enviarWhatsApp() {
-            let texto = "*PEDIDO MAF SAZÓN*%0A";
+            let texto = "*PEDIDO MAF SAZÓN*%0A------------------%0A";
+            let tieneItems = false;
             for (let id in pedido) {
-                if(pedido[id].cant > 0) texto += `- ${pedido[id].nombre} x${pedido[id].cant} ($${pedido[id].precio})%0A`;
+                if(pedido[id].cant > 0) {
+                    let det = pedido[id].detalle ? ` (${pedido[id].detalle})` : "";
+                    texto += `• ${pedido[id].nombre}${det} x${pedido[id].cant}%0A`;
+                    tieneItems = true;
+                }
             }
-            if(texto === "*PEDIDO MAF SAZÓN*%0A") return alert("Elige algún producto");
-            texto += "%0A" + document.getElementById('total-final').innerText;
+            if(!tieneItems) return alert("Por favor, selecciona al menos un producto.");
+            texto += "------------------%0A*" + document.getElementById('total-final').innerText + "*";
             window.open("https://wa.me/TUNUMERO?text=" + texto);
         }
 
