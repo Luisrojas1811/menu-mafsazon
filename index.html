@@ -1,47 +1,39 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maf Sazón - Menú Premium</title>
+    <title>Maf Sazón - Menú Oficial</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-dark: #2c2f36;
+            --bg-dark: #23272e;
             --card-bg: #ffffff;
             --ven-blue: #003893;
             --ven-red: #ce1126;
             --ven-yellow: #ffcc4d;
-            --text-gray: #555;
         }
 
         body {
             font-family: 'Montserrat', sans-serif;
             margin: 0;
-            padding: 0;
             background-color: var(--bg-dark);
             color: white;
             padding-bottom: 120px;
         }
 
-        /* Header con Logo y Onda */
         .header {
-            background: linear-gradient(180deg, var(--ven-red) 0%, #a00d1d 100%);
+            background: linear-gradient(180deg, var(--ven-red) 0%, #900 100%);
             text-align: center;
             padding: 40px 0 60px;
             position: relative;
-            overflow: hidden;
         }
 
         .header img {
-            width: 130px;
-            border: 3px solid var(--ven-yellow);
+            width: 120px;
+            border: 4px solid var(--ven-yellow);
             border-radius: 50%;
             background: white;
-            padding: 5px;
-            position: relative;
-            z-index: 2;
         }
 
         .header::after {
@@ -50,258 +42,221 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 60px;
+            height: 50px;
             background: var(--ven-yellow);
             clip-path: ellipse(60% 50% at 50% 100%);
-            opacity: 0.8;
         }
 
-        .container {
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+        .container { max-width: 500px; margin: 0 auto; padding: 20px; }
 
         .categoria-titulo {
             color: var(--ven-yellow);
             font-size: 1.4rem;
             font-weight: bold;
             margin: 30px 0 15px;
-            text-transform: capitalize;
         }
 
-        /* Tarjeta de Producto Estilo Imagen */
         .producto-card {
             background-color: var(--card-bg);
-            border-radius: 10px;
+            border-radius: 12px;
             margin-bottom: 15px;
             display: flex;
             overflow: hidden;
             border: 2px solid var(--ven-yellow);
             color: #333;
-            height: 100px;
-        }
-
-        .barra-azul {
-            background-color: var(--ven-blue);
-            width: 35px;
-            flex-shrink: 0;
-        }
-
-        .contenido {
-            flex-grow: 1;
-            padding: 10px 15px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            min-height: 100px;
             position: relative;
         }
 
-        .contenido h3 {
-            margin: 0;
-            font-size: 1.1rem;
-            color: #2c2f36;
-        }
+        .barra-azul { background-color: var(--ven-blue); width: 35px; flex-shrink: 0; }
 
-        .precio-display {
-            margin: 4px 0;
-            font-weight: bold;
-            color: var(--text-gray);
-            font-size: 0.9rem;
-        }
+        .contenido { flex-grow: 1; padding: 12px 15px; display: flex; flex-direction: column; justify-content: center; }
 
-        /* Selector de Rellenos Punteado */
+        .contenido h3 { margin: 0; font-size: 1rem; color: #222; }
+
         .selector-rellenos {
-            width: 100%;
-            max-width: 180px;
-            padding: 4px;
+            width: 85%;
+            padding: 5px;
             border: 1px dashed var(--ven-blue);
             border-radius: 4px;
-            background: transparent;
+            margin-top: 8px;
             font-family: inherit;
-            font-size: 0.85rem;
-            color: var(--text-gray);
-            cursor: pointer;
-            margin-top: 5px;
+            color: #555;
         }
 
-        /* Controles de Cantidad (Capsula) */
-        .controles-wrapper {
+        .precio-fijo { font-weight: bold; color: #555; margin-top: 5px; }
+
+        /* CONTROLES + y - */
+        .controles-posicion {
             position: absolute;
             right: 15px;
             top: 50%;
             transform: translateY(-50%);
         }
 
-        .capsula {
+        .capsula-controles {
             background-color: var(--ven-blue);
-            border-radius: 25px;
+            border-radius: 30px;
             display: flex;
             align-items: center;
-            padding: 4px;
-            gap: 10px;
+            padding: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
 
-        .btn-op {
+        .btn-accion {
             background-color: var(--ven-yellow);
             color: var(--ven-blue);
             border: none;
-            width: 32px;
-            height: 32px;
+            width: 34px;
+            height: 34px;
             border-radius: 50%;
             font-weight: bold;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: 0.2s;
         }
 
-        .cant-num {
+        .btn-accion:active { transform: scale(0.9); }
+
+        .cantidad-valor {
             color: white;
             font-weight: bold;
+            margin: 0 12px;
+            font-size: 1.1rem;
             min-width: 15px;
             text-align: center;
         }
 
-        /* Footer Fijo */
-        .footer-total {
+        /* FOOTER */
+        .footer-pedido {
             position: fixed;
             bottom: 0;
             width: 100%;
             background: white;
-            padding: 15px;
+            padding: 20px;
             box-shadow: 0 -5px 15px rgba(0,0,0,0.3);
             text-align: center;
             box-sizing: border-box;
-            z-index: 10;
         }
 
         .btn-whatsapp {
             background-color: var(--ven-red);
             color: white;
             border: none;
-            padding: 15px 30px;
-            border-radius: 8px;
+            padding: 15px;
+            border-radius: 10px;
             font-weight: bold;
-            font-size: 1rem;
             width: 100%;
             max-width: 400px;
             cursor: pointer;
+            font-size: 1rem;
         }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <img src="logo.jpg" alt="Maf Sazón">
-        <h2 style="margin: 10px 0 0; color: white;">Maf Sazón</h2>
+        <img src="logo.jpg" alt="Logo Maf Sazón">
+        <h2 style="color:white; margin:10px 0 0;">Maf Sazón</h2>
     </div>
 
-    <div class="container" id="menu-container">
+    <div class="container" id="menu-lista">
         </div>
 
-    <div class="footer-total">
-        <div id="total-text" style="color: #333; font-weight: bold; margin-bottom: 10px; font-size: 1.2rem;">Total: $0.00</div>
-        <button class="btn-whatsapp" onclick="enviarPedido()">PEDIR POR WHATSAPP</button>
+    <div class="footer-pedido">
+        <div id="total-final" style="color:#333; font-weight:bold; margin-bottom:10px; font-size:1.2rem;">Total: $0.00</div>
+        <button class="btn-whatsapp" onclick="enviarWhatsApp()">PEDIR POR WHATSAPP</button>
     </div>
 
     <script>
-        const menuData = {
-            "Arepas": [
-                { nombre: "Arepa Personalizada", opciones: [{r: "1 Relleno", p: 5}, {r: "2 Rellenos", p: 9}, {r: "3 Rellenos", p: 12}] },
-                { nombre: "Arepa Pabellón", precio: 10 }
-            ],
-            "Empanadas": [
-                { nombre: "Empanada", opciones: [{r: "Sencilla", p: 4}, {r: "Especial (2 rellenos)", p: 7}, {r: "Pabellón", p: 8}] }
-            ],
-            "Cachapas": [
-                { nombre: "Cachapa con Queso", precio: 12 },
-                { nombre: "Cachapa con Todo", precio: 15 }
-            ],
-            "Tequeños": [
-                { nombre: "Ración x6", precio: 7 },
-                { nombre: "Ración x12", precio: 12 }
-            ],
-            "Bebidas": [
-                { nombre: "Malta", precio: 3 },
-                { nombre: "Papelón con Limón", precio: 3 },
-                { nombre: "Refrescos", precio: 2.5 }
-            ]
-        };
+        const menu = [
+            { cat: "Arepas", items: [
+                { id: "a1", nom: "Arepa Personalizada", ops: [{n:"1 Relleno", p:5}, {n:"2 Rellenos", p:9}, {n:"3 Rellenos", p:12}] },
+                { id: "a2", nom: "Arepa Pabellón", p: 10 }
+            ]},
+            { cat: "Empanadas", items: [
+                { id: "e1", nom: "Empanada", ops: [{n:"Sencilla", p:4}, {n:"Especial (2 rellenos)", p:7}, {n:"Pabellón", p:8}] }
+            ]},
+            { cat: "Cachapas", items: [
+                { id: "c1", nom: "Cachapa con Queso", p: 12 },
+                { id: "c2", nom: "Cachapa con Todo", p: 15 }
+            ]},
+            { cat: "Complementos", items: [
+                { id: "t1", nom: "Tequeños x6", p: 7 },
+                { id: "t2", nom: "Tequeños x12", p: 12 }
+            ]},
+            { cat: "Bebidas", items: [
+                { id: "b1", nom: "Malta", p: 3 },
+                { id: "b2", nom: "Papelón con Limón", p: 3 },
+                { id: "b3", nom: "Refresco", p: 2.5 }
+            ]}
+        ];
 
-        let carrito = {};
+        let pedido = {};
 
-        function renderMenu() {
-            const container = document.getElementById('menu-container');
-            for (const [cat, items] of Object.entries(menuData)) {
-                container.innerHTML += `<div class="categoria-titulo">${cat}</div>`;
-                items.forEach((item, index) => {
-                    const itemId = `${cat}-${index}`;
-                    const tieneOpciones = item.opciones;
-                    const precioInicial = tieneOpciones ? item.opciones[0].p : item.precio;
+        function cargarMenu() {
+            const lista = document.getElementById('menu-lista');
+            menu.forEach(seccion => {
+                lista.innerHTML += `<div class="categoria-titulo">${seccion.cat}</div>`;
+                seccion.items.forEach(item => {
+                    pedido[item.id] = { cant: 0, precio: item.p || item.ops[0].p, nombre: item.nom };
+                    
+                    let selector = item.ops ? 
+                        `<select class="selector-rellenos" onchange="cambiarPrecio('${item.id}', this)">
+                            ${item.ops.map(o => `<option value="${o.p}">${o.n} - $${o.p}</option>`).join('')}
+                        </select>` : 
+                        `<div class="precio-fijo">$${item.p.toFixed(2)}</div>`;
 
-                    let html = `
+                    lista.innerHTML += `
                         <div class="producto-card">
                             <div class="barra-azul"></div>
                             <div class="contenido">
-                                <h3>${item.nombre}</h3>
-                                ${tieneOpciones ? `
-                                    <select class="selector-rellenos" onchange="updatePrecio('${itemId}', this)">
-                                        ${item.opciones.map(o => `<option value="${o.p}">${o.r} - $${o.p}</option>`).join('')}
-                                    </select>
-                                ` : `<div class="precio-display">$${precioInicial.toFixed(2)}</div>`}
-                                <div class="precio-display" id="p-val-${itemId}" style="display:none">${precioInicial}</div>
+                                <h3>${item.nom}</h3>
+                                ${selector}
                             </div>
-                            <div class="controles-wrapper">
-                                <div class="capsula">
-                                    <button class="btn-op" onclick="cambiarCant('${itemId}', -1)">-</button>
-                                    <span class="cant-num" id="cant-${itemId}">0</span>
-                                    <button class="btn-op" onclick="cambiarCant('${itemId}', 1)">+</button>
+                            <div class="controles-posicion">
+                                <div class="capsula-controles">
+                                    <button class="btn-accion" onclick="sumar('${item.id}', -1)">-</button>
+                                    <span class="cantidad-valor" id="v-${item.id}">0</span>
+                                    <button class="btn-accion" onclick="sumar('${item.id}', 1)">+</button>
                                 </div>
                             </div>
-                        </div>
-                    `;
-                    container.innerHTML += html;
-                    carrito[itemId] = { nombre: item.nombre, cant: 0, precio: precioInicial };
+                        </div>`;
                 });
-            }
+            });
         }
 
-        function updatePrecio(id, el) {
-            carrito[id].precio = parseFloat(el.value);
-            calcularTotal();
+        function cambiarPrecio(id, el) {
+            pedido[id].precio = parseFloat(el.value);
+            actualizarTotal();
         }
 
-        function cambiarCant(id, delta) {
-            carrito[id].cant = Math.max(0, carrito[id].cant + delta);
-            document.getElementById(`cant-${id}`).innerText = carrito[id].cant;
-            calcularTotal();
+        function sumar(id, n) {
+            pedido[id].cant = Math.max(0, pedido[id].cant + n);
+            document.getElementById('v-' + id).innerText = pedido[id].cant;
+            actualizarTotal();
         }
 
-        function calcularTotal() {
+        function actualizarTotal() {
             let total = 0;
-            for (const key in carrito) {
-                total += carrito[key].cant * carrito[key].precio;
-            }
-            document.getElementById('total-text').innerText = `Total: $${total.toFixed(2)}`;
+            for (let id in pedido) { total += pedido[id].cant * pedido[id].precio; }
+            document.getElementById('total-final').innerText = `Total: $${total.toFixed(2)}`;
         }
 
-        function enviarPedido() {
-            let msg = "*NUEVO PEDIDO MAF SAZÓN*%0A%0A";
-            let tieneItems = false;
-            for (const key in carrito) {
-                if (carrito[key].cant > 0) {
-                    msg += `- ${carrito[key].nombre} x${carrito[key].cant} ($${carrito[key].precio})%0A`;
-                    tieneItems = true;
-                }
+        function enviarWhatsApp() {
+            let texto = "*PEDIDO MAF SAZÓN*%0A";
+            for (let id in pedido) {
+                if(pedido[id].cant > 0) texto += `- ${pedido[id].nombre} x${pedido[id].cant} ($${pedido[id].precio})%0A`;
             }
-            if (!tieneItems) return alert("Agrega algo al carrito primero");
-            msg += `%0A*${document.getElementById('total-text').innerText}*`;
-            window.open(`https://wa.me/TUNUMERO?text=${msg}`);
+            if(texto === "*PEDIDO MAF SAZÓN*%0A") return alert("Elige algún producto");
+            texto += "%0A" + document.getElementById('total-final').innerText;
+            window.open("https://wa.me/TUNUMERO?text=" + texto);
         }
 
-        renderMenu();
+        cargarMenu();
     </script>
 </body>
 </html>
