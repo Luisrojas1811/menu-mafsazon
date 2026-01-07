@@ -12,7 +12,8 @@
             --ven-blue: #003893;
             --ven-red: #ce1126;
             --ven-yellow: #ffcc4d;
-            --empa-orange: #ff6600;
+            --text-dark: #2c2f36;
+            --text-gray: #666;
         }
 
         body {
@@ -21,21 +22,27 @@
             padding: 0;
             background-color: var(--bg-dark);
             color: white;
-            padding-bottom: 140px;
+            padding-bottom: 120px;
         }
 
+        /* Header Tricolor Elegante */
         .header {
             background: linear-gradient(180deg, var(--ven-red) 0%, #a00d1d 100%);
             text-align: center;
             padding: 40px 0 60px;
             position: relative;
+            overflow: hidden;
         }
 
         .header img {
-            width: 100px;
+            width: 120px;
+            height: 120px;
             border: 3px solid var(--ven-yellow);
             border-radius: 50%;
             background: white;
+            padding: 5px;
+            position: relative;
+            z-index: 2;
         }
 
         .header::after {
@@ -44,9 +51,10 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 40px;
+            height: 50px;
             background: var(--ven-yellow);
             clip-path: ellipse(60% 50% at 50% 100%);
+            opacity: 0.9;
         }
 
         .container {
@@ -57,59 +65,67 @@
 
         .categoria-titulo {
             color: var(--ven-yellow);
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             font-weight: bold;
-            margin: 30px 0 10px;
+            margin: 30px 0 15px;
             text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .titulo-naranja { color: var(--empa-orange); }
-
+        /* Tarjeta Estilo Imagen Subida */
         .producto-card {
             background-color: var(--card-bg);
             border-radius: 12px;
-            margin-bottom: 12px;
+            margin-bottom: 18px;
             display: flex;
             overflow: hidden;
-            border: 1px solid var(--ven-yellow);
-            color: #333;
-            min-height: 90px;
+            border: 2px solid var(--ven-yellow);
+            color: var(--text-dark);
             position: relative;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
 
         .barra-azul {
             background-color: var(--ven-blue);
-            width: 15px;
+            width: 35px;
             flex-shrink: 0;
         }
 
         .contenido {
             flex-grow: 1;
-            padding: 12px;
+            padding: 12px 15px;
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
 
-        .contenido h3 { margin: 0; font-size: 1rem; color: #2c2f36; }
-        .precio { color: var(--ven-blue); font-weight: bold; font-size: 0.9rem; margin: 4px 0; }
-        
-        .descripcion { 
-            font-size: 0.75rem; 
-            color: #666; 
-            margin-bottom: 5px;
+        .contenido h3 {
+            margin: 0;
+            font-size: 1.1rem;
+            font-weight: 700;
         }
 
-        .input-rellenos {
-            width: 70%;
+        .descripcion {
+            font-size: 0.75rem;
+            color: var(--text-gray);
+            margin-top: 4px;
+            line-height: 1.2;
+        }
+
+        /* Selector Punteado */
+        .selector-rellenos {
+            width: 85%;
             padding: 6px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 0.8rem;
+            border: 1px dashed var(--ven-blue);
+            border-radius: 5px;
+            background: #f9f9f9;
+            margin-top: 8px;
             font-family: inherit;
+            font-size: 0.85rem;
+            color: var(--text-dark);
         }
 
+        /* Cápsula de Cantidad */
         .controles-wrapper {
             position: absolute;
             right: 12px;
@@ -119,38 +135,44 @@
 
         .capsula {
             background-color: var(--ven-blue);
-            border-radius: 25px;
+            border-radius: 30px;
             display: flex;
             align-items: center;
-            padding: 4px;
+            padding: 3px;
         }
 
         .btn-op {
             background-color: var(--ven-yellow);
             color: var(--ven-blue);
             border: none;
-            width: 32px;
-            height: 32px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             font-weight: bold;
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .cant-num { color: white; margin: 0 12px; font-weight: bold; font-size: 1.1rem; }
+        .cant-num {
+            color: white;
+            font-weight: bold;
+            margin: 0 12px;
+            min-width: 15px;
+            text-align: center;
+        }
 
+        /* Footer */
         .footer-total {
             position: fixed;
             bottom: 0;
             width: 100%;
             background: white;
-            padding: 20px;
-            box-shadow: 0 -5px 15px rgba(0,0,0,0.3);
+            padding: 15px;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.4);
             text-align: center;
-            box-sizing: border-box;
             z-index: 100;
         }
 
@@ -158,12 +180,13 @@
             background-color: var(--ven-red);
             color: white;
             border: none;
-            padding: 16px;
+            padding: 15px;
             border-radius: 10px;
             font-weight: bold;
             width: 100%;
             max-width: 400px;
-            font-size: 1.1rem;
+            font-size: 1rem;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -171,103 +194,123 @@
 
     <div class="header">
         <img src="logo.jpg" alt="Maf Sazón">
+        <h2 style="color: white; margin-top: 10px;">Maf Sazón</h2>
     </div>
 
-    <div class="container" id="menu">
-        
-        <div class="categoria-titulo">Arepas</div>
-        <p class="descripcion" style="color:white; margin-top:-5px">Rellenos: Queso, Jamón, Pollo, Reina Pepiada, Verduras, Mechada, Picada, Salchicha, Chorizo, Perico.</p>
-        
-        <script>
-            const items = [
-                { id: 'arepa1', cat: 'Arepas', nombre: 'Arepa 1 Relleno', precio: 5, nota: true },
-                { id: 'arepa2', cat: 'Arepas', nombre: 'Arepa 2 Rellenos', precio: 9, nota: true },
-                { id: 'arepa3', cat: 'Arepas', nombre: 'Arepa 3 Rellenos', precio: 12, nota: true },
-                { id: 'arepab', cat: 'Arepas', nombre: 'Arepa Pabellón', precio: 10 },
-                { id: 'arepad', cat: 'Arepas', nombre: 'Arepa Dominó', precio: 8 },
-                
-                { id: 'empa1', cat: 'Empanadas', nombre: 'Empanada 1 Relleno', precio: 4, nota: true, naranja: true },
-                { id: 'empab', cat: 'Empanadas', nombre: 'Empanada Pabellón', precio: 8, naranja: true },
-                { id: 'empad', cat: 'Empanadas', nombre: 'Empanada Dominó', precio: 6, naranja: true },
-                
-                { id: 'cacha1', cat: 'Cachapas', nombre: 'Cachapa con Queso', precio: 12 },
-                { id: 'cacha2', cat: 'Cachapa con Todo', precio: 15 },
-                { id: 'cachav', cat: 'Cachapas', nombre: 'Cachapa Verduras Salteadas', precio: 11 },
-                
-                { id: 'ext1', cat: 'Adicionales', nombre: 'Extra Aguacate', precio: 2 },
-                { id: 'ext2', cat: 'Extra Queso o Chicharrón', precio: 3 },
-                
-                { id: 'pata1', cat: 'Patacón', nombre: 'Patacón Pollo o Carne', precio: 12 },
-                { id: 'pata2', cat: 'Patacón Mixto', precio: 14 },
-                { id: 'pata3', cat: 'Patacón Verduras Salteadas', precio: 11 },
-                
-                { id: 'teq1', cat: 'Tequeños', nombre: 'Media Docena (6)', precio: 7 },
-                { id: 'teq2', cat: 'Docena (12)', precio: 12 },
-                
-                { id: 'esp1', cat: 'Especiales', nombre: 'Pabellón Vegano', precio: 12, desc: 'Arroz, caraotas, verduras salteadas y 3 arepitas' },
-                
-                { id: 'beb1', cat: 'Bebidas', nombre: 'Nestea / Agua de Panela', precio: 3 },
-                { id: 'beb2', cat: 'Gaseosas', precio: 2.5 }
-            ];
-
-            let htmlActual = "";
-            let catActual = "";
-
-            items.forEach(item => {
-                if(item.cat && item.cat !== catActual) {
-                    catActual = item.cat;
-                    let colorClase = item.naranja ? 'titulo-naranja' : '';
-                    document.write(`<div class="categoria-titulo ${colorClase}">${catActual}</div>`);
-                }
-
-                document.write(`
-                    <div class="producto-card">
-                        <div class="barra-azul"></div>
-                        <div class="contenido">
-                            <h3>${item.nombre}</h3>
-                            <div class="precio">$${item.precio.toFixed(2)}</div>
-                            ${item.desc ? `<div class="descripcion">${item.desc}</div>` : ''}
-                            ${item.nota ? `<input type="text" class="input-rellenos" id="nota-${item.id}" placeholder="Escribe los rellenos...">` : ''}
-                        </div>
-                        <div class="controles-wrapper">
-                            <div class="capsula">
-                                <button class="btn-op" onclick="cambiar('${item.id}', -1, ${item.precio})">-</button>
-                                <span class="cant-num" id="c-${item.id}">0</span>
-                                <button class="btn-op" onclick="cambiar('${item.id}', 1, ${item.precio})">+</button>
-                            </div>
-                        </div>
-                    </div>
-                `);
-            });
-
-            let carrito = {};
-            function cambiar(id, delta, precio) {
-                if(!carrito[id]) carrito[id] = { cant: 0, precio: precio };
-                carrito[id].cant = Math.max(0, carrito[id].cant + delta);
-                document.getElementById('c-'+id).innerText = carrito[id].cant;
-                
-                let total = 0;
-                for(let key in carrito) total += carrito[key].cant * carrito[key].precio;
-                document.getElementById('total-text').innerText = "Total: $" + total.toFixed(2);
-            }
-
-            function enviar() {
-                let msg = "*PEDIDO MAF SAZÓN*%0A";
-                items.forEach(item => {
-                    let cant = parseInt(document.getElementById('c-'+item.id).innerText);
-                    if(cant > 0) {
-                        let nota = document.getElementById('nota-'+item.id) ? ` (${document.getElementById('nota-'+item.id).value})` : '';
-                        msg += `- ${item.nombre} x${cant}${nota}%0A`;
-                    }
-                });
-                window.open("https://wa.me/TUNUMERO?text=" + msg + "%0A*" + document.getElementById('total-text').innerText + "*");
-            }
-        </script>
-    </div>
+    <div class="container" id="menu-box">
+        </div>
 
     <div class="footer-total">
-        <div id="total-text" style="font-weight:bold; margin-bottom:10px; color:#333; font-size:1.3rem;">Total: $0.00</div>
-        <button class="btn-whatsapp" onclick="enviar()">CONFIRMAR PEDIDO WHATSAPP</button>
+        <div id="total-val" style="color: #333; font-weight: bold; margin-bottom: 10px; font-size: 1.3rem;">Total: $0.00</div>
+        <button class="btn-whatsapp" onclick="enviarPedido()">ENVIAR PEDIDO POR WHATSAPP</button>
     </div>
+
+    <script>
+        const rellenosArepas = "Queso, Jamón y Queso, Pollo Guisado, Reina Pepiada, Verduras Salteadas, Carne Mechada, Carne Picada, Salchicha, Chorizo, Perico";
+        const rellenosEmpanadas = "Queso, Jamón y Queso, Pollo, Verduras, Carne Mechada, Carne Picada";
+
+        const menu = [
+            { cat: "Arepas", items: [
+                { n: "Arepa Personalizada", p: 5, opts: [{n: "1 Relleno", p: 5}, {n: "2 Rellenos", p: 9}, {n: "3 Rellenos", p: 12}], det: rellenosArepas },
+                { n: "Arepa Pabellón", p: 10, det: "Carne mechada, caraotas, tajadas y queso" },
+                { n: "Arepa Dominó", p: 9, det: "Caraotas negras y queso" }
+            ]},
+            { cat: "Empanadas", items: [
+                { n: "Empanada", p: 4, opts: [{n: "1 Relleno", p: 4}, {n: "Pabellón", p: 8}, {n: "Dominó", p: 7}], det: rellenosEmpanadas }
+            ]},
+            { cat: "Cachapas", items: [
+                { n: "Cachapa con Queso de Mano", p: 12 },
+                { n: "Cachapa con Verduras Salteadas", p: 13 },
+                { n: "Adicionales", p: 3, opts: [{n: "Aguacate", p: 3}, {n: "Queso Extra", p: 2}, {n: "Chicharrón", p: 4}] }
+            ]},
+            { cat: "Patacón", items: [
+                { n: "Patacón de Pollo", p: 10 },
+                { n: "Patacón de Carne", p: 10 },
+                { n: "Patacón Mixto", p: 12 },
+                { n: "Patacón Verduras Salteadas", p: 9 }
+            ]},
+            { cat: "Tequeños", items: [
+                { n: "Media Docena (6)", p: 7 },
+                { n: "Docena (12)", p: 12 }
+            ]},
+            { cat: "Especiales", items: [
+                { n: "Pabellón Vegano", p: 11, det: "Arroz, caraotas, verduras salteadas y 3 arepitas" }
+            ]},
+            { cat: "Bebidas", items: [
+                { n: "Malta / Papelón", p: 3 },
+                { n: "Nestea", p: 3.5 },
+                { n: "Gaseosas", p: 2.5 }
+            ]}
+        ];
+
+        let pedido = {};
+
+        function init() {
+            const box = document.getElementById('menu-box');
+            menu.forEach(seccion => {
+                box.innerHTML += `<div class="categoria-titulo">${seccion.cat}</div>`;
+                seccion.items.forEach((item, i) => {
+                    const id = `${seccion.cat}-${i}`.replace(/\s+/g, '');
+                    pedido[id] = { nombre: item.n, cant: 0, precio: item.p };
+                    
+                    box.innerHTML += `
+                        <div class="producto-card">
+                            <div class="barra-azul"></div>
+                            <div class="contenido">
+                                <h3>${item.n}</h3>
+                                ${item.det ? `<div class="descripcion">${item.det}</div>` : ''}
+                                ${item.opts ? `
+                                    <select class="selector-rellenos" onchange="cambiarPrecio('${id}', this)">
+                                        ${item.opts.map(o => `<option value="${o.p}">${o.n} - $${o.p}</option>`).join('')}
+                                    </select>
+                                ` : `<div style="font-weight:bold; color:var(--ven-blue); margin-top:5px;">$${item.p.toFixed(2)}</div>`}
+                            </div>
+                            <div class="controles-wrapper">
+                                <div class="capsula">
+                                    <button class="btn-op" onclick="updateCant('${id}', -1)">-</button>
+                                    <span class="cant-num" id="cant-${id}">0</span>
+                                    <button class="btn-op" onclick="updateCant('${id}', 1)">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            });
+        }
+
+        function cambiarPrecio(id, el) {
+            pedido[id].precio = parseFloat(el.value);
+            pedido[id].variante = el.options[el.selectedIndex].text;
+            calc();
+        }
+
+        function updateCant(id, d) {
+            pedido[id].cant = Math.max(0, pedido[id].cant + d);
+            document.getElementById(`cant-${id}`).innerText = pedido[id].cant;
+            calc();
+        }
+
+        function calc() {
+            let total = 0;
+            for (let k in pedido) total += pedido[k].cant * pedido[k].precio;
+            document.getElementById('total-val').innerText = `Total: $${total.toFixed(2)}`;
+        }
+
+        function enviarPedido() {
+            let msg = "*PEDIDO MAF SAZÓN*%0A%0A";
+            let tiene = false;
+            for (let k in pedido) {
+                if (pedido[k].cant > 0) {
+                    msg += `• ${pedido[k].nombre} ${pedido[k].variante || ''} x${pedido[k].cant}%0A`;
+                    tiene = true;
+                }
+            }
+            if (!tiene) return alert("Selecciona productos");
+            msg += `%0A*${document.getElementById('total-val').innerText}*`;
+            window.open(`https://wa.me/TUNUMERO?text=${msg}`);
+        }
+
+        init();
+    </script>
 </body>
 </html>
