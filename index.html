@@ -1,146 +1,192 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maf Sazón - Menú Completo</title>
+    <title>Maf Sazón - Menú Premium</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --rojo-ven: #CE1126;
-            --azul-ven: #003893;
-            --amarillo-ven: #FECB00;
-            --fondo-oscuro: #1a1c20;
-            --tarjeta-bg: #ffffff;
+            --bg-dark: #2c2f36;
+            --card-bg: #ffffff;
+            --ven-blue: #003893;
+            --ven-red: #ce1126;
+            --ven-yellow: #ffcc4d;
+            --text-gray: #555;
         }
 
         body {
             font-family: 'Montserrat', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: var(--fondo-oscuro);
+            background-color: var(--bg-dark);
             color: white;
             padding-bottom: 120px;
         }
 
+        /* Header con Logo y Onda */
         .header {
-            background: linear-gradient(180deg, var(--rojo-ven) 0%, #8b0000 100%);
+            background: linear-gradient(180deg, var(--ven-red) 0%, #a00d1d 100%);
             text-align: center;
             padding: 40px 0 60px;
-            border-bottom: 4px solid var(--amarillo-ven);
+            position: relative;
+            overflow: hidden;
         }
 
         .header img {
             width: 130px;
-            height: 130px;
-            border: 4px solid white;
+            border: 3px solid var(--ven-yellow);
             border-radius: 50%;
             background: white;
-            object-fit: cover;
+            padding: 5px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: var(--ven-yellow);
+            clip-path: ellipse(60% 50% at 50% 100%);
+            opacity: 0.8;
         }
 
         .container {
             max-width: 500px;
-            margin: 20px auto;
-            padding: 0 15px;
+            margin: 0 auto;
+            padding: 20px;
         }
 
         .categoria-titulo {
-            color: var(--amarillo-ven);
-            font-size: 1.5rem;
+            color: var(--ven-yellow);
+            font-size: 1.4rem;
             font-weight: bold;
-            margin: 35px 0 15px;
-            text-transform: uppercase;
-            border-bottom: 1px solid rgba(254, 203, 0, 0.3);
-            padding-bottom: 5px;
+            margin: 30px 0 15px;
+            text-transform: capitalize;
         }
 
+        /* Tarjeta de Producto Estilo Imagen */
         .producto-card {
-            background-color: var(--tarjeta-bg);
-            border-radius: 12px;
-            margin-bottom: 20px;
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            margin-bottom: 15px;
             display: flex;
             overflow: hidden;
-            border: 2px solid var(--amarillo-ven);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            border: 2px solid var(--ven-yellow);
             color: #333;
+            height: 100px;
         }
 
-        .barra-lateral { background-color: var(--azul-ven); width: 15px; }
+        .barra-azul {
+            background-color: var(--ven-blue);
+            width: 35px;
+            flex-shrink: 0;
+        }
 
-        .contenido { flex-grow: 1; padding: 15px; display: flex; flex-direction: column; }
+        .contenido {
+            flex-grow: 1;
+            padding: 10px 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
 
-        .info-superior { display: flex; justify-content: space-between; align-items: center; }
+        .contenido h3 {
+            margin: 0;
+            font-size: 1.1rem;
+            color: #2c2f36;
+        }
 
-        .info-superior h3 { margin: 0; font-size: 1.1rem; color: #1a1c20; }
+        .precio-display {
+            margin: 4px 0;
+            font-weight: bold;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
 
-        .precio-vistas { font-weight: bold; color: var(--azul-ven); font-size: 1.1rem; }
-
+        /* Selector de Rellenos Punteado */
         .selector-rellenos {
-            margin-top: 10px;
             width: 100%;
-            padding: 10px;
-            border: 1px dashed var(--azul-ven);
-            border-radius: 6px;
-            background: #f9f9f9;
+            max-width: 180px;
+            padding: 4px;
+            border: 1px dashed var(--ven-blue);
+            border-radius: 4px;
+            background: transparent;
             font-family: inherit;
-            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--text-gray);
+            cursor: pointer;
+            margin-top: 5px;
         }
 
-        .input-detalle {
-            margin-top: 8px;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-family: inherit;
+        /* Controles de Cantidad (Capsula) */
+        .controles-wrapper {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
         }
 
-        .controles-fila { display: flex; justify-content: flex-end; align-items: center; margin-top: 15px; }
-
-        .capsula-controles {
-            background-color: var(--azul-ven);
-            border-radius: 30px;
+        .capsula {
+            background-color: var(--ven-blue);
+            border-radius: 25px;
             display: flex;
             align-items: center;
-            padding: 4px 8px;
+            padding: 4px;
+            gap: 10px;
         }
 
         .btn-op {
-            background-color: var(--amarillo-ven);
-            color: var(--azul-ven);
+            background-color: var(--ven-yellow);
+            color: var(--ven-blue);
             border: none;
             width: 32px;
             height: 32px;
             border-radius: 50%;
             font-weight: bold;
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .cant-num { color: white; margin: 0 15px; font-weight: bold; min-width: 20px; text-align: center; }
+        .cant-num {
+            color: white;
+            font-weight: bold;
+            min-width: 15px;
+            text-align: center;
+        }
 
+        /* Footer Fijo */
         .footer-total {
             position: fixed;
             bottom: 0;
             width: 100%;
             background: white;
             padding: 15px;
-            box-shadow: 0 -5px 20px rgba(0,0,0,0.3);
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.3);
             text-align: center;
             box-sizing: border-box;
-            z-index: 100;
+            z-index: 10;
         }
 
-        .btn-enviar {
-            background-color: var(--rojo-ven);
+        .btn-whatsapp {
+            background-color: var(--ven-red);
             color: white;
             border: none;
-            padding: 15px;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1rem;
             width: 100%;
             max-width: 400px;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: bold;
             cursor: pointer;
         }
     </style>
@@ -148,143 +194,114 @@
 <body>
 
     <div class="header">
-        <img src="logo.jpg" alt="Logo Maf Sazón">
-        <h1>Maf Sazón</h1>
-        <p>El Auténtico Sabor Venezolano</p>
+        <img src="logo.jpg" alt="Maf Sazón">
+        <h2 style="margin: 10px 0 0; color: white;">Maf Sazón</h2>
     </div>
 
-    <div class="container">
-        
-        <div class="categoria-titulo">Arepas</div>
-        <div class="producto-card">
-            <div class="barra-lateral"></div>
-            <div class="contenido">
-                <div class="info-superior">
-                    <h3>Arepa de la Casa</h3>
-                    <span class="precio-vistas" id="p-arepa">$5.00</span>
-                </div>
-                <select class="selector-rellenos" id="sel-arepa" onchange="actualizarPrecio('arepa')">
-                    <option value="5">1 Relleno - $5.00</option>
-                    <option value="8">2 Rellenos - $8.00</option>
-                    <option value="10">3 Rellenos - $10.00</option>
-                    <option value="12">Pabellón (Carne, caraota, tajada, queso) - $12.00</option>
-                </select>
-                <input type="text" class="input-detalle" id="det-arepa" placeholder="¿Qué rellenos prefieres?">
-                <div class="controles-fila">
-                    <div class="capsula-controles">
-                        <button class="btn-op" onclick="sumar('arepa', -1)">-</button>
-                        <span class="cant-num" id="c-arepa">0</span>
-                        <button class="btn-op" onclick="sumar('arepa', 1)">+</button>
-                    </div>
-                </div>
-            </div>
+    <div class="container" id="menu-container">
         </div>
-
-        <div class="categoria-titulo">Empanadas</div>
-        <div class="producto-card">
-            <div class="barra-lateral"></div>
-            <div class="contenido">
-                <div class="info-superior">
-                    <h3>Empanadas Crujientes</h3>
-                    <span class="precio-vistas" id="p-empa">$4.00</span>
-                </div>
-                <select class="selector-rellenos" id="sel-empa" onchange="actualizarPrecio('empa')">
-                    <option value="4">Sencilla (1 Relleno) - $4.00</option>
-                    <option value="7">Especial (2 Rellenos) - $7.00</option>
-                    <option value="9">Pabellón - $9.00</option>
-                </select>
-                <input type="text" class="input-detalle" id="det-empa" placeholder="Sabor (Carne, Pollo, Queso...)">
-                <div class="controles-fila">
-                    <div class="capsula-controles">
-                        <button class="btn-op" onclick="sumar('empa', -1)">-</button>
-                        <span class="cant-num" id="c-empa">0</span>
-                        <button class="btn-op" onclick="sumar('empa', 1)">+</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="categoria-titulo">Complementos</div>
-        <div class="producto-card">
-            <div class="barra-lateral"></div>
-            <div class="contenido">
-                <div class="info-superior">
-                    <h3>Tequeños (Ración x6)</h3>
-                    <span class="precio-vistas">$7.00</span>
-                </div>
-                <div class="controles-fila">
-                    <div class="capsula-controles">
-                        <button class="btn-op" onclick="sumar('teq', -1)">-</button>
-                        <span class="cant-num" id="c-teq">0</span>
-                        <button class="btn-op" onclick="sumar('teq', 1)">+</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="categoria-titulo">Bebidas</div>
-        <div class="producto-card">
-            <div class="barra-lateral"></div>
-            <div class="contenido">
-                <div class="info-superior">
-                    <h3>Malta / Papelón / Jugos</h3>
-                    <span class="precio-vistas">$3.00</span>
-                </div>
-                <input type="text" class="input-detalle" id="det-bebida" placeholder="¿Qué bebida deseas?">
-                <div class="controles-fila">
-                    <div class="capsula-controles">
-                        <button class="btn-op" onclick="sumar('bebida', -1)">-</button>
-                        <span class="cant-num" id="c-bebida">0</span>
-                        <button class="btn-op" onclick="sumar('bebida', 1)">+</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
 
     <div class="footer-total">
-        <div id="total-final" style="color:#333; font-weight:bold; margin-bottom:10px; font-size:1.2rem;">Total: $0.00</div>
-        <button class="btn-enviar" onclick="enviarPedido()">Pedir por WhatsApp</button>
+        <div id="total-text" style="color: #333; font-weight: bold; margin-bottom: 10px; font-size: 1.2rem;">Total: $0.00</div>
+        <button class="btn-whatsapp" onclick="enviarPedido()">PEDIR POR WHATSAPP</button>
     </div>
 
     <script>
-        let datos = {
-            arepa: { cant: 0, precio: 5 },
-            empa: { cant: 0, precio: 4 },
-            teq: { cant: 0, precio: 7 },
-            bebida: { cant: 0, precio: 3 }
+        const menuData = {
+            "Arepas": [
+                { nombre: "Arepa Personalizada", opciones: [{r: "1 Relleno", p: 5}, {r: "2 Rellenos", p: 9}, {r: "3 Rellenos", p: 12}] },
+                { nombre: "Arepa Pabellón", precio: 10 }
+            ],
+            "Empanadas": [
+                { nombre: "Empanada", opciones: [{r: "Sencilla", p: 4}, {r: "Especial (2 rellenos)", p: 7}, {r: "Pabellón", p: 8}] }
+            ],
+            "Cachapas": [
+                { nombre: "Cachapa con Queso", precio: 12 },
+                { nombre: "Cachapa con Todo", precio: 15 }
+            ],
+            "Tequeños": [
+                { nombre: "Ración x6", precio: 7 },
+                { nombre: "Ración x12", precio: 12 }
+            ],
+            "Bebidas": [
+                { nombre: "Malta", precio: 3 },
+                { nombre: "Papelón con Limón", precio: 3 },
+                { nombre: "Refrescos", precio: 2.5 }
+            ]
         };
 
-        function actualizarPrecio(id) {
-            datos[id].precio = parseFloat(document.getElementById('sel-' + id).value);
-            document.getElementById('p-' + id).innerText = `$${datos[id].precio.toFixed(2)}`;
-            calcular();
+        let carrito = {};
+
+        function renderMenu() {
+            const container = document.getElementById('menu-container');
+            for (const [cat, items] of Object.entries(menuData)) {
+                container.innerHTML += `<div class="categoria-titulo">${cat}</div>`;
+                items.forEach((item, index) => {
+                    const itemId = `${cat}-${index}`;
+                    const tieneOpciones = item.opciones;
+                    const precioInicial = tieneOpciones ? item.opciones[0].p : item.precio;
+
+                    let html = `
+                        <div class="producto-card">
+                            <div class="barra-azul"></div>
+                            <div class="contenido">
+                                <h3>${item.nombre}</h3>
+                                ${tieneOpciones ? `
+                                    <select class="selector-rellenos" onchange="updatePrecio('${itemId}', this)">
+                                        ${item.opciones.map(o => `<option value="${o.p}">${o.r} - $${o.p}</option>`).join('')}
+                                    </select>
+                                ` : `<div class="precio-display">$${precioInicial.toFixed(2)}</div>`}
+                                <div class="precio-display" id="p-val-${itemId}" style="display:none">${precioInicial}</div>
+                            </div>
+                            <div class="controles-wrapper">
+                                <div class="capsula">
+                                    <button class="btn-op" onclick="cambiarCant('${itemId}', -1)">-</button>
+                                    <span class="cant-num" id="cant-${itemId}">0</span>
+                                    <button class="btn-op" onclick="cambiarCant('${itemId}', 1)">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    container.innerHTML += html;
+                    carrito[itemId] = { nombre: item.nombre, cant: 0, precio: precioInicial };
+                });
+            }
         }
 
-        function sumar(id, n) {
-            datos[id].cant = Math.max(0, datos[id].cant + n);
-            document.getElementById('c-' + id).innerText = datos[id].cant;
-            calcular();
+        function updatePrecio(id, el) {
+            carrito[id].precio = parseFloat(el.value);
+            calcularTotal();
         }
 
-        function calcular() {
+        function cambiarCant(id, delta) {
+            carrito[id].cant = Math.max(0, carrito[id].cant + delta);
+            document.getElementById(`cant-${id}`).innerText = carrito[id].cant;
+            calcularTotal();
+        }
+
+        function calcularTotal() {
             let total = 0;
-            for (let key in datos) { total += datos[key].cant * datos[key].precio; }
-            document.getElementById('total-final').innerText = `Total: $${total.toFixed(2)}`;
+            for (const key in carrito) {
+                total += carrito[key].cant * carrito[key].precio;
+            }
+            document.getElementById('total-text').innerText = `Total: $${total.toFixed(2)}`;
         }
 
         function enviarPedido() {
-            let tel = "TUNUMERODETELEFONO"; // CAMBIA ESTO
-            let msg = "*PEDIDO MAF SAZÓN*%0A";
-            if(datos.arepa.cant > 0) msg += ` Arepas: ${datos.arepa.cant} (${document.getElementById('det-arepa').value})%0A`;
-            if(datos.empa.cant > 0) msg += ` Empanadas: ${datos.empa.cant} (${document.getElementById('det-empa').value})%0A`;
-            if(datos.teq.cant > 0) msg += ` Tequeños: ${datos.teq.cant}%0A`;
-            if(datos.bebida.cant > 0) msg += ` Bebidas: ${datos.bebida.cant} (${document.getElementById('det-bebida').value})%0A`;
-            
-            msg += `%0A*${document.getElementById('total-final').innerText}*`;
-            window.open(`https://wa.me/${tel}?text=${msg}`);
+            let msg = "*NUEVO PEDIDO MAF SAZÓN*%0A%0A";
+            let tieneItems = false;
+            for (const key in carrito) {
+                if (carrito[key].cant > 0) {
+                    msg += `- ${carrito[key].nombre} x${carrito[key].cant} ($${carrito[key].precio})%0A`;
+                    tieneItems = true;
+                }
+            }
+            if (!tieneItems) return alert("Agrega algo al carrito primero");
+            msg += `%0A*${document.getElementById('total-text').innerText}*`;
+            window.open(`https://wa.me/TUNUMERO?text=${msg}`);
         }
+
+        renderMenu();
     </script>
 </body>
 </html>
