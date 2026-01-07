@@ -122,43 +122,48 @@
             background: #fff;
         }
 
-        .controles-wrapper {
-            position: absolute;
-            right: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-        }
+       /* 1. Achicamos la ubicación para que no flote sobre el texto */
+.controles-wrapper {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 5;
+}
 
-        .capsula {
-            background-color: var(--ven-blue);
-            border-radius: 30px;
-            display: flex;
-            align-items: center;
-            padding: 3px;
-        }
+/* 2. Reducimos el tamaño de la cápsula azul */
+.capsula {
+    background-color: var(--ven-blue);
+    border-radius: 20px; /* Más redondeado y pequeño */
+    display: flex;
+    align-items: center;
+    padding: 2px; /* Menos espacio interno */
+}
 
-        .btn-op {
-            background-color: var(--ven-yellow);
-            color: var(--ven-blue);
-            border: none;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            font-weight: bold;
-            font-size: 1.3rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+/* 3. Achicamos los botones amarillos */
+.btn-op {
+    background-color: var(--ven-yellow);
+    color: var(--ven-blue);
+    border: none;
+    width: 24px;  /* Bajamos de 30px a 24px */
+    height: 24px; /* Bajamos de 30px a 24px */
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 1rem; /* Fuente más pequeña */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-        .cant-num {
-            color: white;
-            font-weight: bold;
-            margin: 0 10px;
-            min-width: 20px;
-            text-align: center;
-        }
+/* 4. Reducimos el margen del número central */
+.cant-num {
+    color: white;
+    font-weight: bold;
+    margin: 0 6px; /* Bajamos de 10px a 6px */
+    min-width: 15px;
+    font-size: 0.9rem;
+}
 
         .footer-total {
             position: fixed;
