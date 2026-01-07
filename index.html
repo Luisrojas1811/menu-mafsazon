@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maf Sazón - Menú Premium</title>
+    <title>Maf Sazón - Menú Completo</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -13,6 +12,7 @@
             --ven-blue: #003893;
             --ven-red: #ce1126;
             --ven-yellow: #ffcc4d;
+            --empa-orange: #ff6600;
         }
 
         body {
@@ -21,9 +21,10 @@
             padding: 0;
             background-color: var(--bg-dark);
             color: white;
-            padding-bottom: 130px;
+            padding-bottom: 140px;
         }
 
+        /* Encabezado según tu imagen */
         .header {
             background: linear-gradient(180deg, var(--ven-red) 0%, #a00d1d 100%);
             text-align: center;
@@ -60,18 +61,23 @@
             color: var(--ven-yellow);
             font-size: 1.4rem;
             font-weight: bold;
-            margin: 30px 0 15px;
+            margin: 35px 0 15px;
+            text-transform: capitalize;
         }
 
+        .titulo-naranja { color: var(--empa-orange); }
+
+        /* Tarjeta idéntica a tu foto */
         .producto-card {
             background-color: var(--card-bg);
-            border-radius: 10px;
+            border-radius: 12px;
             margin-bottom: 15px;
             display: flex;
             overflow: hidden;
             border: 2px solid var(--ven-yellow);
             color: #333;
             min-height: 100px;
+            position: relative;
         }
 
         .barra-azul {
@@ -82,29 +88,40 @@
 
         .contenido {
             flex-grow: 1;
-            padding: 10px 15px;
+            padding: 12px 15px;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            position: relative;
         }
 
-        .contenido h3 { margin: 0; font-size: 1.1rem; }
-        .descripcion { font-size: 0.8rem; color: #666; font-style: italic; margin-top: 3px; }
+        .contenido h3 { margin: 0; font-size: 1.1rem; color: #2c2f36; }
+        
+        .descripcion { 
+            font-size: 0.75rem; 
+            color: #666; 
+            line-height: 1.2;
+            margin-top: 4px;
+            max-width: 70%;
+        }
 
+        /* Selector punteado según tu imagen */
         .selector-rellenos {
-            width: 90%;
-            padding: 5px;
+            width: 80%;
+            padding: 4px;
             border: 1px dashed var(--ven-blue);
             border-radius: 4px;
             margin-top: 8px;
             font-family: inherit;
+            font-size: 0.8rem;
+            color: #444;
         }
 
+        /* Controles en cápsula azul */
         .controles-wrapper {
             position: absolute;
-            right: 10px;
-            bottom: 10px;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
         }
 
         .capsula {
@@ -112,22 +129,27 @@
             border-radius: 25px;
             display: flex;
             align-items: center;
-            padding: 4px 8px;
+            padding: 4px;
         }
 
         .btn-op {
             background-color: var(--ven-yellow);
             color: var(--ven-blue);
             border: none;
-            width: 28px;
-            height: 28px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             font-weight: bold;
+            font-size: 1.2rem;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .cant-num { color: white; margin: 0 12px; font-weight: bold; }
+        .cant-num { color: white; margin: 0 12px; font-weight: bold; min-width: 15px; text-align: center; }
 
+        /* Footer */
         .footer-total {
             position: fixed;
             bottom: 0;
@@ -144,78 +166,121 @@
             background-color: var(--ven-red);
             color: white;
             border: none;
-            padding: 15px;
-            border-radius: 8px;
+            padding: 16px;
+            border-radius: 10px;
             font-weight: bold;
             width: 100%;
             max-width: 400px;
             cursor: pointer;
+            font-size: 1rem;
         }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <img src="logo.jpg" alt="Logo">
-        <h2 style="color:white; margin:10px 0 0;">Maf Sazón</h2>
+        <img src="logo.jpg" alt="Maf Sazón">
     </div>
 
-    <div class="container" id="menu">
+    <div class="container" id="main-menu">
         <div class="categoria-titulo">Arepas</div>
         <div class="producto-card">
             <div class="barra-azul"></div>
             <div class="contenido">
                 <h3>Arepa Personalizada</h3>
-                <select class="selector-rellenos" onchange="cambiarPrecio('arepa-p', this)">
+                <select class="selector-rellenos" id="precio-arepa" onchange="actualizarPrecio('arepa')">
                     <option value="5">1 Relleno - $5.00</option>
                     <option value="9">2 Rellenos - $9.00</option>
                     <option value="12">3 Rellenos - $12.00</option>
                 </select>
-                <select class="selector-rellenos">
-                    <option>Queso, Pollo, Reina Pepiada, Mechada...</option>
-                    <option>Perico (Huevo revuelto)</option>
-                    <option>Verduras salteadas</option>
+                <select class="selector-rellenos" id="relleno-arepa">
+                    <option>Elegir Relleno...</option>
+                    <option>Queso</option><option>Jamón y queso</option>
+                    <option>Pollo guisado</option><option>Reina pepiada</option>
+                    <option>Verduras salteadas</option><option>Carne mechada</option>
+                    <option>Carne picada</option><option>Salchicha</option>
+                    <option>Chorizo</option><option>Perico (Huevo revuelto)</option>
                 </select>
-                <div class="controles-wrapper"><div class="capsula">
-                    <button class="btn-op" onclick="sumar('arepa-p', -1)">-</button>
-                    <span class="cant-num" id="c-arepa-p">0</span>
-                    <button class="btn-op" onclick="sumar('arepa-p', 1)">+</button>
-                </div></div>
             </div>
+            <div class="controles-wrapper"><div class="capsula">
+                <button class="btn-op" onclick="sumar('arepa', -1)">-</button>
+                <span class="cant-num" id="c-arepa">0</span>
+                <button class="btn-op" onclick="sumar('arepa', 1)">+</button>
+            </div></div>
         </div>
 
         <div class="producto-card">
             <div class="barra-azul"></div>
             <div class="contenido">
-                <h3>Arepa Pabellón / Dominó</h3>
-                <select class="selector-rellenos" onchange="cambiarPrecio('arepa-e', this)">
+                <h3>Arepa Especial</h3>
+                <select class="selector-rellenos" id="precio-arepa-e" onchange="actualizarPrecio('arepa-e')">
                     <option value="10">Pabellón - $10.00</option>
                     <option value="8">Dominó - $8.00</option>
                 </select>
-                <div class="controles-wrapper"><div class="capsula">
-                    <button class="btn-op" onclick="sumar('arepa-e', -1)">-</button>
-                    <span class="cant-num" id="c-arepa-e">0</span>
-                    <button class="btn-op" onclick="sumar('arepa-e', 1)">+</button>
-                </div></div>
             </div>
+            <div class="controles-wrapper"><div class="capsula">
+                <button class="btn-op" onclick="sumar('arepa-e', -1)">-</button>
+                <span class="cant-num" id="c-arepa-e">0</span>
+                <button class="btn-op" onclick="sumar('arepa-e', 1)">+</button>
+            </div></div>
         </div>
 
-        <div class="categoria-titulo" style="color:#ff6600">Empanadas</div>
+        <div class="categoria-titulo">Cachapas</div>
         <div class="producto-card">
             <div class="barra-azul"></div>
             <div class="contenido">
-                <h3>Opciones Empanada</h3>
-                <select class="selector-rellenos" onchange="cambiarPrecio('empa', this)">
+                <h3>Cachapa Tradicional</h3>
+                <select class="selector-rellenos" id="precio-cacha" onchange="actualizarPrecio('cacha')">
+                    <option value="12">Con Queso de Mano - $12.00</option>
+                    <option value="15">Con Todo - $15.00</option>
+                    <option value="11">Verduras Salteadas - $11.00</option>
+                </select>
+            </div>
+            <div class="controles-wrapper"><div class="capsula">
+                <button class="btn-op" onclick="sumar('cacha', -1)">-</button>
+                <span class="cant-num" id="c-cacha">0</span>
+                <button class="btn-op" onclick="sumar('cacha', 1)">+</button>
+            </div></div>
+        </div>
+
+        <div class="categoria-titulo" style="font-size: 1rem;">Adicionales de Cachapa</div>
+        <div class="producto-card" style="min-height: 80px;">
+            <div class="barra-azul"></div>
+            <div class="contenido">
+                <h3>Extras</h3>
+                <select class="selector-rellenos" id="precio-extra" onchange="actualizarPrecio('extra')">
+                    <option value="2">Aguacate - $2.00</option>
+                    <option value="3">Queso - $3.00</option>
+                    <option value="3">Chicharrón - $3.00</option>
+                </select>
+            </div>
+            <div class="controles-wrapper"><div class="capsula">
+                <button class="btn-op" onclick="sumar('extra', -1)">-</button>
+                <span class="cant-num" id="c-extra">0</span>
+                <button class="btn-op" onclick="sumar('extra', 1)">+</button>
+            </div></div>
+        </div>
+
+        <div class="categoria-titulo titulo-naranja">Empanadas</div>
+        <div class="producto-card">
+            <div class="barra-azul"></div>
+            <div class="contenido">
+                <h3>Opciones de Empanada</h3>
+                <select class="selector-rellenos" id="precio-empa" onchange="actualizarPrecio('empa')">
                     <option value="4">1 Relleno - $4.00</option>
                     <option value="8">Pabellón - $8.00</option>
                     <option value="6">Dominó - $6.00</option>
                 </select>
-                <div class="controles-wrapper"><div class="capsula">
-                    <button class="btn-op" onclick="sumar('empa', -1)">-</button>
-                    <span class="cant-num" id="c-empa">0</span>
-                    <button class="btn-op" onclick="sumar('empa', 1)">+</button>
-                </div></div>
+                <select class="selector-rellenos" id="relleno-empa">
+                    <option>Queso, Jamón y Queso, Pollo...</option>
+                    <option>Verduras, Carne Mechada, Carne Picada</option>
+                </select>
             </div>
+            <div class="controles-wrapper"><div class="capsula">
+                <button class="btn-op" onclick="sumar('empa', -1)">-</button>
+                <span class="cant-num" id="c-empa">0</span>
+                <button class="btn-op" onclick="sumar('empa', 1)">+</button>
+            </div></div>
         </div>
 
         <div class="categoria-titulo">Patacón</div>
@@ -223,17 +288,35 @@
             <div class="barra-azul"></div>
             <div class="contenido">
                 <h3>Elige tu Patacón</h3>
-                <select class="selector-rellenos" onchange="cambiarPrecio('pata', this)">
-                    <option value="12">Pollo o Carne - $12.00</option>
-                    <option value="14">Mixto - $14.00</option>
+                <select class="selector-rellenos" id="precio-pata" onchange="actualizarPrecio('pata')">
+                    <option value="12">Pollo - $12.00</option>
+                    <option value="12">Carne - $12.00</option>
+                    <option value="14">Mixto (Carne y Pollo) - $14.00</option>
                     <option value="11">Verduras Salteadas - $11.00</option>
                 </select>
-                <div class="controles-wrapper"><div class="capsula">
-                    <button class="btn-op" onclick="sumar('pata', -1)">-</button>
-                    <span class="cant-num" id="c-pata">0</span>
-                    <button class="btn-op" onclick="sumar('pata', 1)">+</button>
-                </div></div>
             </div>
+            <div class="controles-wrapper"><div class="capsula">
+                <button class="btn-op" onclick="sumar('pata', -1)">-</button>
+                <span class="cant-num" id="c-pata">0</span>
+                <button class="btn-op" onclick="sumar('pata', 1)">+</button>
+            </div></div>
+        </div>
+
+        <div class="categoria-titulo">Tequeños</div>
+        <div class="producto-card">
+            <div class="barra-azul"></div>
+            <div class="contenido">
+                <h3>Raciones</h3>
+                <select class="selector-rellenos" id="precio-teq" onchange="actualizarPrecio('teq')">
+                    <option value="7">Media docena (6) - $7.00</option>
+                    <option value="12">Docena (12) - $12.00</option>
+                </select>
+            </div>
+            <div class="controles-wrapper"><div class="capsula">
+                <button class="btn-op" onclick="sumar('teq', -1)">-</button>
+                <span class="cant-num" id="c-teq">0</span>
+                <button class="btn-op" onclick="sumar('teq', 1)">+</button>
+            </div></div>
         </div>
 
         <div class="categoria-titulo">Especiales</div>
@@ -242,79 +325,77 @@
             <div class="contenido">
                 <h3>Pabellón Vegano</h3>
                 <p class="descripcion">Arroz, porotos negros (caraotas), verduras salteadas y 3 arepitas</p>
-                <div class="controles-wrapper"><div class="capsula">
-                    <button class="btn-op" onclick="sumar('vegano', -1, 12)">-</button>
-                    <span class="cant-num" id="c-vegano">0</span>
-                    <button class="btn-op" onclick="sumar('vegano', 1, 12)">+</button>
-                </div></div>
             </div>
-        </div>
-
-        <div class="categoria-titulo">Adicionales</div>
-        <div class="producto-card">
-            <div class="barra-azul"></div>
-            <div class="contenido">
-                <h3>Extras</h3>
-                <select class="selector-rellenos" onchange="cambiarPrecio('extra', this)">
-                    <option value="2">Aguacate - $2.00</option>
-                    <option value="3">Queso o Chicharrón - $3.00</option>
-                </select>
-                <div class="controles-wrapper"><div class="capsula">
-                    <button class="btn-op" onclick="sumar('extra', -1)">-</button>
-                    <span class="cant-num" id="c-extra">0</span>
-                    <button class="btn-op" onclick="sumar('extra', 1)">+</button>
-                </div></div>
-            </div>
+            <div class="controles-wrapper"><div class="capsula">
+                <button class="btn-op" onclick="sumar('vegano', -1, 12)">-</button>
+                <span class="cant-num" id="c-vegano">0</span>
+                <button class="btn-op" onclick="sumar('vegano', 1, 12)">+</button>
+            </div></div>
         </div>
 
         <div class="categoria-titulo">Bebidas</div>
         <div class="producto-card">
             <div class="barra-azul"></div>
             <div class="contenido">
-                <h3>Bebida a elección</h3>
-                <select class="selector-rellenos" onchange="cambiarPrecio('beb', this)">
-                    <option value="3">Nestea / Agua de Panela - $3.00</option>
+                <h3>Refresca tu Sazón</h3>
+                <select class="selector-rellenos" id="precio-beb" onchange="actualizarPrecio('beb')">
+                    <option value="3">Nestea - $3.00</option>
+                    <option value="3">Agua de Panela - $3.00</option>
                     <option value="2.5">Gaseosas - $2.50</option>
                 </select>
-                <div class="controles-wrapper"><div class="capsula">
-                    <button class="btn-op" onclick="sumar('beb', -1)">-</button>
-                    <span class="cant-num" id="c-beb">0</span>
-                    <button class="btn-op" onclick="sumar('beb', 1)">+</button>
-                </div></div>
             </div>
+            <div class="controles-wrapper"><div class="capsula">
+                <button class="btn-op" onclick="sumar('beb', -1)">-</button>
+                <span class="cant-num" id="c-beb">0</span>
+                <button class="btn-op" onclick="sumar('beb', 1)">+</button>
+            </div></div>
         </div>
     </div>
 
     <div class="footer-total">
-        <div id="total" style="font-weight:bold; margin-bottom:10px; color:#333;">Total: $0.00</div>
-        <button class="btn-whatsapp" onclick="enviar()">CONFIRMAR PEDIDO WHATSAPP</button>
+        <div id="total-text" style="font-weight:bold; margin-bottom:12px; font-size:1.3rem; color:#333;">Total: $0.00</div>
+        <button class="btn-whatsapp" onclick="enviarPedido()">CONFIRMAR PEDIDO WHATSAPP</button>
     </div>
 
     <script>
-        let pedido = { 
-            "arepa-p": {c:0, p:5}, "arepa-e": {c:0, p:10}, "empa": {c:0, p:4}, 
-            "pata": {c:0, p:12}, "vegano": {c:0, p:12}, "extra": {c:0, p:2}, "beb": {c:0, p:3} 
+        let pedido = {
+            "arepa": {c:0, p:5}, "arepa-e": {c:0, p:10}, "cacha": {c:0, p:12},
+            "extra": {c:0, p:2}, "empa": {c:0, p:4}, "pata": {c:0, p:12},
+            "teq": {c:0, p:7}, "vegano": {c:0, p:12}, "beb": {c:0, p:3}
         };
 
-        function cambiarPrecio(id, el) { pedido[id].p = parseFloat(el.value); calcular(); }
-
-        function sumar(id, n) { 
-            pedido[id].c = Math.max(0, pedido[id].c + n); 
-            document.getElementById('c-'+id).innerText = pedido[id].c; 
-            calcular(); 
+        function actualizarPrecio(id) {
+            pedido[id].p = parseFloat(document.getElementById('precio-'+id).value);
+            calcularTotal();
         }
 
-        function calcular() {
-            let total = 0;
-            for(let k in pedido) total += pedido[k].c * pedido[k].p;
-            document.getElementById('total').innerText = "Total: $" + total.toFixed(2);
+        function sumar(id, n, pManual) {
+            pedido[id].c = Math.max(0, pedido[id].c + n);
+            if(pManual) pedido[id].p = pManual;
+            document.getElementById('c-'+id).innerText = pedido[id].c;
+            calcularTotal();
         }
 
-        function enviar() {
-            let msg = "*NUEVO PEDIDO MAF SAZÓN*%0A";
-            for(let k in pedido) if(pedido[k].c > 0) msg += `- ${k} x${pedido[k].c}%0A`;
-            window.open("https://wa.me/TUNUMERO?text=" + msg + "%0A*" + document.getElementById('total').innerText + "*");
+        function calcularTotal() {
+            let t = 0;
+            for(let k in pedido) t += pedido[k].c * pedido[k].p;
+            document.getElementById('total-text').innerText = "Total: $" + t.toFixed(2);
+        }
+
+        function enviarPedido() {
+            let msg = "*NUEVO PEDIDO MAF SAZÓN*%0A------------------%0A";
+            let tieneItems = false;
+            for(let k in pedido) {
+                if(pedido[k].c > 0) {
+                    msg += `- ${k.toUpperCase()} x${pedido[k].c} ($${pedido[k].p})%0A`;
+                    tieneItems = true;
+                }
+            }
+            if(!tieneItems) return alert("Agrega productos al carrito.");
+            msg += "%0A*" + document.getElementById('total-text').innerText + "*";
+            window.open("https://wa.me/TUNUMERO?text=" + msg);
         }
     </script>
 </body>
 </html>
+
