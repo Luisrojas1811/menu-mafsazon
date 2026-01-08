@@ -147,4 +147,180 @@
 <div class="footer-carrito">
     <div id="resumen" class="resumen-items">Tu pedido está vacío</div>
     <div class="total-area">
-        <div id="total-val" style="font-weight: bold; margin-bottom: 10px; font-size: 1.2rem; color: #33
+        <div id="total-val" style="font-weight: bold; margin-bottom: 10px; font-size: 1.2rem; color: #333;">Total: $0.00</div>
+        <button class="btn-whatsapp" onclick="enviarPedido()">ENVIAR PEDIDO POR WHATSAPP</button>
+    </div>
+</div>
+
+<script>
+    const listaArepas = ["Queso", "Jamón y Queso", "Pollo", "Reina Pepiada", "Carne Mechada", "Carne Picada", "Salchicha", "Chorizo", "Perico"];
+    const listaEmpanadas = ["Queso", "Jamón y Queso", "Pollo", "Carne Mechada", "Carne Picada", "Verduras"];
+
+    const menu = [
+        { 
+            cat: "Arepas", 
+            placeholder: "Ej: Sin cebolla, bien tostada...",
+            items: [
+                { n: "Arepa 1 Relleno", p: 5, m: 1, rellenos: listaArepas },
+                { n: "Arepa 2 Rellenos", p: 9, m: 2, rellenos: listaArepas },
+                { n: "Arepa 3 Rellenos", p: 12, m: 3, rellenos: listaArepas },
+                { n: "Arepa Pabellón", p: 10, det: "Mechada, caraotas, tajadas y queso" },
+                { n: "Arepa Dominó", p: 9, det: "Caraotas negras y queso" }
+            ]
+        },
+        { 
+            cat: "Empanadas", 
+            placeholder: "Ej: Bien frita...",
+            items: [
+                { n: "Empanada 1 Relleno", p: 4, m: 1, rellenos: listaEmpanadas },
+                { n: "Empanada Pabellón", p: 8, det: "Mechada, caraotas, tajadas y queso" },
+                { n: "Empanada Dominó", p: 7, det: "Caraotas y queso" }
+            ]
+        },
+        { 
+            cat: "Patacones", 
+            placeholder: "Ej: Con extra salsa...",
+            items: [
+                { n: "Patacón de Pollo", p: 10 }, { n: "Patacón de Carne", p: 10 }, { n: "Patacón Mixto", p: 12 }
+            ]
+        },
+        { 
+            cat: "Bebidas", 
+            esBebida: true,
+            placeholder: null,
+            items: [
+                { n: "Nestea", p: 3.5 }, { n: "Agua Panela", p: 3 }, { n: "Malta", p: 3 }, { n: "Gaseosa", p: 2.5 }
+            ]
+        }
+    ];
+
+    let carrito = [];
+    let cantidadesBebidas = {}; // Objeto para rastrear cantidades de bebidas
+
+    function init() {
+        const box = document.getElementById('menu-box');
+        menu.forEach(seccion => {
+            box.innerHTML += `<div class="categoria-titulo">${seccion.cat}</div>`;
+            seccion.items.forEach((item, i) => {
+                const id = `${seccion.cat}-${i}`.replace(/\s+/g, '');
+
+                let footerAccion = "";
+                if (seccion.esBebida) {
+                    cantidadesBebidas[id] = 0;
+                    footerAccion = `
+                        <div class="controles-bebida">
+                            <button class="btn-qty" onclick="cambiarCantidadBebida('${id}', '${item.n}', ${item.p}, -1)">-</button>
+                            <span class="qty-num" id="qty-${id}">0</span>
+                            <button class="btn-qty" onclick="cambiarCantidadBebida('${id}', '${item.n}', ${item.p}, 1)">+</button>
+                        </div>`;
+                } else {
+                    footerAccion = `
+                        <button class="btn-agregar" onclick="agregar('${id}', '${item.n}', ${item.p}, ${item.m || 0})">
+                            + Agregar al pedido
+                        </button>`;
+                }
+
+                box.innerHTML += `
+                    <div class="producto-card">
+                        <div class="barra-azul"></div>
+                        <div class="contenido">
+                            <h3>${item.n} <span class="precio-tag">$${item.p.toFixed(2)}</span></h3>
+                            ${item.det ? `<div class="descripcion">${item.det}</div>` : ''}
+                            ${item.rellenos ? `
+                                <div class="contenedor-rellenos" id="checks-${id}">
+                                    ${item.rellenos.map(r => `<label class="relleno-item"><input type="checkbox" value="${r}" onchange="validarChecks('${id}', ${item.m})"> ${r}</label>`).join('')}
+                                </div>` : ''}
+                            ${seccion.placeholder ? `<input type="text" id="nota-${id}" class="input-notas" placeholder="${seccion.placeholder}">` : ''}
+                            ${footerAccion}
+                        </div>
+                    </div>`;
+            });
+        });
+    }
+
+    function validarChecks(id, limite) {
+        const sel = document.querySelectorAll(`#checks-${id} input:checked`);
+        const nosel = document.querySelectorAll(`#checks-${id} input:not(:checked)`);
+        nosel.forEach(el => el.disabled = (sel.length >= limite));
+    }
+
+    function cambiarCantidadBebida(id, nombre, precio, cambio) {
+        const nuevaCant = Math.max(0, cantidadesBebidas[id] + cambio);
+        cantidadesBebidas[id] = nuevaCant;
+        document.getElementById(`qty-${id}`).innerText = nuevaCant;
+
+        // Sincronizar con el carrito
+        carrito = carrito.filter(item => !(item.tipo === 'bebida' && item.id_ref === id));
+        if (nuevaCant > 0) {
+            carrito.push({ nombre, precio: precio * nuevaCant, cant: nuevaCant, tipo: 'bebida', id_ref: id, unitario: precio });
+        }
+        actualizarCarrito();
+    }
+
+    function agregar(id, nombre, precio, limite) {
+        const sel = Array.from(document.querySelectorAll(`#checks-${id} input:checked`)).map(c => c.value);
+        const notaInput = document.getElementById(`nota-${id}`);
+        const nota = notaInput ? notaInput.value : "";
+
+        if (limite > 0 && sel.length !== limite) return alert(`Selecciona ${limite} relleno(s)`);
+
+        carrito.push({ nombre, precio, rellenos: sel, nota, tipo: 'comida' });
+
+        if(limite > 0) {
+            document.querySelectorAll(`#checks-${id} input`).forEach(c => { c.checked = false; c.disabled = false; });
+        }
+        if(notaInput) notaInput.value = "";
+        actualizarCarrito();
+    }
+
+    function actualizarCarrito() {
+        const res = document.getElementById('resumen');
+        if (carrito.length === 0) {
+            res.innerHTML = "Tu pedido está vacío";
+            document.getElementById('total-val').innerText = "Total: $0.00";
+            return;
+        }
+
+        let total = 0;
+        res.innerHTML = carrito.map((item, index) => {
+            total += item.precio;
+            const displayCant = item.tipo === 'bebida' ? item.cant : 1;
+            return `
+                <div class="item-carrito">
+                    <div>
+                        <strong>${displayCant}x ${item.nombre}</strong><br>
+                        <small>${item.rellenos ? 'Gustos: ' + item.rellenos.join(', ') : ''} ${item.nota ? ' | ' + item.nota : ''}</small>
+                    </div>
+                    <div>
+                        $${item.precio.toFixed(2)}
+                        ${item.tipo === 'comida' ? `<span class="btn-eliminar" onclick="eliminarComida(${index})">✕</span>` : ''}
+                    </div>
+                </div>`;
+        }).join('');
+
+        document.getElementById('total-val').innerText = `Total: $${total.toFixed(2)}`;
+    }
+
+    function eliminarComida(index) {
+        carrito.splice(index, 1);
+        actualizarCarrito();
+    }
+
+    function enviarPedido() {
+        if (carrito.length === 0) return alert("Agrega productos.");
+        let msg = "*NUEVO PEDIDO MAF SAZÓN*%0A%0A";
+        carrito.forEach((item, i) => {
+            const cant = item.tipo === 'bebida' ? item.cant : 1;
+            msg += `${i+1}. *${cant}x ${item.nombre}*%0A`;
+            if(item.rellenos && item.rellenos.length > 0) msg += `   _Rellenos: ${item.rellenos.join(', ')}_%0A`;
+            if(item.nota) msg += `   _Nota: ${item.nota}_%0A`;
+            msg += `%0A`;
+        });
+        msg += `*${document.getElementById('total-val').innerText}*`;
+        window.open(`https://wa.me/5491157440973?text=${msg}`);
+    }
+
+    init();
+</script>
+</body>
+</html>
