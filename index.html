@@ -18,11 +18,10 @@
 
         body {
             font-family: 'Montserrat', sans-serif;
-            margin: 0;
-            padding: 0;
+            margin: 0; padding: 0;
             background-color: var(--bg-dark);
             color: white;
-            padding-bottom: 120px;
+            padding-bottom: 140px;
         }
 
         .header {
@@ -34,33 +33,23 @@
         }
 
         .header img {
-            width: 120px;
-            height: 120px;
+            width: 120px; height: 120px;
             border: 3px solid var(--ven-yellow);
             border-radius: 50%;
-            background: white;
-            padding: 5px;
-            position: relative;
-            z-index: 2;
+            background: white; padding: 5px;
+            position: relative; z-index: 2;
         }
 
         .header::after {
             content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 50px;
+            position: absolute; bottom: 0; left: 0;
+            width: 100%; height: 50px;
             background: var(--ven-yellow);
             clip-path: ellipse(60% 50% at 50% 100%);
             opacity: 0.9;
         }
 
-        .container {
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+        .container { max-width: 500px; margin: 0 auto; padding: 20px; }
 
         .categoria-titulo {
             color: var(--ven-yellow);
@@ -82,114 +71,76 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
 
-        .barra-azul {
-            background-color: var(--ven-blue);
-            width: 35px;
-            flex-shrink: 0;
-        }
+        .barra-azul { background-color: var(--ven-blue); width: 30px; flex-shrink: 0; }
 
-        .contenido {
-            flex-grow: 1;
-            padding: 12px 15px;
-            display: flex;
-            flex-direction: column;
-            padding-right: 100px; /* Espacio para que el texto no choque con los botones */
-        }
+        .contenido { flex-grow: 1; padding: 12px 15px; padding-right: 90px; }
 
         .contenido h3 { margin: 0; font-size: 1.1rem; }
 
-        .descripcion {
-            font-size: 0.75rem;
-            color: var(--text-gray);
-            margin-top: 4px;
-            line-height: 1.2;
+        .descripcion { font-size: 0.75rem; color: var(--text-gray); margin: 4px 0; }
+
+        /* Estilo para los Checkboxes de Rellenos */
+        .contenedor-rellenos {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5px;
+            margin: 10px 0;
+            background: #f4f4f4;
+            padding: 8px;
+            border-radius: 8px;
         }
+
+        .relleno-item {
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .relleno-item input { margin-right: 5px; }
 
         .selector-rellenos, .input-notas {
             width: 100%;
             padding: 8px;
             border: 1px dashed var(--ven-blue);
             border-radius: 5px;
-            background: #f9f9f9;
             margin-top: 8px;
-            font-family: inherit;
             font-size: 0.85rem;
             box-sizing: border-box;
         }
 
-        .input-notas {
-            border: 1px solid #ddd;
-            background: #fff;
+        .controles-wrapper {
+            position: absolute; right: 8px; top: 20px;
         }
 
-       /* 1. Achicamos la ubicación para que no flote sobre el texto */
-.controles-wrapper {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 5;
-}
+        .capsula {
+            background-color: var(--ven-blue);
+            border-radius: 20px;
+            display: flex; align-items: center; padding: 2px;
+        }
 
-/* 2. Reducimos el tamaño de la cápsula azul */
-.capsula {
-    background-color: var(--ven-blue);
-    border-radius: 20px; /* Más redondeado y pequeño */
-    display: flex;
-    align-items: center;
-    padding: 2px; /* Menos espacio interno */
-}
+        .btn-op {
+            background-color: var(--ven-yellow);
+            color: var(--ven-blue);
+            border: none; width: 26px; height: 26px;
+            border-radius: 50%; font-weight: bold;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+        }
 
-/* 3. Achicamos los botones amarillos */
-.btn-op {
-    background-color: var(--ven-yellow);
-    color: var(--ven-blue);
-    border: none;
-    width: 24px;  /* Bajamos de 30px a 24px */
-    height: 24px; /* Bajamos de 30px a 24px */
-    border-radius: 50%;
-    font-weight: bold;
-    font-size: 1rem; /* Fuente más pequeña */
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* 4. Reducimos el margen del número central */
-.cant-num {
-    color: white;
-    font-weight: bold;
-    margin: 0 6px; /* Bajamos de 10px a 6px */
-    min-width: 15px;
-    font-size: 0.9rem;
-}
+        .cant-num { color: white; font-weight: bold; margin: 0 8px; min-width: 15px; text-align: center; }
 
         .footer-total {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: white;
-            padding: 15px;
+            position: fixed; bottom: 0; left: 0; width: 100%;
+            background: white; padding: 15px;
             box-shadow: 0 -5px 15px rgba(0,0,0,0.3);
-            text-align: center;
-            box-sizing: border-box;
-            z-index: 100;
+            text-align: center; box-sizing: border-box; z-index: 100;
         }
 
         .btn-whatsapp {
             background-color: var(--ven-red);
-            color: white;
-            border: none;
-            padding: 15px;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 1rem;
-            width: 100%;
-            cursor: pointer;
-            text-transform: uppercase;
-            box-sizing: border-box;
+            color: white; border: none; padding: 15px;
+            border-radius: 8px; font-weight: bold; width: 100%;
+            cursor: pointer; text-transform: uppercase;
         }
     </style>
 </head>
@@ -208,36 +159,33 @@
 </div>
 
 <script>
-    const rellenosArepas = "Queso, jamón y queso, pollo guisado, reina pepiada, verduras salteadas, carne mechada, carne picada, salchicha, chorizo, perico.";
-    const rellenosEmpanadas = "Queso, jamón y queso, pollo, verduras, carne mechada, carne picada.";
+    const listaRellenosArepa = ["Queso", "Jamón y Queso", "Pollo", "Reina Pepiada", "Carne Mechada", "Carne Picada", "Salchicha", "Chorizo", "Perico"];
+    const listaRellenosEmpanada = ["Queso", "Jamón y Queso", "Pollo", "Carne Mechada", "Carne Picada", "Verduras"];
 
     const menu = [
         { cat: "Arepas", items: [
-            { n: "Arepa Personalizada", p: 5, opts: [{n: "1 Relleno", p: 5}, {n: "2 Rellenos", p: 9}, {n: "3 Rellenos", p: 12}], det: rellenosArepas, nota: "Ej: Una de carne, otra de jamón" },
-            { n: "Arepa Pabellón", p: 10, det: "Carne mechada, caraotas, tajadas y queso" },
+            { n: "Arepa Personalizada", p: 5, tipo: "multi", rellenos: listaRellenosArepa, opts: [{n: "1 Relleno", p: 5, m: 1}, {n: "2 Rellenos", p: 9, m: 2}, {n: "3 Rellenos", p: 12, m: 3}] },
+            { n: "Arepa Pabellón", p: 10, det: "Mechada, caraotas, tajadas y queso" },
             { n: "Arepa Dominó", p: 9, det: "Caraotas negras y queso" }
         ]},
         { cat: "Empanadas", items: [
-            { n: "Empanada", p: 4, opts: [{n: "1 Relleno", p: 4}, {n: "Pabellón", p: 8}, {n: "Dominó", p: 7}], det: rellenosEmpanadas, nota: "Indica los sabores aquí" }
+            { n: "Empanada", p: 4, tipo: "multi", rellenos: listaRellenosEmpanada, opts: [{n: "1 Relleno", p: 4, m: 1}, {n: "Pabellón", p: 8, m: 1}, {n: "Dominó", p: 7, m: 1}] }
         ]},
         { cat: "Cachapas", items: [
-            { n: "Cachapa con Queso de Mano", p: 12 },
-            { n: "Cachapa con Verduras Salteadas", p: 13 },
+            { n: "Cachapa Queso de Mano", p: 12 },
+            { n: "Cachapa Verduras", p: 13 },
             { n: "Adicionales", p: 3, opts: [{n: "Aguacate", p: 3}, {n: "Queso Extra", p: 2}, {n: "Chicharrón", p: 4}] }
         ]},
-        { cat: "Patacón", items: [
-            { n: "Pollo", p: 10 }, { n: "Carne", p: 10 }, { n: "Mixto", p: 12 }, { n: "Verduras Salteadas", p: 9 }
-        ]},
-        { cat: "Tequeños", items: [
-            { n: "Media Docena (6)", p: 7 }, { n: "Docena (12)", p: 12 }
+        { cat: "Patacones", items: [
+            { n: "Pollo", p: 10 }, { n: "Carne", p: 10 }, { n: "Mixto", p: 12 }, { n: "Verduras", p: 9 }
         ]},
         { cat: "Especiales", items: [
-            { n: "Pabellón Vegano", p: 11, det: "Arroz, caraotas, verduras salteadas y 3 arepitas" },
-            { n: "Pabellón", p: 11, det: "Arroz, caraotas, carne mechada, 3 arepitas y queso" },
-            { n: "Pollo a la broaster", p: 11, det: "5 arepitas fritas, ensalada y salsa de ajo" }
+            { n: "Pabellón Vegano", p: 11, det: "Arroz, caraotas, verduras y 3 arepitas" },
+            { n: "Pabellón Criollo", p: 11, det: "Arroz, caraotas, mechada, queso y 3 arepitas" },
+            { n: "Pollo Broaster", p: 11, det: "5 arepitas, ensalada y salsa" }
         ]},
         { cat: "Bebidas", items: [
-            { n: "Nestea", p: 3.5 }, { n: "Agua de Panela", p: 3 }, { n: "Gaseosas", p: 2.5 }, { n: "Malta", p: 3 }, { n: "Agua", p: 3 }
+            { n: "Nestea", p: 3.5 }, { n: "Agua Panela", p: 3 }, { n: "Malta", p: 3 }, { n: "Gaseosa", p: 2.5 }
         ]}
     ];
 
@@ -249,8 +197,18 @@
             box.innerHTML += `<div class="categoria-titulo">${seccion.cat}</div>`;
             seccion.items.forEach((item, i) => {
                 const id = `${seccion.cat}-${i}`.replace(/\s+/g, '');
-                pedido[id] = { nombre: item.n, cant: 0, precio: item.p, variante: item.opts ? item.opts[0].n : "" };
-                
+                pedido[id] = { nombre: item.n, cant: 0, precio: item.p, limite: item.opts ? (item.opts[0].m || 99) : 99, variante: item.opts ? item.opts[0].n : "" };
+
+                let htmlRellenos = "";
+                if(item.tipo === "multi") {
+                    htmlRellenos = `<div class="contenedor-rellenos">` + 
+                        item.rellenos.map(r => `
+                            <label class="relleno-item">
+                                <input type="checkbox" class="check-${id}" value="${r}" onclick="validarChecks('${id}')"> ${r}
+                            </label>
+                        `).join('') + `</div>`;
+                }
+
                 box.innerHTML += `
                     <div class="producto-card">
                         <div class="barra-azul"></div>
@@ -258,11 +216,12 @@
                             <h3>${item.n}</h3>
                             ${item.det ? `<div class="descripcion">${item.det}</div>` : ''}
                             ${item.opts ? `
-                                <select class="selector-rellenos" onchange="cambiarPrecio('${id}', this)">
-                                    ${item.opts.map(o => `<option value="${o.p}">${o.n} - $${o.p}</option>`).join('')}
+                                <select class="selector-rellenos" onchange="cambiarVariante('${id}', this)">
+                                    ${item.opts.map(o => `<option value="${o.p}" data-limite="${o.m || 99}">${o.n} - $${o.p}</option>`).join('')}
                                 </select>
                             ` : `<div style="font-weight:bold; color:var(--ven-blue); margin-top:5px;">$${item.p.toFixed(2)}</div>`}
-                            <input type="text" id="nota-${id}" class="input-notas" placeholder="${item.nota || 'Notas o gustos...'}">
+                            ${htmlRellenos}
+                            <input type="text" id="nota-${id}" class="input-notas" placeholder="Instrucciones especiales...">
                         </div>
                         <div class="controles-wrapper">
                             <div class="capsula">
@@ -277,9 +236,25 @@
         });
     }
 
-    function cambiarPrecio(id, el) {
+    function validarChecks(id) {
+        const limite = pedido[id].limite;
+        const seleccionados = document.querySelectorAll(`.check-${id}:checked`);
+        const noSeleccionados = document.querySelectorAll(`.check-${id}:not(:checked)`);
+
+        if (seleccionados.length >= limite) {
+            noSeleccionados.forEach(el => el.disabled = true);
+        } else {
+            noSeleccionados.forEach(el => el.disabled = false);
+        }
+    }
+
+    function cambiarVariante(id, el) {
         pedido[id].precio = parseFloat(el.value);
+        pedido[id].limite = parseInt(el.options[el.selectedIndex].getAttribute('data-limite'));
         pedido[id].variante = el.options[el.selectedIndex].text.split(' -')[0];
+        
+        // Limpiar checks si cambia de 2 a 1 relleno
+        document.querySelectorAll(`.check-${id}`).forEach(c => { c.checked = false; c.disabled = false; });
         calc();
     }
 
@@ -301,16 +276,19 @@
         for (let k in pedido) {
             if (pedido[k].cant > 0) {
                 let nota = document.getElementById(`nota-${k}`).value;
+                let checks = Array.from(document.querySelectorAll(`.check-${k}:checked`)).map(c => c.value);
+                
                 msg += `• *${pedido[k].nombre}* x${pedido[k].cant}`;
                 if (pedido[k].variante) msg += ` (${pedido[k].variante})`;
+                if (checks.length > 0) msg += `%0A  _Rellenos: ${checks.join(", ")}_`;
                 if (nota) msg += `%0A  _Nota: ${nota}_`;
-                msg += `%0A`;
+                msg += `%0A%0A`;
                 tiene = true;
             }
         }
-        if (!tiene) return alert("Selecciona productos");
-        msg += `%0A*${document.getElementById('total-val').innerText}*`;
-        window.open(`https://wa.me/5491111111111?text=${msg}`); // <-- PON TU NÚMERO AQUÍ
+        if (!tiene) return alert("El carrito está vacío");
+        msg += `*${document.getElementById('total-val').innerText}*`;
+        window.open(`https://wa.me/5491111111111?text=${msg}`);
     }
 
     init();
