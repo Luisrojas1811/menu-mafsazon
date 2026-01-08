@@ -21,7 +21,6 @@
             margin: 0; padding: 0;
             background-color: var(--bg-dark);
             color: white;
-            /* Se eliminó el padding fijo para usar un espaciador dinámico */
         }
 
         .header {
@@ -69,13 +68,12 @@
             overflow: hidden;
             border: 2px solid var(--ven-yellow);
             color: var(--text-dark);
-            position: relative;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
 
         .barra-azul { background-color: var(--ven-blue); width: 12px; flex-shrink: 0; }
-        .contenido { flex-grow: 1; padding: 12px; }
-        .contenido h3 { margin: 0; font-size: 1rem; color: var(--ven-blue); display: flex; justify-content: space-between; }
+        .contenido { flex-grow: 1; padding: 12px; width: 100%; }
+        .contenido h3 { margin: 0; font-size: 1rem; color: var(--ven-blue); display: flex; justify-content: space-between; align-items: center; }
         .precio-tag { font-weight: bold; color: var(--ven-red); }
         .descripcion { font-size: 0.75rem; color: var(--text-gray); margin: 4px 0; line-height: 1.2; }
 
@@ -88,17 +86,16 @@
         .relleno-item input { margin-right: 5px; }
 
         .input-notas {
-            width: 100%; padding: 8px; border: 1px solid #ccc;
-            border-radius: 5px; margin-top: 8px; font-size: 0.8rem; box-sizing: border-box;
+            width: 100%; padding: 10px; border: 1px solid #ccc;
+            border-radius: 5px; margin-top: 8px; font-size: 0.85rem; box-sizing: border-box;
         }
 
         .btn-agregar {
             background-color: var(--ven-blue); color: white; border: none;
-            padding: 10px; border-radius: 6px; width: 100%; font-weight: bold;
+            padding: 12px; border-radius: 6px; width: 100%; font-weight: bold;
             margin-top: 10px; cursor: pointer; text-transform: uppercase; font-size: 0.8rem;
         }
 
-        /* Controles +/- */
         .controles-qty {
             display: flex; align-items: center; justify-content: center;
             background: #f1f3f5; border-radius: 8px; padding: 5px;
@@ -106,7 +103,7 @@
         }
         .btn-qty {
             background: var(--ven-blue); color: white; border: none;
-            width: 32px; height: 32px; border-radius: 5px; font-size: 1.2rem;
+            width: 35px; height: 35px; border-radius: 5px; font-size: 1.3rem;
             cursor: pointer; font-weight: bold;
         }
         .qty-num { margin: 0 15px; font-weight: bold; font-size: 1.1rem; color: var(--ven-blue); min-width: 20px; text-align: center; }
@@ -118,24 +115,42 @@
         }
 
         .resumen-items {
-            max-height: 120px; overflow-y: auto; padding: 10px 15px;
+            max-height: 140px; overflow-y: auto; padding: 10px;
             font-size: 0.85rem; border-bottom: 1px solid #eee;
         }
 
         .item-carrito {
             display: flex; justify-content: space-between; align-items: center;
-            margin-bottom: 8px; padding-bottom: 5px; border-bottom: 1px dashed #ddd;
+            margin-bottom: 8px; padding: 8px; border-bottom: 1px dashed #ddd;
+            gap: 10px;
         }
 
-        .btn-eliminar { color: var(--ven-red); font-weight: bold; cursor: pointer; margin-left: 10px; padding: 2px 8px; }
-        .total-area { padding: 12px; text-align: center; }
+        .info-producto { flex: 1; }
+
+        .precio-y-borrar {
+            display: flex; align-items: center; gap: 10px;
+            font-weight: bold; white-space: nowrap;
+        }
+
+        .btn-eliminar {
+            background-color: var(--ven-red);
+            color: white;
+            border: none;
+            width: 26px; height: 26px;
+            border-radius: 50%;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 14px;
+        }
+
+        .total-area { padding: 15px; text-align: center; }
         .btn-whatsapp {
-            background-color: var(--ven-red); color: white; border: none; padding: 12px;
+            background-color: var(--ven-red); color: white; border: none; padding: 15px;
             border-radius: 8px; font-weight: bold; width: 100%; cursor: pointer; text-transform: uppercase; font-size: 1rem;
         }
 
-        /* Espaciador para que el carrito no tape el menú */
-        .espaciador-final { height: 220px; width: 100%; }
+        .espaciador-final { height: 240px; width: 100%; }
     </style>
 </head>
 <body>
@@ -151,7 +166,7 @@
 <div class="footer-carrito">
     <div id="resumen" class="resumen-items">Tu pedido está vacío</div>
     <div class="total-area">
-        <div id="total-val" style="font-weight: bold; margin-bottom: 8px; font-size: 1.1rem; color: #333;">Total: $0.00</div>
+        <div id="total-val" style="font-weight: bold; margin-bottom: 10px; font-size: 1.2rem; color: #333;">Total: $0.00</div>
         <button class="btn-whatsapp" onclick="enviarPedido()">ENVIAR PEDIDO POR WHATSAPP</button>
     </div>
 </div>
@@ -194,10 +209,10 @@
             cat: "Bebidas", 
             placeholder: null,
             items: [
-                { n: "Nestea", p: 3.5, tipo: "bebida" }, 
-                { n: "Agua Panela", p: 3, tipo: "bebida" }, 
-                { n: "Malta", p: 3, tipo: "bebida" }, 
-                { n: "Gaseosa", p: 2.5, tipo: "bebida" }
+                { n: "Nestea", p: 3.5, tipo: "fijo" }, 
+                { n: "Agua Panela", p: 3, tipo: "fijo" }, 
+                { n: "Malta", p: 3, tipo: "fijo" }, 
+                { n: "Gaseosa", p: 2.5, tipo: "fijo" }
             ]
         }
     ];
@@ -249,30 +264,21 @@
         nosel.forEach(el => el.disabled = (sel.length >= limite));
     }
 
-    // Para productos con contador +/-
     function cambiarCantidad(id, nombre, precio, delta, tipo) {
         cantidadesFijas[id] = Math.max(0, cantidadesFijas[id] + delta);
-        document.getElementById(`qty-${id}`).innerText = cantidadesFijas[id];
+        const elQty = document.getElementById(`qty-${id}`);
+        if(elQty) elQty.innerText = cantidadesFijas[id];
         
         const notaInput = document.getElementById(`nota-${id}`);
         const nota = notaInput ? notaInput.value : "";
 
-        // Sincronizar con carrito
         carrito = carrito.filter(item => item.id_ref !== id);
         if (cantidadesFijas[id] > 0) {
-            carrito.push({ 
-                id_ref: id, 
-                nombre, 
-                precio: precio * cantidadesFijas[id], 
-                cant: cantidadesFijas[id], 
-                nota, 
-                tipo: tipo 
-            });
+            carrito.push({ id_ref: id, nombre, precio: precio * cantidadesFijas[id], cant: cantidadesFijas[id], nota, tipo: tipo, unitario: precio });
         }
         actualizarCarrito();
     }
 
-    // Actualiza la nota en el carrito mientras el usuario escribe (para los de contador)
     function actualizarNotaFija(id) {
         const item = carrito.find(i => i.id_ref === id);
         if (item) {
@@ -281,19 +287,28 @@
         }
     }
 
-    // Para Arepas/Empanadas de elección libre
     function agregarVariable(id, nombre, precio, limite) {
         const sel = Array.from(document.querySelectorAll(`#checks-${id} input:checked`)).map(c => c.value);
         const notaInput = document.getElementById(`nota-${id}`);
         const nota = notaInput ? notaInput.value : "";
-
         if (sel.length !== limite) return alert(`Por favor selecciona ${limite} relleno(s)`);
 
-        carrito.push({ nombre, precio, rellenos: sel, nota, cant: 1, tipo: 'comida_var' });
-        
-        // Limpiar campos
+        carrito.push({ nombre, precio, rellenos: sel, nota, cant: 1, tipo: 'var' });
         document.querySelectorAll(`#checks-${id} input`).forEach(c => { c.checked = false; c.disabled = false; });
         if(notaInput) notaInput.value = "";
+        actualizarCarrito();
+    }
+
+    function eliminarDelCarrito(index) {
+        const item = carrito[index];
+        if (item.id_ref) {
+            cantidadesFijas[item.id_ref] = 0;
+            const elQty = document.getElementById(`qty-${item.id_ref}`);
+            if(elQty) elQty.innerText = "0";
+            const elNota = document.getElementById(`nota-${item.id_ref}`);
+            if(elNota) elNota.value = "";
+        }
+        carrito.splice(index, 1);
         actualizarCarrito();
     }
 
@@ -310,13 +325,13 @@
             total += item.precio;
             return `
                 <div class="item-carrito">
-                    <div>
+                    <div class="info-producto">
                         <strong>${item.cant}x ${item.nombre}</strong><br>
-                        <small>${item.rellenos ? 'Rellenos: ' + item.rellenos.join(', ') : ''} ${item.nota ? (item.rellenos ? ' | ' : '') + item.nota : ''}</small>
+                        <small>${item.rellenos ? item.rellenos.join(', ') : ''} ${item.nota ? (item.rellenos ? ' | ' : '') + item.nota : ''}</small>
                     </div>
-                    <div>
-                        $${item.precio.toFixed(2)}
-                        ${item.tipo === 'comida_var' ? `<span class="btn-eliminar" onclick="eliminarVariable(${index})">✕</span>` : ''}
+                    <div class="precio-y-borrar">
+                        <span>$${item.precio.toFixed(2)}</span>
+                        <button class="btn-eliminar" onclick="eliminarDelCarrito(${index})">✕</button>
                     </div>
                 </div>`;
         }).join('');
@@ -324,13 +339,8 @@
         document.getElementById('total-val').innerText = `Total: $${total.toFixed(2)}`;
     }
 
-    function eliminarVariable(index) {
-        carrito.splice(index, 1);
-        actualizarCarrito();
-    }
-
     function enviarPedido() {
-        if (carrito.length === 0) return alert("Agrega productos para enviar el pedido.");
+        if (carrito.length === 0) return alert("Agrega productos.");
         let msg = "*NUEVO PEDIDO MAF SAZÓN*%0A%0A";
         carrito.forEach((item, i) => {
             msg += `${i+1}. *${item.cant}x ${item.nombre}*%0A`;
