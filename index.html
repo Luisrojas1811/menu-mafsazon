@@ -71,46 +71,47 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
 
-        .barra-azul { background-color: var(--ven-blue); width: 30px; flex-shrink: 0; }
+        .barra-azul { background-color: var(--ven-blue); width: 25px; flex-shrink: 0; }
 
-        .contenido { flex-grow: 1; padding: 12px 15px; padding-right: 90px; }
+        .contenido { flex-grow: 1; padding: 12px 15px; padding-right: 85px; }
 
-        .contenido h3 { margin: 0; font-size: 1.1rem; }
+        .contenido h3 { margin: 0; font-size: 1rem; color: var(--ven-blue); }
 
-        .descripcion { font-size: 0.75rem; color: var(--text-gray); margin: 4px 0; }
+        .precio-tag { font-weight: bold; font-size: 1.1rem; margin-top: 4px; display: block; }
 
-        /* Estilo para los Checkboxes de Rellenos */
         .contenedor-rellenos {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 5px;
+            gap: 4px;
             margin: 10px 0;
-            background: #f4f4f4;
+            background: #f8f8f8;
             padding: 8px;
             border-radius: 8px;
+            border: 1px solid #eee;
         }
 
         .relleno-item {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             display: flex;
             align-items: center;
             cursor: pointer;
+            color: #444;
         }
 
-        .relleno-item input { margin-right: 5px; }
+        .relleno-item input { margin-right: 4px; }
 
-        .selector-rellenos, .input-notas {
+        .input-notas {
             width: 100%;
-            padding: 8px;
-            border: 1px dashed var(--ven-blue);
-            border-radius: 5px;
+            padding: 6px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
             margin-top: 8px;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             box-sizing: border-box;
         }
 
         .controles-wrapper {
-            position: absolute; right: 8px; top: 20px;
+            position: absolute; right: 10px; top: 20px;
         }
 
         .capsula {
@@ -122,12 +123,12 @@
         .btn-op {
             background-color: var(--ven-yellow);
             color: var(--ven-blue);
-            border: none; width: 26px; height: 26px;
+            border: none; width: 24px; height: 24px;
             border-radius: 50%; font-weight: bold;
             cursor: pointer; display: flex; align-items: center; justify-content: center;
         }
 
-        .cant-num { color: white; font-weight: bold; margin: 0 8px; min-width: 15px; text-align: center; }
+        .cant-num { color: white; font-weight: bold; margin: 0 8px; min-width: 12px; text-align: center; font-size: 0.9rem; }
 
         .footer-total {
             position: fixed; bottom: 0; left: 0; width: 100%;
@@ -159,25 +160,27 @@
 </div>
 
 <script>
-    const listaRellenosArepa = ["Queso", "Jamón y Queso", "Pollo", "Reina Pepiada", "Carne Mechada", "Carne Picada", "Salchicha", "Chorizo", "Perico"];
-    const listaRellenosEmpanada = ["Queso", "Jamón y Queso", "Pollo", "Carne Mechada", "Carne Picada", "Verduras"];
+    const listaArepas = ["Queso", "Jamón y Queso", "Pollo", "Reina Pepiada", "Carne Mechada", "Carne Picada", "Salchicha", "Chorizo", "Perico"];
+    const listaEmpanadas = ["Queso", "Jamón y Queso", "Pollo", "Carne Mechada", "Carne Picada", "Verduras"];
 
     const menu = [
         { cat: "Arepas", items: [
-            { n: "Arepa Personalizada", p: 5, tipo: "multi", rellenos: listaRellenosArepa, opts: [{n: "1 Relleno", p: 5, m: 1}, {n: "2 Rellenos", p: 9, m: 2}, {n: "3 Rellenos", p: 12, m: 3}] },
+            { n: "Arepa 1 Relleno", p: 5, m: 1, rellenos: listaArepas },
+            { n: "Arepa 2 Rellenos", p: 9, m: 2, rellenos: listaArepas },
+            { n: "Arepa 3 Rellenos", p: 12, m: 3, rellenos: listaArepas },
             { n: "Arepa Pabellón", p: 10, det: "Mechada, caraotas, tajadas y queso" },
             { n: "Arepa Dominó", p: 9, det: "Caraotas negras y queso" }
         ]},
         { cat: "Empanadas", items: [
-            { n: "Empanada", p: 4, tipo: "multi", rellenos: listaRellenosEmpanada, opts: [{n: "1 Relleno", p: 4, m: 1}, {n: "Pabellón", p: 8, m: 1}, {n: "Dominó", p: 7, m: 1}] }
-        ]},
-        { cat: "Cachapas", items: [
-            { n: "Cachapa Queso de Mano", p: 12 },
-            { n: "Cachapa Verduras", p: 13 },
-            { n: "Adicionales", p: 3, opts: [{n: "Aguacate", p: 3}, {n: "Queso Extra", p: 2}, {n: "Chicharrón", p: 4}] }
+            { n: "Empanada 1 Relleno", p: 4, m: 1, rellenos: listaEmpanadas },
+            { n: "Empanada Pabellón", p: 8, det: "Mechada, caraotas, tajadas y queso" },
+            { n: "Empanada Dominó", p: 7, det: "Caraotas y queso" }
         ]},
         { cat: "Patacones", items: [
-            { n: "Pollo", p: 10 }, { n: "Carne", p: 10 }, { n: "Mixto", p: 12 }, { n: "Verduras", p: 9 }
+            { n: "Patacón de Pollo", p: 10 }, 
+            { n: "Patacón de Carne", p: 10 }, 
+            { n: "Patacón Mixto", p: 12 }, 
+            { n: "Patacón de Verduras", p: 9 }
         ]},
         { cat: "Especiales", items: [
             { n: "Pabellón Vegano", p: 11, det: "Arroz, caraotas, verduras y 3 arepitas" },
@@ -197,10 +200,10 @@
             box.innerHTML += `<div class="categoria-titulo">${seccion.cat}</div>`;
             seccion.items.forEach((item, i) => {
                 const id = `${seccion.cat}-${i}`.replace(/\s+/g, '');
-                pedido[id] = { nombre: item.n, cant: 0, precio: item.p, limite: item.opts ? (item.opts[0].m || 99) : 99, variante: item.opts ? item.opts[0].n : "" };
+                pedido[id] = { nombre: item.n, cant: 0, precio: item.p, limite: item.m || 0 };
 
                 let htmlRellenos = "";
-                if(item.tipo === "multi") {
+                if(item.rellenos) {
                     htmlRellenos = `<div class="contenedor-rellenos">` + 
                         item.rellenos.map(r => `
                             <label class="relleno-item">
@@ -214,14 +217,10 @@
                         <div class="barra-azul"></div>
                         <div class="contenido">
                             <h3>${item.n}</h3>
+                            <span class="precio-tag">$${item.p.toFixed(2)}</span>
                             ${item.det ? `<div class="descripcion">${item.det}</div>` : ''}
-                            ${item.opts ? `
-                                <select class="selector-rellenos" onchange="cambiarVariante('${id}', this)">
-                                    ${item.opts.map(o => `<option value="${o.p}" data-limite="${o.m || 99}">${o.n} - $${o.p}</option>`).join('')}
-                                </select>
-                            ` : `<div style="font-weight:bold; color:var(--ven-blue); margin-top:5px;">$${item.p.toFixed(2)}</div>`}
                             ${htmlRellenos}
-                            <input type="text" id="nota-${id}" class="input-notas" placeholder="Instrucciones especiales...">
+                            <input type="text" id="nota-${id}" class="input-notas" placeholder="Nota (ej: sin cebolla)">
                         </div>
                         <div class="controles-wrapper">
                             <div class="capsula">
@@ -248,16 +247,6 @@
         }
     }
 
-    function cambiarVariante(id, el) {
-        pedido[id].precio = parseFloat(el.value);
-        pedido[id].limite = parseInt(el.options[el.selectedIndex].getAttribute('data-limite'));
-        pedido[id].variante = el.options[el.selectedIndex].text.split(' -')[0];
-        
-        // Limpiar checks si cambia de 2 a 1 relleno
-        document.querySelectorAll(`.check-${id}`).forEach(c => { c.checked = false; c.disabled = false; });
-        calc();
-    }
-
     function updateCant(id, d) {
         pedido[id].cant = Math.max(0, pedido[id].cant + d);
         document.getElementById(`cant-${id}`).innerText = pedido[id].cant;
@@ -279,7 +268,6 @@
                 let checks = Array.from(document.querySelectorAll(`.check-${k}:checked`)).map(c => c.value);
                 
                 msg += `• *${pedido[k].nombre}* x${pedido[k].cant}`;
-                if (pedido[k].variante) msg += ` (${pedido[k].variante})`;
                 if (checks.length > 0) msg += `%0A  _Rellenos: ${checks.join(", ")}_`;
                 if (nota) msg += `%0A  _Nota: ${nota}_`;
                 msg += `%0A%0A`;
