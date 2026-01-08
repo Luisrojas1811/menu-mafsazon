@@ -129,7 +129,6 @@
 
         .btn-agregar:active { transform: scale(0.98); }
 
-        /* Estilos del Carrito Flotante */
         .footer-carrito {
             position: fixed; bottom: 0; left: 0; width: 100%;
             background: white; color: var(--text-dark);
@@ -194,32 +193,52 @@
     const listaEmpanadas = ["Queso", "Jamón y Queso", "Pollo", "Carne Mechada", "Carne Picada", "Verduras"];
 
     const menu = [
-        { cat: "Arepas", items: [
-            { n: "Arepa 1 Relleno", p: 5, m: 1, rellenos: listaArepas },
-            { n: "Arepa 2 Rellenos", p: 9, m: 2, rellenos: listaArepas },
-            { n: "Arepa 3 Rellenos", p: 12, m: 3, rellenos: listaArepas },
-            { n: "Arepa Pabellón", p: 10, det: "Mechada, caraotas, tajadas y queso" },
-            { n: "Arepa Dominó", p: 9, det: "Caraotas negras y queso" }
-        ]},
-        { cat: "Empanadas", items: [
-            { n: "Empanada 1 Relleno", p: 4, m: 1, rellenos: listaEmpanadas },
-            { n: "Empanada Pabellón", p: 8, det: "Mechada, caraotas, tajadas y queso" },
-            { n: "Empanada Dominó", p: 7, det: "Caraotas y queso" }
-        ]},
-        { cat: "Patacones", items: [
-            { n: "Patacón de Pollo", p: 10 }, 
-            { n: "Patacón de Carne", p: 10 }, 
-            { n: "Patacón Mixto", p: 12 }, 
-            { n: "Patacón de Verduras", p: 9 }
-        ]},
-        { cat: "Especiales", items: [
-            { n: "Pabellón Vegano", p: 11, det: "Arroz, caraotas, verduras y 3 arepitas" },
-            { n: "Pabellón Criollo", p: 11, det: "Arroz, caraotas, mechada, queso y 3 arepitas" },
-            { n: "Pollo Broaster", p: 11, det: "5 arepitas, ensalada y salsa" }
-        ]},
-        { cat: "Bebidas", items: [
-            { n: "Nestea", p: 3.5 }, { n: "Agua Panela", p: 3 }, { n: "Malta", p: 3 }, { n: "Gaseosa", p: 2.5 }
-        ]}
+        { 
+            cat: "Arepas", 
+            placeholder: "Ej: Sin cebolla, bien tostada...",
+            items: [
+                { n: "Arepa 1 Relleno", p: 5, m: 1, rellenos: listaArepas },
+                { n: "Arepa 2 Rellenos", p: 9, m: 2, rellenos: listaArepas },
+                { n: "Arepa 3 Rellenos", p: 12, m: 3, rellenos: listaArepas },
+                { n: "Arepa Pabellón", p: 10, det: "Mechada, caraotas, tajadas y queso" },
+                { n: "Arepa Dominó", p: 9, det: "Caraotas negras y queso" }
+            ]
+        },
+        { 
+            cat: "Empanadas", 
+            placeholder: "Ej: Bien frita, alguna nota extra...",
+            items: [
+                { n: "Empanada 1 Relleno", p: 4, m: 1, rellenos: listaEmpanadas },
+                { n: "Empanada Pabellón", p: 8, det: "Mechada, caraotas, tajadas y queso" },
+                { n: "Empanada Dominó", p: 7, det: "Caraotas y queso" }
+            ]
+        },
+        { 
+            cat: "Patacones", 
+            placeholder: "Ej: Con extra salsa, sin aderezos...",
+            items: [
+                { n: "Patacón de Pollo", p: 10 }, 
+                { n: "Patacón de Carne", p: 10 }, 
+                { n: "Patacón Mixto", p: 12 }, 
+                { n: "Patacón de Verduras", p: 9 }
+            ]
+        },
+        { 
+            cat: "Especiales", 
+            placeholder: "Nota especial para tu plato...",
+            items: [
+                { n: "Pabellón Vegano", p: 11, det: "Arroz, caraotas, verduras y 3 arepitas" },
+                { n: "Pabellón Criollo", p: 11, det: "Arroz, caraotas, mechada, queso y 3 arepitas" },
+                { n: "Pollo Broaster", p: 11, det: "5 arepitas, ensalada y salsa" }
+            ]
+        },
+        { 
+            cat: "Bebidas", 
+            placeholder: null, // Esto hará que no aparezca el cuadro de notas
+            items: [
+                { n: "Nestea", p: 3.5 }, { n: "Agua Panela", p: 3 }, { n: "Malta", p: 3 }, { n: "Gaseosa", p: 2.5 }
+            ]
+        }
     ];
 
     let carrito = [];
@@ -248,7 +267,10 @@
                                 </div>
                             ` : ''}
                             
-                            <input type="text" id="nota-${id}" class="input-notas" placeholder="Nota (ej: sin cebolla, bien tostada)">
+                            ${seccion.placeholder ? `
+                                <input type="text" id="nota-${id}" class="input-notas" placeholder="${seccion.placeholder}">
+                            ` : ''}
+
                             <button class="btn-agregar" onclick="agregar('${id}', '${item.n}', ${item.p}, ${item.m || 0})">
                                 + Agregar al pedido
                             </button>
@@ -267,19 +289,21 @@
 
     function agregar(id, nombre, precio, limite) {
         const sel = Array.from(document.querySelectorAll(`#checks-${id} input:checked`)).map(c => c.value);
-        const nota = document.getElementById(`nota-${id}`).value;
+        const notaInput = document.getElementById(`nota-${id}`);
+        const nota = notaInput ? notaInput.value : "";
 
         if (limite > 0 && sel.length !== limite) {
             return alert(`Por favor selecciona ${limite} relleno(s) para esta opción.`);
         }
 
+        // Agregar objeto individual al carrito
         carrito.push({ nombre, precio, rellenos: sel, nota });
 
-        // Limpiar campos
+        // Limpiar campos después de agregar
         if(limite > 0) {
             document.querySelectorAll(`#checks-${id} input`).forEach(c => { c.checked = false; c.disabled = false; });
         }
-        document.getElementById(`nota-${id}`).value = "";
+        if(notaInput) notaInput.value = "";
         
         actualizarCarrito();
     }
@@ -299,7 +323,7 @@
                 <div class="item-carrito">
                     <div>
                         <strong>1x ${item.nombre}</strong><br>
-                        <small>${item.rellenos.length > 0 ? 'Gustos: ' + item.rellenos.join(', ') : ''} ${item.nota ? ' | ' + item.nota : ''}</small>
+                        <small>${item.rellenos.length > 0 ? 'Gustos: ' + item.rellenos.join(', ') : ''} ${item.nota ? (item.rellenos.length > 0 ? ' | ' : '') + item.nota : ''}</small>
                     </div>
                     <div>
                         $${item.precio.toFixed(2)}
