@@ -1,3 +1,11 @@
+Aquí tienes el código actualizado y corregido. He implementado las dos mejoras que solicitaste:
+
+Contadores +/- con Notas: Ahora los Patacones, Arepas Fijas (Pabellón/Dominó) y Empanadas Fijas tienen el contador de cantidad y el cuadro de notas vinculados. Si el cliente escribe una nota, esta se guarda automáticamente junto con la cantidad.
+
+Corrección de Visibilidad (Scroll): He añadido un "espaciador" al final del menú y ajustado los márgenes para que el carrito flotante nunca tape los últimos productos (especialmente las bebidas) en pantallas de celular.
+
+HTML
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -21,7 +29,7 @@
             margin: 0; padding: 0;
             background-color: var(--bg-dark);
             color: white;
-            padding-bottom: 180px; /* Espacio para el carrito */
+            /* Se eliminó el padding fijo para usar un espaciador dinámico */
         }
 
         .header {
@@ -73,7 +81,7 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
 
-        .barra-azul { background-color: var(--ven-blue); width: 15px; flex-shrink: 0; }
+        .barra-azul { background-color: var(--ven-blue); width: 12px; flex-shrink: 0; }
         .contenido { flex-grow: 1; padding: 12px; }
         .contenido h3 { margin: 0; font-size: 1rem; color: var(--ven-blue); display: flex; justify-content: space-between; }
         .precio-tag { font-weight: bold; color: var(--ven-red); }
@@ -89,7 +97,7 @@
 
         .input-notas {
             width: 100%; padding: 8px; border: 1px solid #ccc;
-            border-radius: 5px; margin-top: 5px; font-size: 0.8rem; box-sizing: border-box;
+            border-radius: 5px; margin-top: 8px; font-size: 0.8rem; box-sizing: border-box;
         }
 
         .btn-agregar {
@@ -98,18 +106,18 @@
             margin-top: 10px; cursor: pointer; text-transform: uppercase; font-size: 0.8rem;
         }
 
-        /* Estilos específicos para el contador de bebidas */
-        .controles-bebida {
+        /* Controles +/- */
+        .controles-qty {
             display: flex; align-items: center; justify-content: center;
             background: #f1f3f5; border-radius: 8px; padding: 5px;
             width: fit-content; margin-top: 10px; border: 1px solid var(--ven-blue);
         }
         .btn-qty {
             background: var(--ven-blue); color: white; border: none;
-            width: 30px; height: 30px; border-radius: 5px; font-size: 1.2rem;
+            width: 32px; height: 32px; border-radius: 5px; font-size: 1.2rem;
             cursor: pointer; font-weight: bold;
         }
-        .qty-num { margin: 0 15px; font-weight: bold; font-size: 1rem; color: var(--ven-blue); min-width: 20px; text-align: center; }
+        .qty-num { margin: 0 15px; font-weight: bold; font-size: 1.1rem; color: var(--ven-blue); min-width: 20px; text-align: center; }
 
         .footer-carrito {
             position: fixed; bottom: 0; left: 0; width: 100%;
@@ -118,7 +126,7 @@
         }
 
         .resumen-items {
-            max-height: 150px; overflow-y: auto; padding: 10px 15px;
+            max-height: 120px; overflow-y: auto; padding: 10px 15px;
             font-size: 0.85rem; border-bottom: 1px solid #eee;
         }
 
@@ -127,12 +135,15 @@
             margin-bottom: 8px; padding-bottom: 5px; border-bottom: 1px dashed #ddd;
         }
 
-        .btn-eliminar { color: var(--ven-red); font-weight: bold; cursor: pointer; margin-left: 10px; padding: 2px 5px; }
-        .total-area { padding: 15px; text-align: center; }
+        .btn-eliminar { color: var(--ven-red); font-weight: bold; cursor: pointer; margin-left: 10px; padding: 2px 8px; }
+        .total-area { padding: 12px; text-align: center; }
         .btn-whatsapp {
-            background-color: var(--ven-red); color: white; border: none; padding: 15px;
+            background-color: var(--ven-red); color: white; border: none; padding: 12px;
             border-radius: 8px; font-weight: bold; width: 100%; cursor: pointer; text-transform: uppercase; font-size: 1rem;
         }
+
+        /* Espaciador para que el carrito no tape el menú */
+        .espaciador-final { height: 220px; width: 100%; }
     </style>
 </head>
 <body>
@@ -143,11 +154,12 @@
 </div>
 
 <div class="container" id="menu-box"></div>
+<div class="espaciador-final"></div>
 
 <div class="footer-carrito">
     <div id="resumen" class="resumen-items">Tu pedido está vacío</div>
     <div class="total-area">
-        <div id="total-val" style="font-weight: bold; margin-bottom: 10px; font-size: 1.2rem; color: #333;">Total: $0.00</div>
+        <div id="total-val" style="font-weight: bold; margin-bottom: 8px; font-size: 1.1rem; color: #333;">Total: $0.00</div>
         <button class="btn-whatsapp" onclick="enviarPedido()">ENVIAR PEDIDO POR WHATSAPP</button>
     </div>
 </div>
@@ -161,41 +173,45 @@
             cat: "Arepas", 
             placeholder: "Ej: Sin cebolla, bien tostada...",
             items: [
-                { n: "Arepa 1 Relleno", p: 5, m: 1, rellenos: listaArepas },
-                { n: "Arepa 2 Rellenos", p: 9, m: 2, rellenos: listaArepas },
-                { n: "Arepa 3 Rellenos", p: 12, m: 3, rellenos: listaArepas },
-                { n: "Arepa Pabellón", p: 10, det: "Mechada, caraotas, tajadas y queso" },
-                { n: "Arepa Dominó", p: 9, det: "Caraotas negras y queso" }
+                { n: "Arepa 1 Relleno", p: 5, m: 1, rellenos: listaArepas, tipo: "var" },
+                { n: "Arepa 2 Rellenos", p: 9, m: 2, rellenos: listaArepas, tipo: "var" },
+                { n: "Arepa 3 Rellenos", p: 12, m: 3, rellenos: listaArepas, tipo: "var" },
+                { n: "Arepa Pabellón", p: 10, det: "Mechada, caraotas, tajadas y queso", tipo: "fijo" },
+                { n: "Arepa Dominó", p: 9, det: "Caraotas negras y queso", tipo: "fijo" }
             ]
         },
         { 
             cat: "Empanadas", 
             placeholder: "Ej: Bien frita...",
             items: [
-                { n: "Empanada 1 Relleno", p: 4, m: 1, rellenos: listaEmpanadas },
-                { n: "Empanada Pabellón", p: 8, det: "Mechada, caraotas, tajadas y queso" },
-                { n: "Empanada Dominó", p: 7, det: "Caraotas y queso" }
+                { n: "Empanada 1 Relleno", p: 4, m: 1, rellenos: listaEmpanadas, tipo: "var" },
+                { n: "Empanada Pabellón", p: 8, det: "Mechada, caraotas, tajadas y queso", tipo: "fijo" },
+                { n: "Empanada Dominó", p: 7, det: "Caraotas y queso", tipo: "fijo" }
             ]
         },
         { 
             cat: "Patacones", 
             placeholder: "Ej: Con extra salsa...",
             items: [
-                { n: "Patacón de Pollo", p: 10 }, { n: "Patacón de Carne", p: 10 }, { n: "Patacón Mixto", p: 12 }
+                { n: "Patacón de Pollo", p: 10, tipo: "fijo" }, 
+                { n: "Patacón de Carne", p: 10, tipo: "fijo" }, 
+                { n: "Patacón Mixto", p: 12, tipo: "fijo" }
             ]
         },
         { 
             cat: "Bebidas", 
-            esBebida: true,
             placeholder: null,
             items: [
-                { n: "Nestea", p: 3.5 }, { n: "Agua Panela", p: 3 }, { n: "Malta", p: 3 }, { n: "Gaseosa", p: 2.5 }
+                { n: "Nestea", p: 3.5, tipo: "bebida" }, 
+                { n: "Agua Panela", p: 3, tipo: "bebida" }, 
+                { n: "Malta", p: 3, tipo: "bebida" }, 
+                { n: "Gaseosa", p: 2.5, tipo: "bebida" }
             ]
         }
     ];
 
     let carrito = [];
-    let cantidadesBebidas = {}; // Objeto para rastrear cantidades de bebidas
+    let cantidadesFijas = {};
 
     function init() {
         const box = document.getElementById('menu-box');
@@ -203,21 +219,18 @@
             box.innerHTML += `<div class="categoria-titulo">${seccion.cat}</div>`;
             seccion.items.forEach((item, i) => {
                 const id = `${seccion.cat}-${i}`.replace(/\s+/g, '');
-
-                let footerAccion = "";
-                if (seccion.esBebida) {
-                    cantidadesBebidas[id] = 0;
-                    footerAccion = `
-                        <div class="controles-bebida">
-                            <button class="btn-qty" onclick="cambiarCantidadBebida('${id}', '${item.n}', ${item.p}, -1)">-</button>
-                            <span class="qty-num" id="qty-${id}">0</span>
-                            <button class="btn-qty" onclick="cambiarCantidadBebida('${id}', '${item.n}', ${item.p}, 1)">+</button>
-                        </div>`;
+                
+                let htmlAccion = "";
+                if (item.tipo === "var") {
+                    htmlAccion = `<button class="btn-agregar" onclick="agregarVariable('${id}', '${item.n}', ${item.p}, ${item.m})">+ Agregar al pedido</button>`;
                 } else {
-                    footerAccion = `
-                        <button class="btn-agregar" onclick="agregar('${id}', '${item.n}', ${item.p}, ${item.m || 0})">
-                            + Agregar al pedido
-                        </button>`;
+                    cantidadesFijas[id] = 0;
+                    htmlAccion = `
+                        <div class="controles-qty">
+                            <button class="btn-qty" onclick="cambiarCantidad('${id}', '${item.n}', ${item.p}, -1, '${item.tipo}')">-</button>
+                            <span class="qty-num" id="qty-${id}">0</span>
+                            <button class="btn-qty" onclick="cambiarCantidad('${id}', '${item.n}', ${item.p}, 1, '${item.tipo}')">+</button>
+                        </div>`;
                 }
 
                 box.innerHTML += `
@@ -230,8 +243,8 @@
                                 <div class="contenedor-rellenos" id="checks-${id}">
                                     ${item.rellenos.map(r => `<label class="relleno-item"><input type="checkbox" value="${r}" onchange="validarChecks('${id}', ${item.m})"> ${r}</label>`).join('')}
                                 </div>` : ''}
-                            ${seccion.placeholder ? `<input type="text" id="nota-${id}" class="input-notas" placeholder="${seccion.placeholder}">` : ''}
-                            ${footerAccion}
+                            ${seccion.placeholder ? `<input type="text" id="nota-${id}" class="input-notas" placeholder="${seccion.placeholder}" oninput="actualizarNotaFija('${id}')">` : ''}
+                            ${htmlAccion}
                         </div>
                     </div>`;
             });
@@ -244,31 +257,50 @@
         nosel.forEach(el => el.disabled = (sel.length >= limite));
     }
 
-    function cambiarCantidadBebida(id, nombre, precio, cambio) {
-        const nuevaCant = Math.max(0, cantidadesBebidas[id] + cambio);
-        cantidadesBebidas[id] = nuevaCant;
-        document.getElementById(`qty-${id}`).innerText = nuevaCant;
+    // Para productos con contador +/-
+    function cambiarCantidad(id, nombre, precio, delta, tipo) {
+        cantidadesFijas[id] = Math.max(0, cantidadesFijas[id] + delta);
+        document.getElementById(`qty-${id}`).innerText = cantidadesFijas[id];
+        
+        const notaInput = document.getElementById(`nota-${id}`);
+        const nota = notaInput ? notaInput.value : "";
 
-        // Sincronizar con el carrito
-        carrito = carrito.filter(item => !(item.tipo === 'bebida' && item.id_ref === id));
-        if (nuevaCant > 0) {
-            carrito.push({ nombre, precio: precio * nuevaCant, cant: nuevaCant, tipo: 'bebida', id_ref: id, unitario: precio });
+        // Sincronizar con carrito
+        carrito = carrito.filter(item => item.id_ref !== id);
+        if (cantidadesFijas[id] > 0) {
+            carrito.push({ 
+                id_ref: id, 
+                nombre, 
+                precio: precio * cantidadesFijas[id], 
+                cant: cantidadesFijas[id], 
+                nota, 
+                tipo: tipo 
+            });
         }
         actualizarCarrito();
     }
 
-    function agregar(id, nombre, precio, limite) {
+    // Actualiza la nota en el carrito mientras el usuario escribe (para los de contador)
+    function actualizarNotaFija(id) {
+        const item = carrito.find(i => i.id_ref === id);
+        if (item) {
+            item.nota = document.getElementById(`nota-${id}`).value;
+            actualizarCarrito();
+        }
+    }
+
+    // Para Arepas/Empanadas de elección libre
+    function agregarVariable(id, nombre, precio, limite) {
         const sel = Array.from(document.querySelectorAll(`#checks-${id} input:checked`)).map(c => c.value);
         const notaInput = document.getElementById(`nota-${id}`);
         const nota = notaInput ? notaInput.value : "";
 
-        if (limite > 0 && sel.length !== limite) return alert(`Selecciona ${limite} relleno(s)`);
+        if (sel.length !== limite) return alert(`Por favor selecciona ${limite} relleno(s)`);
 
-        carrito.push({ nombre, precio, rellenos: sel, nota, tipo: 'comida' });
-
-        if(limite > 0) {
-            document.querySelectorAll(`#checks-${id} input`).forEach(c => { c.checked = false; c.disabled = false; });
-        }
+        carrito.push({ nombre, precio, rellenos: sel, nota, cant: 1, tipo: 'comida_var' });
+        
+        // Limpiar campos
+        document.querySelectorAll(`#checks-${id} input`).forEach(c => { c.checked = false; c.disabled = false; });
         if(notaInput) notaInput.value = "";
         actualizarCarrito();
     }
@@ -284,16 +316,15 @@
         let total = 0;
         res.innerHTML = carrito.map((item, index) => {
             total += item.precio;
-            const displayCant = item.tipo === 'bebida' ? item.cant : 1;
             return `
                 <div class="item-carrito">
                     <div>
-                        <strong>${displayCant}x ${item.nombre}</strong><br>
-                        <small>${item.rellenos ? 'Gustos: ' + item.rellenos.join(', ') : ''} ${item.nota ? ' | ' + item.nota : ''}</small>
+                        <strong>${item.cant}x ${item.nombre}</strong><br>
+                        <small>${item.rellenos ? 'Rellenos: ' + item.rellenos.join(', ') : ''} ${item.nota ? (item.rellenos ? ' | ' : '') + item.nota : ''}</small>
                     </div>
                     <div>
                         $${item.precio.toFixed(2)}
-                        ${item.tipo === 'comida' ? `<span class="btn-eliminar" onclick="eliminarComida(${index})">✕</span>` : ''}
+                        ${item.tipo === 'comida_var' ? `<span class="btn-eliminar" onclick="eliminarVariable(${index})">✕</span>` : ''}
                     </div>
                 </div>`;
         }).join('');
@@ -301,18 +332,17 @@
         document.getElementById('total-val').innerText = `Total: $${total.toFixed(2)}`;
     }
 
-    function eliminarComida(index) {
+    function eliminarVariable(index) {
         carrito.splice(index, 1);
         actualizarCarrito();
     }
 
     function enviarPedido() {
-        if (carrito.length === 0) return alert("Agrega productos.");
+        if (carrito.length === 0) return alert("Agrega productos para enviar el pedido.");
         let msg = "*NUEVO PEDIDO MAF SAZÓN*%0A%0A";
         carrito.forEach((item, i) => {
-            const cant = item.tipo === 'bebida' ? item.cant : 1;
-            msg += `${i+1}. *${cant}x ${item.nombre}*%0A`;
-            if(item.rellenos && item.rellenos.length > 0) msg += `   _Rellenos: ${item.rellenos.join(', ')}_%0A`;
+            msg += `${i+1}. *${item.cant}x ${item.nombre}*%0A`;
+            if(item.rellenos) msg += `   _Rellenos: ${item.rellenos.join(', ')}_%0A`;
             if(item.nota) msg += `   _Nota: ${item.nota}_%0A`;
             msg += `%0A`;
         });
