@@ -74,60 +74,42 @@
         }
 
         .barra-azul { background-color: var(--ven-blue); width: 15px; flex-shrink: 0; }
-
         .contenido { flex-grow: 1; padding: 12px; }
-
         .contenido h3 { margin: 0; font-size: 1rem; color: var(--ven-blue); display: flex; justify-content: space-between; }
-
         .precio-tag { font-weight: bold; color: var(--ven-red); }
-
         .descripcion { font-size: 0.75rem; color: var(--text-gray); margin: 4px 0; line-height: 1.2; }
 
         .contenedor-rellenos {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4px;
-            margin: 10px 0;
-            background: #f1f3f5;
-            padding: 8px;
-            border-radius: 8px;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 4px;
+            margin: 10px 0; background: #f1f3f5; padding: 8px; border-radius: 8px;
         }
 
-        .relleno-item {
-            font-size: 0.7rem;
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-            color: #333;
-        }
-
+        .relleno-item { font-size: 0.7rem; display: flex; align-items: center; color: #333; }
         .relleno-item input { margin-right: 5px; }
 
         .input-notas {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-top: 5px;
-            font-size: 0.8rem;
-            box-sizing: border-box;
+            width: 100%; padding: 8px; border: 1px solid #ccc;
+            border-radius: 5px; margin-top: 5px; font-size: 0.8rem; box-sizing: border-box;
         }
 
         .btn-agregar {
-            background-color: var(--ven-blue);
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 6px;
-            width: 100%;
-            font-weight: bold;
-            margin-top: 10px;
-            cursor: pointer;
-            text-transform: uppercase;
-            font-size: 0.8rem;
+            background-color: var(--ven-blue); color: white; border: none;
+            padding: 10px; border-radius: 6px; width: 100%; font-weight: bold;
+            margin-top: 10px; cursor: pointer; text-transform: uppercase; font-size: 0.8rem;
         }
 
-        .btn-agregar:active { transform: scale(0.98); }
+        /* Estilos específicos para el contador de bebidas */
+        .controles-bebida {
+            display: flex; align-items: center; justify-content: center;
+            background: #f1f3f5; border-radius: 8px; padding: 5px;
+            width: fit-content; margin-top: 10px; border: 1px solid var(--ven-blue);
+        }
+        .btn-qty {
+            background: var(--ven-blue); color: white; border: none;
+            width: 30px; height: 30px; border-radius: 5px; font-size: 1.2rem;
+            cursor: pointer; font-weight: bold;
+        }
+        .qty-num { margin: 0 15px; font-weight: bold; font-size: 1rem; color: var(--ven-blue); min-width: 20px; text-align: center; }
 
         .footer-carrito {
             position: fixed; bottom: 0; left: 0; width: 100%;
@@ -136,38 +118,20 @@
         }
 
         .resumen-items {
-            max-height: 150px;
-            overflow-y: auto;
-            padding: 10px 15px;
-            font-size: 0.85rem;
-            border-bottom: 1px solid #eee;
+            max-height: 150px; overflow-y: auto; padding: 10px 15px;
+            font-size: 0.85rem; border-bottom: 1px solid #eee;
         }
 
         .item-carrito {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-            padding-bottom: 5px;
-            border-bottom: 1px dashed #ddd;
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 8px; padding-bottom: 5px; border-bottom: 1px dashed #ddd;
         }
 
-        .btn-eliminar {
-            color: var(--ven-red);
-            font-weight: bold;
-            cursor: pointer;
-            margin-left: 10px;
-            padding: 2px 5px;
-        }
-
+        .btn-eliminar { color: var(--ven-red); font-weight: bold; cursor: pointer; margin-left: 10px; padding: 2px 5px; }
         .total-area { padding: 15px; text-align: center; }
-
         .btn-whatsapp {
-            background-color: var(--ven-red);
-            color: white; border: none; padding: 15px;
-            border-radius: 8px; font-weight: bold; width: 100%;
-            cursor: pointer; text-transform: uppercase;
-            font-size: 1rem;
+            background-color: var(--ven-red); color: white; border: none; padding: 15px;
+            border-radius: 8px; font-weight: bold; width: 100%; cursor: pointer; text-transform: uppercase; font-size: 1rem;
         }
     </style>
 </head>
@@ -183,180 +147,4 @@
 <div class="footer-carrito">
     <div id="resumen" class="resumen-items">Tu pedido está vacío</div>
     <div class="total-area">
-        <div id="total-val" style="font-weight: bold; margin-bottom: 10px; font-size: 1.2rem; color: #333;">Total: $0.00</div>
-        <button class="btn-whatsapp" onclick="enviarPedido()">ENVIAR PEDIDO POR WHATSAPP</button>
-    </div>
-</div>
-
-<script>
-    const listaArepas = ["Queso", "Jamón y Queso", "Pollo", "Reina Pepiada", "Carne Mechada", "Carne Picada", "Salchicha", "Chorizo", "Perico"];
-    const listaEmpanadas = ["Queso", "Jamón y Queso", "Pollo", "Carne Mechada", "Carne Picada", "Verduras"];
-
-    const menu = [
-        { 
-            cat: "Arepas", 
-            placeholder: "Ej: Sin cebolla, bien tostada...",
-            items: [
-                { n: "Arepa 1 Relleno", p: 5, m: 1, rellenos: listaArepas },
-                { n: "Arepa 2 Rellenos", p: 9, m: 2, rellenos: listaArepas },
-                { n: "Arepa 3 Rellenos", p: 12, m: 3, rellenos: listaArepas },
-                { n: "Arepa Pabellón", p: 10, det: "Mechada, caraotas, tajadas y queso" },
-                { n: "Arepa Dominó", p: 9, det: "Caraotas negras y queso" }
-            ]
-        },
-        { 
-            cat: "Empanadas", 
-            placeholder: "Ej: Bien frita, alguna nota extra...",
-            items: [
-                { n: "Empanada 1 Relleno", p: 4, m: 1, rellenos: listaEmpanadas },
-                { n: "Empanada Pabellón", p: 8, det: "Mechada, caraotas, tajadas y queso" },
-                { n: "Empanada Dominó", p: 7, det: "Caraotas y queso" }
-            ]
-        },
-        { 
-            cat: "Patacones", 
-            placeholder: "Ej: Con extra salsa, sin aderezos...",
-            items: [
-                { n: "Patacón de Pollo", p: 10 }, 
-                { n: "Patacón de Carne", p: 10 }, 
-                { n: "Patacón Mixto", p: 12 }, 
-                { n: "Patacón de Verduras", p: 9 }
-            ]
-        },
-        { 
-            cat: "Especiales", 
-            placeholder: "Nota especial para tu plato...",
-            items: [
-                { n: "Pabellón Vegano", p: 11, det: "Arroz, caraotas, verduras y 3 arepitas" },
-                { n: "Pabellón Criollo", p: 11, det: "Arroz, caraotas, mechada, queso y 3 arepitas" },
-                { n: "Pollo Broaster", p: 11, det: "5 arepitas, ensalada y salsa" }
-            ]
-        },
-        { 
-            cat: "Bebidas", 
-            placeholder: null, // Esto hará que no aparezca el cuadro de notas
-            items: [
-                { n: "Nestea", p: 3.5 }, { n: "Agua Panela", p: 3 }, { n: "Malta", p: 3 }, { n: "Gaseosa", p: 2.5 }
-            ]
-        }
-    ];
-
-    let carrito = [];
-
-    function init() {
-        const box = document.getElementById('menu-box');
-        menu.forEach(seccion => {
-            box.innerHTML += `<div class="categoria-titulo">${seccion.cat}</div>`;
-            seccion.items.forEach((item, i) => {
-                const id = `${seccion.cat}-${i}`.replace(/\s+/g, '');
-
-                box.innerHTML += `
-                    <div class="producto-card">
-                        <div class="barra-azul"></div>
-                        <div class="contenido">
-                            <h3>${item.n} <span class="precio-tag">$${item.p.toFixed(2)}</span></h3>
-                            ${item.det ? `<div class="descripcion">${item.det}</div>` : ''}
-                            
-                            ${item.rellenos ? `
-                                <div class="contenedor-rellenos" id="checks-${id}">
-                                    ${item.rellenos.map(r => `
-                                        <label class="relleno-item">
-                                            <input type="checkbox" value="${r}" onchange="validarChecks('${id}', ${item.m})"> ${r}
-                                        </label>
-                                    `).join('')}
-                                </div>
-                            ` : ''}
-                            
-                            ${seccion.placeholder ? `
-                                <input type="text" id="nota-${id}" class="input-notas" placeholder="${seccion.placeholder}">
-                            ` : ''}
-
-                            <button class="btn-agregar" onclick="agregar('${id}', '${item.n}', ${item.p}, ${item.m || 0})">
-                                + Agregar al pedido
-                            </button>
-                        </div>
-                    </div>
-                `;
-            });
-        });
-    }
-
-    function validarChecks(id, limite) {
-        const sel = document.querySelectorAll(`#checks-${id} input:checked`);
-        const nosel = document.querySelectorAll(`#checks-${id} input:not(:checked)`);
-        nosel.forEach(el => el.disabled = (sel.length >= limite));
-    }
-
-    function agregar(id, nombre, precio, limite) {
-        const sel = Array.from(document.querySelectorAll(`#checks-${id} input:checked`)).map(c => c.value);
-        const notaInput = document.getElementById(`nota-${id}`);
-        const nota = notaInput ? notaInput.value : "";
-
-        if (limite > 0 && sel.length !== limite) {
-            return alert(`Por favor selecciona ${limite} relleno(s) para esta opción.`);
-        }
-
-        // Agregar objeto individual al carrito
-        carrito.push({ nombre, precio, rellenos: sel, nota });
-
-        // Limpiar campos después de agregar
-        if(limite > 0) {
-            document.querySelectorAll(`#checks-${id} input`).forEach(c => { c.checked = false; c.disabled = false; });
-        }
-        if(notaInput) notaInput.value = "";
-        
-        actualizarCarrito();
-    }
-
-    function actualizarCarrito() {
-        const res = document.getElementById('resumen');
-        if (carrito.length === 0) {
-            res.innerHTML = "Tu pedido está vacío";
-            document.getElementById('total-val').innerText = "Total: $0.00";
-            return;
-        }
-
-        let total = 0;
-        res.innerHTML = carrito.map((item, index) => {
-            total += item.precio;
-            return `
-                <div class="item-carrito">
-                    <div>
-                        <strong>1x ${item.nombre}</strong><br>
-                        <small>${item.rellenos.length > 0 ? 'Gustos: ' + item.rellenos.join(', ') : ''} ${item.nota ? (item.rellenos.length > 0 ? ' | ' : '') + item.nota : ''}</small>
-                    </div>
-                    <div>
-                        $${item.precio.toFixed(2)}
-                        <span class="btn-eliminar" onclick="eliminar(${index})">✕</span>
-                    </div>
-                </div>
-            `;
-        }).join('');
-
-        document.getElementById('total-val').innerText = `Total: $${total.toFixed(2)}`;
-    }
-
-    function eliminar(index) {
-        carrito.splice(index, 1);
-        actualizarCarrito();
-    }
-
-    function enviarPedido() {
-        if (carrito.length === 0) return alert("Agrega productos para enviar el pedido.");
-        
-        let msg = "*NUEVO PEDIDO MAF SAZÓN*%0A%0A";
-        carrito.forEach((item, i) => {
-            msg += `${i+1}. *${item.nombre}*%0A`;
-            if(item.rellenos.length > 0) msg += `   _Rellenos: ${item.rellenos.join(', ')}_%0A`;
-            if(item.nota) msg += `   _Nota: ${item.nota}_%0A`;
-            msg += `%0A`;
-        });
-        
-        msg += `*${document.getElementById('total-val').innerText}*`;
-        window.open(`https://wa.me/5491157440973?text=${msg}`);
-    }
-
-    init();
-</script>
-</body>
-</html>
+        <div id="total-val" style="font-weight: bold; margin-bottom: 10px; font-size: 1.2rem; color: #33
