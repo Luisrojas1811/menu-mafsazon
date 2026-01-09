@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maf Sazón - Menú Visual</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #2c2f36;
+            --card-bg: #ffffff;
+            --ven-blue: #003893;
+            --ven-red: #ce1126;
+            --ven-yellow: #ffcc4d;
+            --text-dark: #2c2f36;
+            --text-gray: #666;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0; padding: 0;
+            background-color: var(--bg-dark);
+            color: white;
+            padding-bottom: 40px;
+        }
+
+        .header {
+            background: linear-gradient(180deg, var(--ven-red) 0%, #a00d1d 100%);
+            text-align: center;
+            padding: 30px 0 50px;
+            position: relative;
+        }
+
+        .header img {
+            width: 100px; height: 100px;
+            border: 3px solid var(--ven-yellow);
+            border-radius: 50%;
+            background: white; padding: 5px;
+        }
+
+        .aviso-retiro {
+            background-color: var(--ven-yellow);
+            color: #000;
+            text-align: center;
+            padding: 12px 10px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-top: -25px;
+            position: relative;
+            z-index: 3;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            border-bottom: 4px solid var(--ven-blue);
+        }
+
+        .container { max-width: 500px; margin: 0 auto; padding: 15px; }
+
+        .categoria-titulo {
+            color: var(--ven-yellow);
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin: 30px 0 15px;
+            text-transform: uppercase;
+            text-align: center;
+            border-bottom: 2px solid var(--ven-red);
+            padding-bottom: 5px;
+        }
+
+        .producto-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            margin-bottom: 12px;
+            display: flex;
+            overflow: hidden;
+            border: 1px solid #ddd;
+            color: var(--text-dark);
+        }
+
+        .barra-azul { background-color: var(--ven-blue); width: 8px; }
+        .contenido { flex-grow: 1; padding: 15px; }
+        
+        .fila-principal { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: flex-start; 
+        }
+
+        .nombre-prod { 
+            font-weight: 700; 
+            font-size: 1.1rem; 
+            color: var(--ven-blue);
+            margin: 0;
+        }
+
+        .precio-tag { 
+            font-weight: bold; 
+            color: var(--ven-red); 
+            font-size: 1.1rem;
+            white-space: nowrap;
+            margin-left: 10px;
+        }
+
+        .descripcion { 
+            font-size: 0.85rem; 
+            color: var(--text-gray); 
+            margin-top: 5px; 
+            font-style: italic;
+        }
+
+        .lista-rellenos {
+            font-size: 0.75rem;
+            color: #555;
+            margin-top: 8px;
+            display: block;
+            background: #f8f9fa;
+            padding: 5px 8px;
+            border-radius: 4px;
+            border: 1px dashed #ccc;
+        }
+
+        .footer-info {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .btn-pedir-estatico {
+            display: block;
+            background-color: #25d366;
+            color: white;
+            text-decoration: none;
+            padding: 15px;
+            border-radius: 50px;
+            font-weight: bold;
+            margin: 20px auto;
+            max-width: 250px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <img src="logo.jpg" alt="Maf Sazón">
+    <h1 style="color: white; margin-top: 10px; font-size: 1.5rem;">Maf Sazón</h1>
+</div>
+
+<div class="aviso-retiro">
+    📍 Avenida Cazón 375, Tigre <br>
+    <small>Solo retiro por local (Take Away)</small>
+</div>
+
+<div class="container">
+    <div class="categoria-titulo">Arepas</div>
+    
+    <div class="producto-card">
+        <div class="barra-azul"></div>
+        <div class="contenido">
+            <div class="fila-principal">
+                <p class="nombre-prod">Arepa Simple (1 Relleno)</p>
+                <span class="precio-tag">$5.00</span>
+            </div>
+            <span class="lista-rellenos">Queso, Jamón y Queso, Pollo, Reina Pepiada, Carne Mechada, Carne Picada, Salchicha, Chorizo o Perico.</span>
+        </div>
+    </div>
+
+    <div class="producto-card">
+        <div class="barra-azul"></div>
+        <div class="contenido">
+            <div class="fila-principal">
+                <p class="nombre-prod">Arepa Especial (2 Rellenos)</p>
+                <span class="precio-tag">$9.00</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="producto-card">
+        <div class="barra-azul"></div>
+        <div class="contenido">
+            <div class="fila-principal">
+                <p class="nombre-prod">Arepa Pabellón</p>
+                <span class="precio-tag">$10.00</span>
+            </div>
+            <p class="descripcion">Mechada, caraotas, tajadas y queso</p>
+        </div>
+    </div>
+
+    <div class="categoria-titulo">Empanadas</div>
+    
+    <div class="producto-card">
+        <div class="barra-azul"></div>
+        <div class="contenido">
+            <div class="fila-principal">
+                <p class="nombre-prod">Empanada Clásica</p>
+                <span class="precio-tag">$4.00</span>
+            </div>
+            <span class="lista-rellenos">Queso, Jamón y Queso, Pollo, Carne Mechada, Carne Picada o Verduras.</span>
+        </div>
+    </div>
+
+    <div class="producto-card">
+        <div class="barra-azul"></div>
+        <div class="contenido">
+            <div class="fila-principal">
+                <p class="nombre-prod">Empanada Pabellón</p>
+                <span class="precio-tag">$8.00</span>
+            </div>
+            <p class="descripcion">Mechada, caraotas, tajadas y queso</p>
+        </div>
+    </div>
+
+    <div class="categoria-titulo">Patacones</div>
+    
+    <div class="producto-card">
+        <div class="barra-azul"></div>
+        <div class="contenido">
+            <div class="fila-principal">
+                <p class="nombre-prod">Patacón de Pollo / Carne</p>
+                <span class="precio-tag">$10.00</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="producto-card">
+        <div class="barra-azul"></div>
+        <div class="contenido">
+            <div class="fila-principal">
+                <p class="nombre-prod">Patacón Mixto</p>
+                <span class="precio-tag">$12.00</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="categoria-titulo">Bebidas</div>
+    
+    <div class="producto-card">
+        <div class="barra-azul"></div>
+        <div class="contenido">
+            <div class="fila-principal">
+                <p class="nombre-prod">Nestea / Malta</p>
+                <span class="precio-tag">$3.00</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-info">
+        <p>Haz tu pedido por WhatsApp:</p>
+        <a href="https://wa.me/5491157440973" class="btn-pedir-estatico">Enviar mensaje ahora</a>
+        <p style="font-size: 0.8rem; color: var(--ven-yellow);">¡Gracias por elegir Maf Sazón! 🇻🇪</p>
+    </div>
+</div>
+
+</body>
+</html>
