@@ -185,7 +185,7 @@
 
 <script>
     const listaArepas = ["Queso", "Jamón y Queso", "Pollo", "Reina Pepiada", "Carne Mechada", "Carne Picada", "Salchicha", "Chorizo", "Perico"];
-    const listaEmpanadas = ["Queso", "Jamón y Queso", "Pollo", "Carne Mechada", "Carne Picada", "Verduras"];
+    const listaEmpanadas = ["Queso", "Jamón y Queso", "Pollo", "Carne Mechada", "Carne Picada", "Verduras", "Dominó (Caraotas y Queso)"];
 
     const menu = [
         { 
@@ -204,6 +204,7 @@
             items: [
                 { n: "Empanada 1 Relleno", p: 4.00, m: 1, rellenos: listaEmpanadas, tipo: "var" },
                 { n: "Empanada 2 Rellenos", p: 7.50, m: 2, rellenos: listaEmpanadas, tipo: "var" },
+                { n: "Empanada Dominó", p: 6.00, det: "Porotos negros (caraotas y queso)", tipo: "fijo" },
                 { n: "Empanada Pabellón", p: 8.00, det: "Mechada, caraotas, tajadas y queso", tipo: "fijo" }
             ]
         },
@@ -226,6 +227,14 @@
                 { n: "Patacón Vegetariano", p: 11.00, det: "Con verduras salteadas.", tipo: "fijo" },
                 { n: "Tostones fritos con queso", p: 8.00, det: "Plátano aplastado frito con queso llanero.", tipo: "fijo" },
                 { n: "Tajadas con queso", p: 7.00, det: "Rodajas de plátano frito con queso blanco rallado.", tipo: "fijo" }
+            ]
+        },
+        {
+            cat: "Pollo Frito",
+            placeholder: "Notas especiales...",
+            items: [
+                { n: "Alitas a la Broaster", p: 15.00, det: "6 Alitas de pollo fritas (a la Broaster) + 6 arepitas + salsa de ajo.", tipo: "fijo", img: "alitas a la broaster.txt" },
+                { n: "Pollo a la Broaster", p: 18.00, det: "Pollo frito empanizado, con ensalada de repollo y zanahoria, arepitas fritas.", tipo: "fijo", img: "pollo a la broaster.txt" }
             ]
         },
         {
@@ -253,8 +262,8 @@
             items: [
                 { n: "Arroz con Pollo", p: 12.00, det: "Arroz, pollo, zanahoria, verdeo, cebolla, morrón.", tipo: "fijo" },
                 { n: "Pasta a la Boloñesa", p: 13.00, det: "Spaghetti con salsa de carne molida y queso rallado.", tipo: "fijo" },
-                { n: "Pabellón", p: 15.00, det: "Arroz, caraotas, carne mechada y tajadas.", tipo: "fijo", img: "pabellon.jpg" },
-                { n: "Asado Negro", p: 16.00, det: "Carne tierna en salsa de papelón y especias.", tipo: "fijo", img: "asado negro.jpg" }
+                { n: "Pabellón", p: 15.00, det: "Arroz, caraotas, carne mechada y tajadas.", tipo: "fijo", img: "pabellon.txt" },
+                { n: "Asado Negro", p: 16.00, det: "Carne tierna en salsa de papelón y especias.", tipo: "fijo", img: "asado negro.txt" }
             ]
         },
         { 
