@@ -78,10 +78,15 @@
         }
 
         .img-producto {
-            width: 150px;
+            width: 140px;
             height: auto;
             object-fit: cover;
             border-right: 1px solid #ddd;
+            transition: transform 0.3s ease;
+        }
+        
+        .img-producto:hover {
+            transform: scale(1.05);
         }
 
         .barra-azul { background-color: var(--ven-blue); width: 12px; flex-shrink: 0; }
@@ -194,6 +199,7 @@
             items: [
                 { n: "Arepa 1 Relleno", p: 5.00, m: 1, rellenos: listaArepas, tipo: "var" },
                 { n: "Arepa 2 Rellenos", p: 9.00, m: 2, rellenos: listaArepas, tipo: "var" },
+                { n: "Arepa 3 Rellenos", p: 12.00, m: 3, rellenos: listaArepas, tipo: "var" },
                 { n: "Arepa Pabellón", p: 10.00, det: "Mechada, caraotas, tajadas y queso", tipo: "fijo" },
                 { n: "Arepa Dominó", p: 9.00, det: "Caraotas negras y queso", tipo: "fijo" }
             ]
@@ -233,6 +239,14 @@
                 { n: "Patacón Vegetariano", p: 11.00, det: "Con verduras salteadas.", tipo: "fijo" },
                 { n: "Tostones fritos con queso", p: 8.00, det: "Plátano aplastado frito con queso llanero.", tipo: "fijo" },
                 { n: "Tajadas con queso", p: 7.00, det: "Rodajas de plátano frito con queso blanco rallado.", tipo: "fijo" }
+            ]
+        },
+        {
+            cat: "Tequeños",
+            placeholder: "Ej: Salsa extra...",
+            items: [
+                { n: "Tequeños (6 unidades)", p: 10.00, det: "Deditos de masa rellenos de queso.", tipo: "fijo" },
+                { n: "Tequeños (12 unidades)", p: 18.00, det: "Deditos de masa rellenos de queso.", tipo: "fijo" }
             ]
         },
         {
