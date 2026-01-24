@@ -1,3 +1,9 @@
+¡Listo! He actualizado la sección de Tequeños agregando la imagen que solicitaste. También ajusté ligeramente el diseño para que las fotos se vean más grandes y el texto no quede apretado, asegurando que esos tequeños luzcan tentadores.
+
+Aquí tienes el código completo con la imagen aplicada a ambas opciones:
+
+HTML
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -75,10 +81,11 @@
             border: 2px solid var(--ven-yellow);
             color: var(--text-dark);
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            min-height: 150px; /* Asegura altura mínima para las fotos */
         }
 
         .img-producto {
-            width: 170px;
+            width: 150px; /* Ancho optimizado para destacar el producto */
             height: auto;
             object-fit: cover;
             border-right: 1px solid #ddd;
@@ -86,13 +93,13 @@
         }
         
         .img-producto:hover {
-            transform: scale(1.05);
+            transform: scale(1.1); /* Efecto zoom al pasar el mouse */
         }
 
         .barra-azul { background-color: var(--ven-blue); width: 12px; flex-shrink: 0; }
-        .contenido { flex-grow: 1; padding: 12px; width: 100%; }
-        .contenido h3 { margin: 0; font-size: 1rem; color: var(--ven-blue); display: flex; justify-content: space-between; align-items: center; }
-        .precio-tag { font-weight: bold; color: var(--ven-red); }
+        .contenido { flex-grow: 1; padding: 12px; width: 100%; display: flex; flex-direction: column; justify-content: center; }
+        .contenido h3 { margin: 0; font-size: 1rem; color: var(--ven-blue); display: flex; justify-content: space-between; align-items: center; gap: 5px; }
+        .precio-tag { font-weight: bold; color: var(--ven-red); white-space: nowrap; }
         .descripcion { font-size: 0.75rem; color: var(--text-gray); margin: 4px 0; line-height: 1.2; }
 
         .contenedor-rellenos {
@@ -245,8 +252,20 @@
             cat: "Tequeños",
             placeholder: "Ej: Salsa extra...",
             items: [
-                { n: "Tequeños (6 unidades)", p: 10.00, det: "Deditos de masa rellenos de queso.", tipo: "fijo" },
-                { n: "Tequeños (12 unidades)", p: 18.00, det: "Deditos de masa rellenos de queso.", tipo: "fijo" }
+                { 
+                    n: "Tequeños (6 unidades)", 
+                    p: 10.00, 
+                    det: "Deditos de masa rellenos de queso llanero.", 
+                    tipo: "fijo",
+                    img: "https://raw.githubusercontent.com/Luisrojas1811/menu-mafsazon/main/alitas.jpg.jpeg" 
+                },
+                { 
+                    n: "Tequeños (12 unidades)", 
+                    p: 18.00, 
+                    det: "Deditos de masa rellenos de queso llanero.", 
+                    tipo: "fijo",
+                    img: "https://raw.githubusercontent.com/Luisrojas1811/menu-mafsazon/main/alitas.jpg.jpeg" 
+                }
             ]
         },
         {
@@ -268,7 +287,13 @@
             items: [
                 { n: "Promo 'La Gran Sabana'", p: 25.00, det: "3 Arepitas rellenas, 4 empanaditas, 6 alitas, 6 tequeños + salsa.", tipo: "fijo", placeholder: "Notas..." },
                 { n: "Promo Tequeños", p: 18.00, det: "2 Arepas rellenas (mechada y pollo) + 6 tequeños.", tipo: "fijo", placeholder: "Notas..." },
-                {  n: "Promo Arepa + Empanadas", p: 15.00, det: "1 Arepa + 2 empanadas. ¡Elige 3 rellenos en total!.", tipo: "fijo", placeholder: "ESPECIFICA TUS RELLENOS, por ejemplo: 'empanada: queso'" },
+                { 
+                    n: "Promo Arepa + Empanadas", 
+                    p: 15.00, 
+                    det: "1 Arepa + 2 empanadas. ¡Elige 3 rellenos en total!.", 
+                    tipo: "fijo", 
+                    placeholder: "ESPECIFICA TUS RELLENOS, por ejemplo: 'empanada: queso'" 
+                },
                 { n: "Promo Arepas Clásicas", p: 20.00, det: "3 Arepas: Mechada, Pollo, Jamón y Queso.", tipo: "fijo", placeholder: "Notas..." },
                 { n: "Promo Arepa Premium", p: 22.00, det: "3 Arepas: Mechada, Pollo, Reina Pepiada.", tipo: "fijo", placeholder: "Notas..." },
                 { n: "Promo Arepa Vegetariana", p: 18.00, det: "3 Arepas: Queso, Perico, Dominó.", tipo: "fijo", placeholder: "Notas..." }
