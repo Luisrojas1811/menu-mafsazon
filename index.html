@@ -77,7 +77,6 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
 
-        /* Estilo para las nuevas imágenes */
         .img-producto {
             width: 100px;
             height: auto;
@@ -189,60 +188,71 @@
     const listaEmpanadas = ["Queso", "Jamón y Queso", "Pollo", "Carne Mechada", "Carne Picada", "Verduras"];
 
     const menu = [
-        { 
-            cat: "Arepas", 
-            placeholder: "Ej: Sin cebolla, bien tostada...",
+        {
+            cat: "Promociones Imperdibles",
+            placeholder: "Especificaciones de tu promo...",
             items: [
-                { n: "Arepa 1 Relleno", p: 5, m: 1, rellenos: listaArepas, tipo: "var" },
-                { n: "Arepa 2 Rellenos", p: 9, m: 2, rellenos: listaArepas, tipo: "var" },
-                { n: "Arepa 3 Rellenos", p: 12, m: 3, rellenos: listaArepas, tipo: "var" },
-                { n: "Arepa Pabellón", p: 10, det: "Mechada, caraotas, tajadas y queso", tipo: "fijo" },
-                { n: "Arepa Dominó", p: 9, det: "Caraotas negras y queso", tipo: "fijo" }
+                { n: "Promo 'La Gran Sabana'", p: 25.00, det: "3 Arepitas rellenas, 4 empanaditas, 6 alitas de pollo, 6 tequeños + salsa de ajo", tipo: "fijo" },
+                { n: "Promo Tequeños", p: 18.00, det: "2 Arepas rellenas (1 carne mechada, 1 pollo) + 6 tequeños con salsa de ajo", tipo: "fijo" },
+                { n: "Promo Arepa + Empanadas", p: 15.00, m: 3, rellenos: listaArepas, det: "1 Arepa (frita/asada) + 2 empanadas. ¡Elige 3 rellenos en total!", tipo: "var" },
+                { n: "Promo Arepas Clásicas", p: 20.00, det: "3 Arepas rellenas: 1 carne mechada, 1 pollo, 1 jamón y queso", tipo: "fijo" },
+                { n: "Promo Arepa Premium", p: 22.00, det: "Arepa carne mechada, Arepa pollo, Arepa reina pepiada", tipo: "fijo" },
+                { n: "Promo Arepa Vegetariana", p: 18.00, det: "Arepa queso, Arepa perico (huevo), Arepa Dominó", tipo: "fijo" }
             ]
         },
         { 
-            cat: "Empanadas", 
-            placeholder: "Ej: Bien frita...",
+            cat: "Platos Caseros", 
+            placeholder: "Ej: Sin verdeo...",
             items: [
-                { n: "Empanada 1 Relleno", p: 4, m: 1, rellenos: listaEmpanadas, tipo: "var" },
-                { n: "Empanada Pabellón", p: 8, det: "Mechada, caraotas, tajadas y queso", tipo: "fijo" },
-                { n: "Empanada Dominó", p: 7, det: "Caraotas y queso", tipo: "fijo" }
-            ]
-        },
-        /* NUEVAS SECCIONES AGREGADAS */
-        { 
-            cat: "Especialidades Criollas", 
-            placeholder: "Ej: Sin tajadas...",
-            items: [
-                { n: "Pabellón", p: 15, det: "Plato tradicional con arroz, caraotas, carne mechada y tajadas.", tipo: "fijo", img: "pabellon.jpg" },
-                { n: "Asado Negro", p: 16, det: "Carne tierna en salsa de papelón y especias.", tipo: "fijo", img: "asado negro.jpg" }
+                { n: "Arroz con Pollo", p: 12.00, det: "Arroz, pollo, zanahoria, verdeo, cebolla, morrón.", tipo: "fijo" },
+                { n: "Pasta a la Boloñesa", p: 13.00, det: "Spaghetti con salsa de carne molida y queso rallado.", tipo: "fijo" },
+                { n: "Pabellón", p: 15.00, det: "Arroz, caraotas, carne mechada y tajadas.", tipo: "fijo", img: "pabellon.jpg" },
+                { n: "Asado Negro", p: 16.00, det: "Carne tierna en salsa de papelón y especias.", tipo: "fijo", img: "asado negro.jpg" }
             ]
         },
         { 
             cat: "Pollo Frito", 
             placeholder: "Ej: Solo muslos...",
             items: [
-                { n: "Pollo a la Broaster", p: 14, det: "Pollo crujiente estilo broaster.", tipo: "fijo", img: "pollo a la broaster.jpg" },
-                { n: "Alitas a la Broaster", p: 12, det: "Alitas de pollo crujientes.", tipo: "fijo", img: "alitas a la broaster.jpg" }
+                { n: "Pollo a la Broaster", p: 14.00, det: "Pollo crujiente estilo broaster.", tipo: "fijo", img: "pollo a la broaster.jpg" },
+                { n: "Alitas a la Broaster", p: 12.00, det: "Alitas de pollo crujientes.", tipo: "fijo", img: "alitas a la broaster.jpg" }
             ]
         },
         { 
-            cat: "Patacones", 
+            cat: "Arepas", 
+            placeholder: "Ej: Frita o Asada, sin cebolla...",
+            items: [
+                { n: "Arepa 1 Relleno", p: 5.00, m: 1, rellenos: listaArepas, tipo: "var" },
+                { n: "Arepa 2 Rellenos", p: 9.00, m: 2, rellenos: listaArepas, tipo: "var" },
+                { n: "Arepa Pabellón", p: 10.00, det: "Mechada, caraotas, tajadas y queso", tipo: "fijo" },
+                { n: "Arepa Dominó", p: 9.00, det: "Caraotas negras y queso", tipo: "fijo" }
+            ]
+        },
+        { 
+            cat: "Empanadas", 
+            placeholder: "Ej: Bien frita...",
+            items: [
+                { n: "Empanada 1 Relleno", p: 4.00, m: 1, rellenos: listaEmpanadas, tipo: "var" },
+                { n: "Empanada Pabellón", p: 8.00, det: "Mechada, caraotas, tajadas y queso", tipo: "fijo" }
+            ]
+        },
+        { 
+            cat: "Patacones y Entradas", 
             placeholder: "Ej: Con extra salsa...",
             items: [
-                { n: "Patacón de Pollo", p: 10, tipo: "fijo" }, 
-                { n: "Patacón de Carne", p: 10, tipo: "fijo" }, 
-                { n: "Patacón Mixto", p: 12, tipo: "fijo" }
+                { n: "Patacón de Pollo", p: 10.00, tipo: "fijo" }, 
+                { n: "Patacón de Carne", p: 10.00, tipo: "fijo" }, 
+                { n: "Tostones fritos con queso", p: 8.00, det: "Plátano aplastado frito con queso llanero.", tipo: "fijo" },
+                { n: "Tajadas con queso", p: 7.00, det: "Rodajas de plátano frito con queso blanco rallado.", tipo: "fijo" }
             ]
         },
         { 
             cat: "Bebidas", 
-            placeholder: null,
             items: [
-                { n: "Nestea", p: 3.5, tipo: "fijo" }, 
-                { n: "Agua Panela", p: 3, tipo: "fijo" }, 
-                { n: "Malta", p: 3, tipo: "fijo" }, 
-                { n: "Gaseosa", p: 2.5, tipo: "fijo" }
+                { n: "Nestea", p: 3.50, tipo: "fijo" }, 
+                { n: "Agua Panela", p: 3.00, tipo: "fijo" }, 
+                { n: "Malta", p: 3.00, tipo: "fijo" }, 
+                { n: "Gaseosa", p: 2.50, tipo: "fijo" }
             ]
         }
     ];
@@ -259,7 +269,7 @@
                 
                 let htmlAccion = "";
                 if (item.tipo === "var") {
-                    htmlAccion = `<button class="btn-agregar" onclick="agregarVariable('${id}', '${item.n}', ${item.p}, ${item.m})">+ Agregar al pedido</button>`;
+                    htmlAccion = `<button class="btn-agregar" onclick="agregarVariable('${id}', '${item.n}', ${item.p}, ${item.m})">+ AGREGAR AL PEDIDO</button>`;
                 } else {
                     cantidadesFijas[id] = 0;
                     htmlAccion = `
@@ -289,7 +299,6 @@
         });
     }
 
-    // (El resto de tus funciones se mantienen exactamente igual)
     function validarChecks(id, limite) {
         const sel = document.querySelectorAll(`#checks-${id} input:checked`);
         const nosel = document.querySelectorAll(`#checks-${id} input:not(:checked)`);
@@ -373,7 +382,7 @@
 
     function enviarPedido() {
         if (carrito.length === 0) return alert("Agrega productos.");
-        let msg = "*NUEVO PEDIDO PARA RETIRAR (TAKE AWAY)*%0A";
+        let msg = "*NUEVO PEDIDO PARA RETIRAR*%0A";
         msg += "📍 Retiro en: Av. Cazón 375, Tigre%0A%0A";
         carrito.forEach((item, i) => {
             msg += `${i+1}. *${item.cant}x ${item.nombre}*%0A`;
