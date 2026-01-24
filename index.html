@@ -1,3 +1,9 @@
+¡Entendido! He reorganizado todo el menú siguiendo el orden exacto que pediste, añadí la nueva sección de Cachapas, actualicé los Patacones (con los nuevos sabores) e incorporé la opción de Empanada con 2 rellenos.
+
+Aquí tienes el código completo y actualizado:
+
+HTML
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -189,24 +195,6 @@
 
     const menu = [
         { 
-            cat: "Platos", 
-            placeholder: "Ej: Sin verdeo...",
-            items: [
-                { n: "Arroz con Pollo", p: 12.00, det: "Arroz, pollo, zanahoria, verdeo, cebolla, morrón.", tipo: "fijo" },
-                { n: "Pasta a la Boloñesa", p: 13.00, det: "Spaghetti con salsa de carne molida y queso rallado.", tipo: "fijo" },
-                { n: "Pabellón", p: 15.00, det: "Arroz, caraotas, carne mechada y tajadas.", tipo: "fijo", img: "pabellon.jpg" },
-                { n: "Asado Negro", p: 16.00, det: "Carne tierna en salsa de papelón y especias.", tipo: "fijo", img: "asado negro.jpg" }
-            ]
-        },
-        { 
-            cat: "Pollo Frito", 
-            placeholder: "Ej: Solo muslos...",
-            items: [
-                { n: "Pollo a la Broaster", p: 14.00, det: "Pollo crujiente estilo broaster.", tipo: "fijo", img: "pollo a la broaster.jpg" },
-                { n: "Alitas a la Broaster", p: 12.00, det: "Alitas de pollo crujientes.", tipo: "fijo", img: "alitas a la broaster.jpg" }
-            ]
-        },
-        { 
             cat: "Arepas", 
             placeholder: "Ej: Frita o Asada, sin cebolla...",
             items: [
@@ -221,15 +209,27 @@
             placeholder: "Ej: Bien frita...",
             items: [
                 { n: "Empanada 1 Relleno", p: 4.00, m: 1, rellenos: listaEmpanadas, tipo: "var" },
+                { n: "Empanada 2 Rellenos", p: 7.50, m: 2, rellenos: listaEmpanadas, tipo: "var" },
                 { n: "Empanada Pabellón", p: 8.00, det: "Mechada, caraotas, tajadas y queso", tipo: "fijo" }
             ]
         },
         { 
-            cat: "Patacones y Entradas", 
+            cat: "Cachapas", 
+            placeholder: "Ej: Con extra mantequilla...",
+            items: [
+                { n: "Cachapa con queso", p: 12.00, det: "Masa de choclo, un poco de azúcar y sal.", tipo: "fijo" },
+                { n: "Cachapa con jamón y queso", p: 14.00, det: "Masa de jojoto (choclo), azúcar y sal.", tipo: "fijo" },
+                { n: "Cachapa con queso y carne mechada", p: 16.00, det: "Masa de jojoto (choclo) 🌽, azúcar, sal.", tipo: "fijo" }
+            ]
+        },
+        { 
+            cat: "Patacones", 
             placeholder: "Ej: Con extra salsa...",
             items: [
                 { n: "Patacón de Pollo", p: 10.00, tipo: "fijo" }, 
                 { n: "Patacón de Carne", p: 10.00, tipo: "fijo" }, 
+                { n: "Patacón Mixto", p: 13.00, det: "Carne y pollo.", tipo: "fijo" },
+                { n: "Patacón Vegetariano", p: 11.00, det: "Con verduras salteadas.", tipo: "fijo" },
                 { n: "Tostones fritos con queso", p: 8.00, det: "Plátano aplastado frito con queso llanero.", tipo: "fijo" },
                 { n: "Tajadas con queso", p: 7.00, det: "Rodajas de plátano frito con queso blanco rallado.", tipo: "fijo" }
             ]
@@ -251,6 +251,16 @@
                 { n: "Promo Arepas Clásicas", p: 20.00, det: "3 Arepas: Mechada, Pollo, Jamón y Queso.", tipo: "fijo", placeholder: "Notas..." },
                 { n: "Promo Arepa Premium", p: 22.00, det: "3 Arepas: Mechada, Pollo, Reina Pepiada.", tipo: "fijo", placeholder: "Notas..." },
                 { n: "Promo Arepa Vegetariana", p: 18.00, det: "3 Arepas: Queso, Perico, Dominó.", tipo: "fijo", placeholder: "Notas..." }
+            ]
+        },
+        { 
+            cat: "Platos", 
+            placeholder: "Ej: Sin verdeo...",
+            items: [
+                { n: "Arroz con Pollo", p: 12.00, det: "Arroz, pollo, zanahoria, verdeo, cebolla, morrón.", tipo: "fijo" },
+                { n: "Pasta a la Boloñesa", p: 13.00, det: "Spaghetti con salsa de carne molida y queso rallado.", tipo: "fijo" },
+                { n: "Pabellón", p: 15.00, det: "Arroz, caraotas, carne mechada y tajadas.", tipo: "fijo", img: "pabellon.jpg" },
+                { n: "Asado Negro", p: 16.00, det: "Carne tierna en salsa de papelón y especias.", tipo: "fijo", img: "asado negro.jpg" }
             ]
         },
         { 
