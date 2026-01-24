@@ -39,7 +39,6 @@
             position: relative; z-index: 2;
         }
 
-        /* Banner de Dirección corregido */
         .aviso-retiro {
             background-color: var(--ven-yellow);
             color: #000;
@@ -76,6 +75,14 @@
             border: 2px solid var(--ven-yellow);
             color: var(--text-dark);
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        /* Estilo para las nuevas imágenes */
+        .img-producto {
+            width: 100px;
+            height: auto;
+            object-fit: cover;
+            border-right: 1px solid #ddd;
         }
 
         .barra-azul { background-color: var(--ven-blue); width: 12px; flex-shrink: 0; }
@@ -140,14 +147,9 @@
         }
 
         .btn-eliminar {
-            background-color: var(--ven-red);
-            color: white;
-            border: none;
-            width: 26px; height: 26px;
-            border-radius: 50%;
-            font-weight: bold;
-            cursor: pointer;
-            display: flex; align-items: center; justify-content: center;
+            background-color: var(--ven-red); color: white; border: none;
+            width: 26px; height: 26px; border-radius: 50%;
+            font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center;
             font-size: 14px;
         }
 
@@ -207,6 +209,23 @@
                 { n: "Empanada Dominó", p: 7, det: "Caraotas y queso", tipo: "fijo" }
             ]
         },
+        /* NUEVAS SECCIONES AGREGADAS */
+        { 
+            cat: "Especialidades Criollas", 
+            placeholder: "Ej: Sin tajadas...",
+            items: [
+                { n: "Pabellón", p: 15, det: "Plato tradicional con arroz, caraotas, carne mechada y tajadas.", tipo: "fijo", img: "pabellon.jpg" },
+                { n: "Asado Negro", p: 16, det: "Carne tierna en salsa de papelón y especias.", tipo: "fijo", img: "asado negro.jpg" }
+            ]
+        },
+        { 
+            cat: "Pollo Frito", 
+            placeholder: "Ej: Solo muslos...",
+            items: [
+                { n: "Pollo a la Broaster", p: 14, det: "Pollo crujiente estilo broaster.", tipo: "fijo", img: "pollo a la broaster.jpg" },
+                { n: "Alitas a la Broaster", p: 12, det: "Alitas de pollo crujientes.", tipo: "fijo", img: "alitas a la broaster.jpg" }
+            ]
+        },
         { 
             cat: "Patacones", 
             placeholder: "Ej: Con extra salsa...",
@@ -253,6 +272,7 @@
 
                 box.innerHTML += `
                     <div class="producto-card">
+                        ${item.img ? `<img src="${item.img}" class="img-producto" onerror="this.style.display='none'">` : ''}
                         <div class="barra-azul"></div>
                         <div class="contenido">
                             <h3>${item.n} <span class="precio-tag">$${item.p.toFixed(2)}</span></h3>
@@ -269,6 +289,7 @@
         });
     }
 
+    // (El resto de tus funciones se mantienen exactamente igual)
     function validarChecks(id, limite) {
         const sel = document.querySelectorAll(`#checks-${id} input:checked`);
         const nosel = document.querySelectorAll(`#checks-${id} input:not(:checked)`);
