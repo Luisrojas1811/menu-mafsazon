@@ -1,3 +1,15 @@
+¡Listo! He aplicado los cambios exactos que pediste sobre el código base:
+
+Orden de categorías: Moví las Promociones para que aparezcan justo antes de las Bebidas.
+
+Renombre: Cambié "Platos Caseros" a simplemente "Platos".
+
+Promo Intuitiva: En la "Promo Arepa + Empanadas", actualicé el texto de instrucciones a: "Especifica tus rellenos, por ejemplo: Arepa: Queso, Empanada 1: Pollo..." para que el cliente no tenga dudas de qué va con qué.
+
+Aquí tienes el código actualizado:
+
+HTML
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -188,20 +200,8 @@
     const listaEmpanadas = ["Queso", "Jamón y Queso", "Pollo", "Carne Mechada", "Carne Picada", "Verduras"];
 
     const menu = [
-        {
-            cat: "Promociones Imperdibles",
-            placeholder: "Especificaciones de tu promo...",
-            items: [
-                { n: "Promo 'La Gran Sabana'", p: 25.00, det: "3 Arepitas rellenas, 4 empanaditas, 6 alitas de pollo, 6 tequeños + salsa de ajo", tipo: "fijo" },
-                { n: "Promo Tequeños", p: 18.00, det: "2 Arepas rellenas (1 carne mechada, 1 pollo) + 6 tequeños con salsa de ajo", tipo: "fijo" },
-                { n: "Promo Arepa + Empanadas", p: 15.00, m: 3, rellenos: listaArepas, det: "1 Arepa (frita/asada) + 2 empanadas. ¡Elige 3 rellenos en total!", tipo: "var" },
-                { n: "Promo Arepas Clásicas", p: 20.00, det: "3 Arepas rellenas: 1 carne mechada, 1 pollo, 1 jamón y queso", tipo: "fijo" },
-                { n: "Promo Arepa Premium", p: 22.00, det: "Arepa carne mechada, Arepa pollo, Arepa reina pepiada", tipo: "fijo" },
-                { n: "Promo Arepa Vegetariana", p: 18.00, det: "Arepa queso, Arepa perico (huevo), Arepa Dominó", tipo: "fijo" }
-            ]
-        },
         { 
-            cat: "Platos Caseros", 
+            cat: "Platos", 
             placeholder: "Ej: Sin verdeo...",
             items: [
                 { n: "Arroz con Pollo", p: 12.00, det: "Arroz, pollo, zanahoria, verdeo, cebolla, morrón.", tipo: "fijo" },
@@ -244,6 +244,25 @@
                 { n: "Patacón de Carne", p: 10.00, tipo: "fijo" }, 
                 { n: "Tostones fritos con queso", p: 8.00, det: "Plátano aplastado frito con queso llanero.", tipo: "fijo" },
                 { n: "Tajadas con queso", p: 7.00, det: "Rodajas de plátano frito con queso blanco rallado.", tipo: "fijo" }
+            ]
+        },
+        {
+            cat: "Promociones Imperdibles",
+            items: [
+                { n: "Promo 'La Gran Sabana'", p: 25.00, det: "3 Arepitas rellenas, 4 empanaditas, 6 alitas, 6 tequeños + salsa.", tipo: "fijo", placeholder: "Notas..." },
+                { n: "Promo Tequeños", p: 18.00, det: "2 Arepas rellenas (mechada y pollo) + 6 tequeños.", tipo: "fijo", placeholder: "Notas..." },
+                { 
+                    n: "Promo Arepa + Empanadas", 
+                    p: 15.00, 
+                    m: 3, 
+                    rellenos: listaArepas, 
+                    det: "1 Arepa + 2 empanadas. ¡Elige 3 rellenos en total!", 
+                    tipo: "var", 
+                    placeholder: "especifica tus rellenos, por ejemplo: 'empanada: queso'" 
+                },
+                { n: "Promo Arepas Clásicas", p: 20.00, det: "3 Arepas: Mechada, Pollo, Jamón y Queso.", tipo: "fijo", placeholder: "Notas..." },
+                { n: "Promo Arepa Premium", p: 22.00, det: "3 Arepas: Mechada, Pollo, Reina Pepiada.", tipo: "fijo", placeholder: "Notas..." },
+                { n: "Promo Arepa Vegetariana", p: 18.00, det: "3 Arepas: Queso, Perico, Dominó.", tipo: "fijo", placeholder: "Notas..." }
             ]
         },
         { 
@@ -291,7 +310,7 @@
                                 <div class="contenedor-rellenos" id="checks-${id}">
                                     ${item.rellenos.map(r => `<label class="relleno-item"><input type="checkbox" value="${r}" onchange="validarChecks('${id}', ${item.m})"> ${r}</label>`).join('')}
                                 </div>` : ''}
-                            ${seccion.placeholder ? `<input type="text" id="nota-${id}" class="input-notas" placeholder="${seccion.placeholder}" oninput="actualizarNotaFija('${id}')">` : ''}
+                            ${(seccion.placeholder || item.placeholder) ? `<input type="text" id="nota-${id}" class="input-notas" placeholder="${item.placeholder || seccion.placeholder}" oninput="actualizarNotaFija('${id}')">` : ''}
                             ${htmlAccion}
                         </div>
                     </div>`;
@@ -332,7 +351,7 @@
         const sel = Array.from(document.querySelectorAll(`#checks-${id} input:checked`)).map(c => c.value);
         const notaInput = document.getElementById(`nota-${id}`);
         const nota = notaInput ? notaInput.value : "";
-        if (sel.length !== limite) return alert(`Por favor selecciona ${limite} relleno(s)`);
+        if (sel.length !== limite) return alert(`Por favor selecciona ${limite} relleno(s) en total`);
 
         carrito.push({ nombre, precio, rellenos: sel, nota, cant: 1, tipo: 'var' });
         document.querySelectorAll(`#checks-${id} input`).forEach(c => { c.checked = false; c.disabled = false; });
