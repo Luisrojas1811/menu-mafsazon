@@ -78,16 +78,40 @@
             min-height: 150px;
         }
 
+        /* --- ESTILOS DE GALERÍA DE FOTOS --- */
+        .contenedor-img {
+            width: 150px;
+            position: relative;
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            background: #eee;
+            flex-shrink: 0;
+        }
+        
+        /* Ocultar barra de scroll */
+        .contenedor-img::-webkit-scrollbar { display: none; }
+        
         .img-producto {
             width: 150px;
             height: auto;
+            min-height: 150px;
             object-fit: cover;
+            flex-shrink: 0;
+            scroll-snap-align: start;
             border-right: 1px solid #ddd;
-            transition: transform 0.3s ease;
         }
-        
-        .img-producto:hover {
-            transform: scale(1.1);
+
+        .indicador-fotos {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            background: rgba(0,0,0,0.6);
+            color: white;
+            font-size: 9px;
+            padding: 2px 5px;
+            border-radius: 4px;
+            pointer-events: none;
         }
 
         .barra-azul { background-color: var(--ven-blue); width: 12px; flex-shrink: 0; }
@@ -198,9 +222,10 @@
             cat: "Arepas", 
             placeholder: "Ej: Frita o Asada, sin cebolla...",
             items: [
-                { n: "Arepa 1 Relleno", p: 5.00, m: 1, rellenos: listaArepas, tipo: "var" },
-                { n: "Arepa 2 Rellenos", p: 9.00, m: 2, rellenos: listaArepas, tipo: "var" },
-                { n: "Arepa 3 Rellenos", p: 12.00, m: 3, rellenos: listaArepas, tipo: "var" },
+                /* SOLO AGREGA TUS LINKS AQUÍ ABAJO */
+                { n: "Arepa 1 Relleno", p: 5.00, m: 1, rellenos: listaArepas, tipo: "var", img: ["URL_FOTO_1", "URL_FOTO_2", "URL_FOTO_3", "URL_FOTO_4"] },
+                { n: "Arepa 2 Rellenos", p: 9.00, m: 2, rellenos: listaArepas, tipo: "var", img: ["URL_1", "URL_2"] },
+                { n: "Arepa 3 Rellenos", p: 12.00, m: 3, rellenos: listaArepas, tipo: "var", img: ["URL_1", "URL_2"] },
                 { n: "Arepa Pabellón", p: 10.00, det: "Mechada, caraotas, tajadas y queso", tipo: "fijo" },
                 { n: "Arepa Dominó", p: 9.00, det: "Caraotas negras y queso", tipo: "fijo" },
                 { n: "Arepa criolla", p: 9.00, det: "huevo revuelto, caraotas ( porotos negros) y queso", tipo: "fijo" },
@@ -212,9 +237,10 @@
             cat: "Empanadas", 
             placeholder: "Ej: Bien frita...",
             items: [
-                { n: "Empanada 1 Relleno", p: 4.00, m: 1, rellenos: listaEmpanadas, tipo: "var" },
-                { n: "Empanada 2 Rellenos", p: 7.50, m: 2, rellenos: listaEmpanadas, tipo: "var" },
-                { n: "Empanada 3 Rellenos", p: 7.50, m: 2, rellenos: listaEmpanadas, tipo: "var" },
+                /* SOLO AGREGA TUS LINKS AQUÍ ABAJO */
+                { n: "Empanada 1 Relleno", p: 4.00, m: 1, rellenos: listaEmpanadas, tipo: "var", img: ["URL_1", "URL_2", "URL_3", "URL_4"] },
+                { n: "Empanada 2 Rellenos", p: 7.50, m: 2, rellenos: listaEmpanadas, tipo: "var", img: ["URL_1", "URL_2"] },
+                { n: "Empanada 3 Rellenos", p: 7.50, m: 2, rellenos: listaEmpanadas, tipo: "var", img: ["URL_1", "URL_2"] },
                 { n: "Empanada Dominó", p: 6.00, det: "Porotos negros (caraotas y queso)", tipo: "fijo" },
                 { n: "Empanada Pabellón", p: 8.00, det: "Mechada, caraotas, tajadas y queso", tipo: "fijo" }
             ]
@@ -230,11 +256,7 @@
                     tipo: "fijo",
                     img: "https://raw.githubusercontent.com/Luisrojas1811/menu-mafsazon/main/cachapa-queso.jpg.jpeg" 
                 },
-                { n: "Cachapa con jamón y queso",
-                 p: 14.00,
-                 det: "Masa de jojoto (choclo), azúcar y sal.",
-                 tipo: "fijo"
-                },
+                { n: "Cachapa con jamón y queso", p: 14.00, det: "Masa de jojoto (choclo), azúcar y sal.", tipo: "fijo" },
                 { n: "Cachapa con queso y carne mechada", p: 16.00, det: "Masa de jojoto (choclo), azúcar, sal.", tipo: "fijo" },
                 { n: "Cachapa con queso y verduras", p: 16.00, det: "Masa de jojoto (choclo), azúcar, sal, relleno de verduras", tipo: "fijo" }
             ]
@@ -333,6 +355,25 @@
             seccion.items.forEach((item, i) => {
                 const id = `${seccion.cat}-${i}`.replace(/\s+/g, '');
                 
+                // --- LÓGICA DE FOTOS (UNA O VARIAS) ---
+                let htmlFotos = "";
+                if (item.img) {
+                    if (Array.isArray(item.img)) {
+                        // Varias fotos: Creamos el slider
+                        htmlFotos = `
+                            <div class="contenedor-img">
+                                ${item.img.map(url => `<img src="${url}" class="img-producto" onerror="this.style.display='none'">`).join('')}
+                                <div class="indicador-fotos">↔ Desliza</div>
+                            </div>`;
+                    } else {
+                        // Una sola foto: Vista normal
+                        htmlFotos = `
+                            <div class="contenedor-img">
+                                <img src="${item.img}" class="img-producto" onerror="this.style.display='none'">
+                            </div>`;
+                    }
+                }
+
                 let htmlAccion = "";
                 if (item.tipo === "var") {
                     htmlAccion = `<button class="btn-agregar" onclick="agregarVariable('${id}', '${item.n}', ${item.p}, ${item.m})">+ AGREGAR AL PEDIDO</button>`;
@@ -348,7 +389,7 @@
 
                 box.innerHTML += `
                     <div class="producto-card">
-                        ${item.img ? `<img src="${item.img}" class="img-producto" onerror="this.style.display='none'">` : ''}
+                        ${htmlFotos}
                         <div class="barra-azul"></div>
                         <div class="contenido">
                             <h3>${item.n} <span class="precio-tag">$${item.p.toFixed(2)}</span></h3>
@@ -463,4 +504,4 @@
     init();
 </script>
 </body>
-</html>
+</html
