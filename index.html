@@ -78,9 +78,8 @@
             min-height: 150px;
         }
 
-        /* --- ESTILOS DE GALERÍA DE FOTOS --- */
         .contenedor-img {
-            width: 150px;
+            width: 140px;
             position: relative;
             display: flex;
             overflow-x: auto;
@@ -89,17 +88,15 @@
             flex-shrink: 0;
         }
         
-        /* Ocultar barra de scroll */
         .contenedor-img::-webkit-scrollbar { display: none; }
         
         .img-producto {
-            width: 150px;
+            width: 140px;
             height: auto;
             min-height: 150px;
             object-fit: cover;
             flex-shrink: 0;
             scroll-snap-align: start;
-            border-right: 1px solid #ddd;
         }
 
         .indicador-fotos {
@@ -111,84 +108,34 @@
             font-size: 9px;
             padding: 2px 5px;
             border-radius: 4px;
-            pointer-events: none;
         }
 
-        .barra-azul { background-color: var(--ven-blue); width: 12px; flex-shrink: 0; }
-        .contenido { flex-grow: 1; padding: 12px; width: 100%; display: flex; flex-direction: column; justify-content: center; }
-        .contenido h3 { margin: 0; font-size: 1rem; color: var(--ven-blue); display: flex; justify-content: space-between; align-items: center; gap: 5px; }
+        .barra-azul { background-color: var(--ven-blue); width: 10px; flex-shrink: 0; }
+        .contenido { flex-grow: 1; padding: 12px; display: flex; flex-direction: column; justify-content: center; }
+        .contenido h3 { margin: 0; font-size: 0.95rem; color: var(--ven-blue); display: flex; justify-content: space-between; gap: 5px; }
         .precio-tag { font-weight: bold; color: var(--ven-red); white-space: nowrap; }
-        .descripcion { font-size: 0.75rem; color: var(--text-gray); margin: 4px 0; line-height: 1.2; }
+        .descripcion { font-size: 0.75rem; color: var(--text-gray); margin: 4px 0; }
 
         .contenedor-rellenos {
             display: grid; grid-template-columns: 1fr 1fr; gap: 4px;
-            margin: 10px 0; background: #f1f3f5; padding: 8px; border-radius: 8px;
+            margin: 8px 0; background: #f1f3f5; padding: 6px; border-radius: 6px;
         }
 
-        .relleno-item { font-size: 0.7rem; display: flex; align-items: center; color: #333; }
-        .relleno-item input { margin-right: 5px; }
+        .relleno-item { font-size: 0.65rem; display: flex; align-items: center; color: #333; }
+        .input-notas { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px; margin-top: 5px; font-size: 0.8rem; box-sizing: border-box; }
 
-        .input-notas {
-            width: 100%; padding: 10px; border: 1px solid #ccc;
-            border-radius: 5px; margin-top: 8px; font-size: 0.85rem; box-sizing: border-box;
-        }
+        .btn-agregar { background-color: var(--ven-blue); color: white; border: none; padding: 10px; border-radius: 6px; width: 100%; font-weight: bold; margin-top: 8px; cursor: pointer; font-size: 0.75rem; }
 
-        .btn-agregar {
-            background-color: var(--ven-blue); color: white; border: none;
-            padding: 12px; border-radius: 6px; width: 100%; font-weight: bold;
-            margin-top: 10px; cursor: pointer; text-transform: uppercase; font-size: 0.8rem;
-        }
+        .controles-qty { display: flex; align-items: center; background: #f1f3f5; border-radius: 8px; padding: 5px; width: fit-content; margin-top: 8px; border: 1px solid var(--ven-blue); }
+        .btn-qty { background: var(--ven-blue); color: white; border: none; width: 30px; height: 30px; border-radius: 5px; font-size: 1.2rem; cursor: pointer; }
+        .qty-num { margin: 0 12px; font-weight: bold; color: var(--ven-blue); }
 
-        .controles-qty {
-            display: flex; align-items: center; justify-content: center;
-            background: #f1f3f5; border-radius: 8px; padding: 5px;
-            width: fit-content; margin-top: 10px; border: 1px solid var(--ven-blue);
-        }
-        .btn-qty {
-            background: var(--ven-blue); color: white; border: none;
-            width: 35px; height: 35px; border-radius: 5px; font-size: 1.3rem;
-            cursor: pointer; font-weight: bold;
-        }
-        .qty-num { margin: 0 15px; font-weight: bold; font-size: 1.1rem; color: var(--ven-blue); min-width: 20px; text-align: center; }
-
-        .footer-carrito {
-            position: fixed; bottom: 0; left: 0; width: 100%;
-            background: white; color: var(--text-dark);
-            box-shadow: 0 -5px 15px rgba(0,0,0,0.5); z-index: 100;
-        }
-
-        .resumen-items {
-            max-height: 140px; overflow-y: auto; padding: 10px;
-            font-size: 0.85rem; border-bottom: 1px solid #eee;
-        }
-
-        .item-carrito {
-            display: flex; justify-content: space-between; align-items: center;
-            margin-bottom: 8px; padding: 8px; border-bottom: 1px dashed #ddd;
-            gap: 10px;
-        }
-
-        .info-producto { flex: 1; }
-
-        .precio-y-borrar {
-            display: flex; align-items: center; gap: 10px;
-            font-weight: bold; white-space: nowrap;
-        }
-
-        .btn-eliminar {
-            background-color: var(--ven-red); color: white; border: none;
-            width: 26px; height: 26px; border-radius: 50%;
-            font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center;
-            font-size: 14px;
-        }
-
+        .footer-carrito { position: fixed; bottom: 0; left: 0; width: 100%; background: white; color: var(--text-dark); box-shadow: 0 -5px 15px rgba(0,0,0,0.5); z-index: 100; }
+        .resumen-items { max-height: 120px; overflow-y: auto; padding: 10px; font-size: 0.8rem; border-bottom: 1px solid #eee; }
+        .item-carrito { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px dashed #ddd; }
         .total-area { padding: 15px; text-align: center; }
-        .btn-whatsapp {
-            background-color: var(--ven-red); color: white; border: none; padding: 15px;
-            border-radius: 8px; font-weight: bold; width: 100%; cursor: pointer; text-transform: uppercase; font-size: 1rem;
-        }
-
-        .espaciador-final { height: 260px; width: 100%; }
+        .btn-whatsapp { background-color: var(--ven-red); color: white; border: none; padding: 15px; border-radius: 8px; font-weight: bold; width: 100%; cursor: pointer; font-size: 0.9rem; }
+        .espaciador-final { height: 280px; }
     </style>
 </head>
 <body>
@@ -208,140 +155,91 @@
 <div class="footer-carrito">
     <div id="resumen" class="resumen-items">Tu pedido está vacío</div>
     <div class="total-area">
-        <div id="total-val" style="font-weight: bold; margin-bottom: 10px; font-size: 1.2rem; color: #333;">Total: $0.00</div>
-        <button class="btn-whatsapp" onclick="enviarPedido()">PEDIR PARA RETIRAR POR LOCAL</button>
+        <div id="total-val" style="font-weight: bold; margin-bottom: 10px; font-size: 1.1rem;">Total: $0.00</div>
+        <button class="btn-whatsapp" onclick="enviarPedido()">PEDIR POR WHATSAPP</button>
     </div>
 </div>
 
 <script>
     const listaArepas = ["Queso", "Jamón y Queso", "Pollo", "Reina Pepiada", "Carne Mechada", "Carne Picada", "Salchicha", "Chorizo", "Perico"];
-    const listaEmpanadas = ["Queso", "Jamón y Queso", "Pollo", "Carne Mechada", "Carne Picada", "Verduras", "Dominó (Caraotas y Queso)"];
+    const listaEmpanadas = ["Queso", "Jamón y Queso", "Pollo", "Carne Mechada", "Carne Picada", "Verduras", "Dominó"];
 
     const menu = [
         { 
             cat: "Arepas", 
-            placeholder: "Ej: Frita o Asada, sin cebolla...",
+            placeholder: "Frita/Asada, sin cebolla...",
             items: [
-                /* SOLO AGREGA TUS LINKS AQUÍ ABAJO */
-                { n: "Arepa 1 Relleno", p: 5.00, m: 1, rellenos: listaArepas, tipo: "var", img: ["https://github.com/Luisrojas1811/menu-mafsazon/blob/main/arepapollo.jpg.jpeg?raw=true", "https://github.com/Luisrojas1811/menu-mafsazon/blob/main/arepasalchicha.jpg.jpeg?raw=true", "https://github.com/Luisrojas1811/menu-mafsazon/blob/main/arepacarnemechada.jpg.jpeg?raw=true", "URL_FOTO_4"] },
-                { n: "Arepa 2 Rellenos", p: 9.00, m: 2, rellenos: listaArepas, tipo: "var", img: ["https://github.com/Luisrojas1811/menu-mafsazon/blob/main/arepajamonqueso.jpg.jpeg?raw=true",] },
-                { n: "Arepa 3 Rellenos", p: 12.00, m: 3, rellenos: listaArepas, tipo: "var", img: ["https://github.com/Luisrojas1811/menu-mafsazon/blob/main/arepatresrellenos.jpg.jpeg?raw=true", "URL_2"] },
+                { n: "Arepa 1 Relleno", p: 5.00, m: 1, rellenos: listaArepas, tipo: "var", img: ["https://raw.githubusercontent.com/Luisrojas1811/menu-mafsazon/main/arepapollo.jpg.jpeg", "https://raw.githubusercontent.com/Luisrojas1811/menu-mafsazon/main/arepasalchicha.jpg.jpeg", "https://raw.githubusercontent.com/Luisrojas1811/menu-mafsazon/main/arepacarnemechada.jpg.jpeg"] },
+                { n: "Arepa 2 Rellenos", p: 9.00, m: 2, rellenos: listaArepas, tipo: "var", img: ["https://raw.githubusercontent.com/Luisrojas1811/menu-mafsazon/main/arepajamonqueso.jpg.jpeg"] },
+                { n: "Arepa 3 Rellenos", p: 12.00, m: 3, rellenos: listaArepas, tipo: "var", img: ["https://raw.githubusercontent.com/Luisrojas1811/menu-mafsazon/main/arepatresrellenos.jpg.jpeg"] },
                 { n: "Arepa Pabellón", p: 10.00, det: "Mechada, caraotas, tajadas y queso", tipo: "fijo" },
                 { n: "Arepa Dominó", p: 9.00, det: "Caraotas negras y queso", tipo: "fijo" },
-                { n: "Arepa criolla", p: 9.00, det: "huevo revuelto, caraotas ( porotos negros) y queso", tipo: "fijo" },
-                { n: "Arepa con perico", p: 9.00, det: "huevo revuelto", tipo: "fijo" },
-                { n: "Areburguer", p: 9.00, det: "arepa rellena de carne, jamon, queso, huevo, tomate y lechuga", tipo: "fijo" }
-                { n: "Arepa de verdura", p: 9.00, det: "arepa rellena de verduras salteadas", tipo: "fijo" }
+                { n: "Arepa Criolla", p: 9.00, det: "Huevo revuelto, caraotas y queso", tipo: "fijo" },
+                { n: "Arepa con Perico", p: 9.00, det: "Huevo revuelto con vegetales", tipo: "fijo", img: "https://raw.githubusercontent.com/Luisrojas1811/menu-mafsazon/main/arepaperico.jpg.jpeg" },
+                { n: "Areburguer", p: 9.00, det: "Carne, jamón, queso, huevo, tomate y lechuga", tipo: "fijo", img: "https://raw.githubusercontent.com/Luisrojas1811/menu-mafsazon/main/areburguer.jpg.jpeg" },
+                { n: "Arepa de Verdura", p: 9.00, det: "Verduras salteadas", tipo: "fijo", img: "https://raw.githubusercontent.com/Luisrojas1811/menu-mafsazon/main/arepaverdura.jpg.jpeg" }
             ]
         },
         { 
             cat: "Empanadas", 
-            placeholder: "Ej: Bien frita...",
+            placeholder: "Notas...",
             items: [
-                /* SOLO AGREGA TUS LINKS AQUÍ ABAJO */
-                { n: "Empanada 1 Relleno", p: 4.00, m: 1, rellenos: listaEmpanadas, tipo: "var", img: ["https://github.com/Luisrojas1811/menu-mafsazon/blob/main/empanadacarnemechada.jpg.jpeg?raw=true", "https://github.com/Luisrojas1811/menu-mafsazon/blob/main/empanadapollo.jpg.jpeg?raw=true", "https://github.com/Luisrojas1811/menu-mafsazon/blob/main/empanadaqueso.jpg.jpeg?raw=true", "URL_4"] },
-                { n: "Empanada 2 Rellenos", p: 7.50, m: 2, rellenos: listaEmpanadas, tipo: "var", img: ["https://github.com/Luisrojas1811/menu-mafsazon/blob/main/empanadajamonqueso.jpg.jpeg?raw=true", "URL_2"] },
-                { n: "Empanada 3 Rellenos", p: 7.50, m: 2, rellenos: listaEmpanadas, tipo: "var", img: ["https://github.com/Luisrojas1811/menu-mafsazon/blob/main/empanadatresrellenos.jpg.jpeg?raw=true", "URL_2"] },
-                { n: "Empanada Dominó", p: 6.00, det: "Porotos negros (caraotas y queso)", tipo: "fijo" },
+                { n: "Empanada 1 Relleno", p: 4.00, m: 1, rellenos: listaEmpanadas, tipo: "var", img: ["https://raw.githubusercontent.com/Luisrojas1811/menu-mafsazon/main/empanadacarnemechada.jpg.jpeg", "https://raw.githubusercontent.com/Luisrojas1811/menu-mafsazon/main/empanadapollo.jpg.jpeg"] },
+                { n: "Empanada 2 Rellenos", p: 7.50, m: 2, rellenos: listaEmpanadas, tipo: "var", img: ["https://raw.githubusercontent.com/Luisrojas1811/menu-mafsazon/main/empanadajamonqueso.jpg.jpeg"] },
                 { n: "Empanada Pabellón", p: 8.00, det: "Mechada, caraotas, tajadas y queso", tipo: "fijo" }
             ]
         },
-        { 
-            cat: "Cachapas", 
-            placeholder: "Ej: Con extra mantequilla...",
+        {
+            cat: "Cachapas",
             items: [
-                { 
-                    n: "Cachapa con queso", 
-                    p: 12.00, 
-                    det: "Masa de choclo, un poco de azúcar y sal.", 
-                    tipo: "fijo",
-                    img: "https://raw.githubusercontent.com/Luisrojas1811/menu-mafsazon/main/cachapa-queso.jpg.jpeg" 
-                },
-                { n: "Cachapa con jamón y queso", p: 14.00, det: "Masa de jojoto (choclo), azúcar y sal.", tipo: "fijo" },
-                { n: "Cachapa con queso y carne mechada", p: 16.00, det: "Masa de jojoto (choclo), azúcar, sal.", tipo: "fijo" },
-                { n: "Cachapa con queso y verduras", p: 16.00, det: "Masa de jojoto (choclo), azúcar, sal, relleno de verduras", tipo: "fijo" }
+                { n: "Cachapa con Queso", p: 12.00, det: "Masa de choclo artesanal", tipo: "fijo", img: "https://raw.githubusercontent.com/Luisrojas1811/menu-mafsazon/main/cachapa-queso.jpg.jpeg" },
+                { n: "Cachapa Jamón y Queso", p: 14.00, tipo: "fijo" },
+                { n: "Cachapa Queso y Mechada", p: 16.00, tipo: "fijo" }
             ]
         },
-        { 
-            cat: "Patacones", 
-            placeholder: "Ej: Con extra salsa...",
+        {
+            cat: "Patacones",
             items: [
-                { n: "Patacón de Pollo", p: 10.00, tipo: "fijo" }, 
-                { n: "Patacón de Carne", p: 10.00, tipo: "fijo" }, 
-                { n: "Patacón Mixto", p: 13.00, det: "Carne y pollo.", tipo: "fijo" },
-                { n: "Patacón Vegetariano", p: 11.00, det: "Con verduras salteadas.", tipo: "fijo" },
-                { n: "Tostones fritos con queso", p: 8.00, det: "Plátano aplastado frito con queso llanero.", tipo: "fijo" },
-                { n: "Tajadas con queso", p: 7.00, det: "Rodajas de plátano frito con queso blanco rallado.", tipo: "fijo" }
+                { n: "Patacón de Pollo", p: 10.00, tipo: "fijo" },
+                { n: "Patacón de Carne", p: 10.00, tipo: "fijo" },
+                { n: "Patacón Mixto", p: 13.00, det: "Carne y Pollo", tipo: "fijo" },
+                { n: "Tostones con Queso", p: 8.00, det: "Plátano frito con queso llanero", tipo: "fijo" }
             ]
         },
         {
             cat: "Tequeños",
-            placeholder: "Ej: Salsa extra...",
             items: [
-                { 
-                    n: "Tequeños (6 unidades)", 
-                    p: 10.00, 
-                    det: "Deditos de masa rellenos de queso.", 
-                    tipo: "fijo",
-                    img: "https://raw.githubusercontent.com/Luisrojas1811/menu-mafsazon/main/tequenos.jpg.jpeg"
-                },
-                { 
-                    n: "Tequeños (12 unidades)", 
-                    p: 18.00, 
-                    det: "Deditos de masa rellenos de queso.", 
-                    tipo: "fijo",
-                    img: "https://raw.githubusercontent.com/Luisrojas1811/menu-mafsazon/main/tequenos.jpg.jpeg" 
-                }
+                { n: "Tequeños (6 unidades)", p: 10.00, tipo: "fijo", img: "https://raw.githubusercontent.com/Luisrojas1811/menu-mafsazon/main/tequenos.jpg.jpeg" },
+                { n: "Tequeños (12 unidades)", p: 18.00, tipo: "fijo", img: "https://raw.githubusercontent.com/Luisrojas1811/menu-mafsazon/main/tequenos.jpg.jpeg" }
             ]
         },
         {
             cat: "Pollo Frito",
-            placeholder: "Notas especiales...",
             items: [
-                { 
-                    n: "Alitas a la Broaster", 
-                    p: 15.00, 
-                    det: "6 Alitas de pollo fritas (a la Broaster) + 6 arepitas + salsa de ajo.", 
-                    tipo: "fijo",
-                    img: "https://raw.githubusercontent.com/Luisrojas1811/menu-mafsazon/main/alitas.jpg.jpeg"
-                },
-                { n: "Pollo a la Broaster", p: 18.00, det: "Pollo frito empanizado, con ensalada de repollo y zanahoria, arepitas fritas.", tipo: "fijo" }
+                { n: "Alitas a la Broaster", p: 15.00, det: "6 alitas + 6 arepitas + salsa", tipo: "fijo", img: "https://raw.githubusercontent.com/Luisrojas1811/menu-mafsazon/main/alitas.jpg.jpeg" },
+                { n: "Pollo a la Broaster", p: 18.00, det: "Pollo, ensalada y arepitas", tipo: "fijo" }
             ]
         },
         {
-            cat: "Promociones Imperdibles",
+            cat: "Promociones",
             items: [
-                { n: "Promo 'La Gran Sabana'", p: 25.00, det: "3 Arepitas rellenas, 4 empanaditas, 6 alitas, 6 tequeños + salsa.", tipo: "fijo", placeholder: "Notas..." },
-                { n: "Promo Tequeños", p: 18.00, det: "2 Arepas rellenas (mechada y pollo) + 6 tequeños.", tipo: "fijo", placeholder: "Notas..." },
-                { 
-                    n: "Promo Arepa + Empanadas", 
-                    p: 15.00, 
-                    det: "1 Arepa + 2 empanadas. ¡Elige 3 rellenos en total!.", 
-                    tipo: "fijo", 
-                    placeholder: "ESPECIFICA TUS RELLENOS, por ejemplo: 'empanada: queso'" 
-                },
-                { n: "Promo Arepas Clásicas", p: 20.00, det: "3 Arepas: Mechada, Pollo, Jamón y Queso.", tipo: "fijo", placeholder: "Notas..." },
-                { n: "Promo Arepa Premium", p: 22.00, det: "3 Arepas: Mechada, Pollo, Reina Pepiada.", tipo: "fijo", placeholder: "Notas..." },
-                { n: "Promo Arepa Vegetariana", p: 18.00, det: "3 Arepas: Queso, Perico, Dominó.", tipo: "fijo", placeholder: "Notas..." }
+                { n: "Promo 'La Gran Sabana'", p: 25.00, det: "Arepitas, empanaditas, alitas y tequeños", tipo: "fijo", placeholder: "Notas..." },
+                { n: "Promo Arepa + Empanadas", p: 15.00, det: "1 Arepa + 2 empanadas", tipo: "fijo", placeholder: "Indica rellenos aquí..." }
             ]
         },
-        { 
-            cat: "Platos", 
-            placeholder: "Ej: Sin verdeo...",
+        {
+            cat: "Platos",
             items: [
-                { n: "Arroz con Pollo", p: 12.00, det: "Arroz, pollo, zanahoria, verdeo, cebolla, morrón.", tipo: "fijo" },
-                { n: "Pasta a la Boloñesa", p: 13.00, det: "Spaghetti con salsa de carne molida y queso rallado.", tipo: "fijo" },
-                { n: "Pabellón", p: 15.00, det: "Arroz, caraotas, carne mechada y tajadas.", tipo: "fijo" },
-                { n: "Asado Negro", p: 16.00, det: "Carne tierna en salsa de papelón y especias.", tipo: "fijo" }
+                { n: "Arroz con Pollo", p: 12.00, tipo: "fijo" },
+                { n: "Pabellón Criollo", p: 15.00, det: "Arroz, caraotas, mechada y tajadas", tipo: "fijo" }
             ]
         },
         { 
             cat: "Bebidas", 
             items: [
                 { n: "Nestea", p: 3.50, tipo: "fijo" }, 
-                { n: "Agua Panela", p: 3.00, tipo: "fijo" }, 
-                { n: "Malta", p: 3.00, tipo: "fijo" }, 
-                { n: "Gaseosa", p: 2.50, tipo: "fijo" }
+                { n: "Agua Panela", p: 3.00, tipo: "fijo", img: "https://raw.githubusercontent.com/Luisrojas1811/menu-mafsazon/main/aguapanela.jpg.jpeg" }, 
+                { n: "Malta", p: 3.00, tipo: "fijo" }
             ]
         }
     ];
@@ -355,38 +253,24 @@
             box.innerHTML += `<div class="categoria-titulo">${seccion.cat}</div>`;
             seccion.items.forEach((item, i) => {
                 const id = `${seccion.cat}-${i}`.replace(/\s+/g, '');
-                
-                // --- LÓGICA DE FOTOS (UNA O VARIAS) ---
                 let htmlFotos = "";
                 if (item.img) {
                     if (Array.isArray(item.img)) {
-                        // Varias fotos: Creamos el slider
-                        htmlFotos = `
-                            <div class="contenedor-img">
-                                ${item.img.map(url => `<img src="${url}" class="img-producto" onerror="this.style.display='none'">`).join('')}
-                                <div class="indicador-fotos">↔ Desliza</div>
-                            </div>`;
+                        htmlFotos = `<div class="contenedor-img">
+                            ${item.img.map(url => `<img src="${url}" class="img-producto" onerror="this.style.display='none'">`).join('')}
+                            <div class="indicador-fotos">↔ Slider</div></div>`;
                     } else {
-                        // Una sola foto: Vista normal
-                        htmlFotos = `
-                            <div class="contenedor-img">
-                                <img src="${item.img}" class="img-producto" onerror="this.style.display='none'">
-                            </div>`;
+                        htmlFotos = `<div class="contenedor-img"><img src="${item.img}" class="img-producto" onerror="this.style.display='none'"></div>`;
                     }
                 }
 
-                let htmlAccion = "";
-                if (item.tipo === "var") {
-                    htmlAccion = `<button class="btn-agregar" onclick="agregarVariable('${id}', '${item.n}', ${item.p}, ${item.m})">+ AGREGAR AL PEDIDO</button>`;
-                } else {
-                    cantidadesFijas[id] = 0;
-                    htmlAccion = `
-                        <div class="controles-qty">
-                            <button class="btn-qty" onclick="cambiarCantidad('${id}', '${item.n}', ${item.p}, -1, '${item.tipo}')">-</button>
-                            <span class="qty-num" id="qty-${id}">0</span>
-                            <button class="btn-qty" onclick="cambiarCantidad('${id}', '${item.n}', ${item.p}, 1, '${item.tipo}')">+</button>
-                        </div>`;
-                }
+                let htmlAccion = item.tipo === "var" ? 
+                    `<button class="btn-agregar" onclick="agregarVariable('${id}', '${item.n}', ${item.p}, ${item.m})">+ AGREGAR</button>` :
+                    `<div class="controles-qty">
+                        <button class="btn-qty" onclick="cambiarCantidad('${id}', '${item.n}', ${item.p}, -1, 'fijo')">-</button>
+                        <span class="qty-num" id="qty-${id}">0</span>
+                        <button class="btn-qty" onclick="cambiarCantidad('${id}', '${item.n}', ${item.p}, 1, 'fijo')">+</button>
+                    </div>`;
 
                 box.innerHTML += `
                     <div class="producto-card">
@@ -395,10 +279,9 @@
                         <div class="contenido">
                             <h3>${item.n} <span class="precio-tag">$${item.p.toFixed(2)}</span></h3>
                             ${item.det ? `<div class="descripcion">${item.det}</div>` : ''}
-                            ${item.rellenos ? `
-                                <div class="contenedor-rellenos" id="checks-${id}">
-                                    ${item.rellenos.map(r => `<label class="relleno-item"><input type="checkbox" value="${r}" onchange="validarChecks('${id}', ${item.m})"> ${r}</label>`).join('')}
-                                </div>` : ''}
+                            ${item.rellenos ? `<div class="contenedor-rellenos" id="checks-${id}">
+                                ${item.rellenos.map(r => `<label class="relleno-item"><input type="checkbox" value="${r}" onchange="validarChecks('${id}', ${item.m})"> ${r}</label>`).join('')}
+                            </div>` : ''}
                             ${(seccion.placeholder || item.placeholder) ? `<input type="text" id="nota-${id}" class="input-notas" placeholder="${item.placeholder || seccion.placeholder}" oninput="actualizarNotaFija('${id}')">` : ''}
                             ${htmlAccion}
                         </div>
@@ -409,100 +292,64 @@
 
     function validarChecks(id, limite) {
         const sel = document.querySelectorAll(`#checks-${id} input:checked`);
-        const nosel = document.querySelectorAll(`#checks-${id} input:not(:checked)`);
-        nosel.forEach(el => el.disabled = (sel.length >= limite));
+        document.querySelectorAll(`#checks-${id} input:not(:checked)`).forEach(el => el.disabled = (sel.length >= limite));
     }
 
-    function cambiarCantidad(id, nombre, precio, delta, tipo) {
-        cantidadesFijas[id] = Math.max(0, cantidadesFijas[id] + delta);
-        const elQty = document.getElementById(`qty-${id}`);
-        if(elQty) elQty.innerText = cantidadesFijas[id];
-        
-        const notaInput = document.getElementById(`nota-${id}`);
-        const nota = notaInput ? notaInput.value : "";
-
+    function cambiarCantidad(id, nombre, precio, delta) {
+        cantidadesFijas[id] = Math.max(0, (cantidadesFijas[id] || 0) + delta);
+        document.getElementById(`qty-${id}`).innerText = cantidadesFijas[id];
+        const nota = document.getElementById(`nota-${id}`)?.value || "";
         carrito = carrito.filter(item => item.id_ref !== id);
         if (cantidadesFijas[id] > 0) {
-            carrito.push({ id_ref: id, nombre, precio: precio * cantidadesFijas[id], cant: cantidadesFijas[id], nota, tipo: tipo, unitario: precio });
+            carrito.push({ id_ref: id, nombre, precio: precio * cantidadesFijas[id], cant: cantidadesFijas[id], nota });
         }
         actualizarCarrito();
     }
 
     function actualizarNotaFija(id) {
         const item = carrito.find(i => i.id_ref === id);
-        if (item) {
-            item.nota = document.getElementById(`nota-${id}`).value;
-            actualizarCarrito();
-        }
+        if (item) item.nota = document.getElementById(`nota-${id}`).value;
+        actualizarCarrito();
     }
 
     function agregarVariable(id, nombre, precio, limite) {
         const sel = Array.from(document.querySelectorAll(`#checks-${id} input:checked`)).map(c => c.value);
-        const notaInput = document.getElementById(`nota-${id}`);
-        const nota = notaInput ? notaInput.value : "";
-        if (sel.length !== limite) return alert(`Por favor selecciona ${limite} relleno(s) en total`);
-
-        carrito.push({ nombre, precio, rellenos: sel, nota, cant: 1, tipo: 'var' });
+        if (sel.length !== limite) return alert(`Elige ${limite} relleno(s)`);
+        const nota = document.getElementById(`nota-${id}`)?.value || "";
+        carrito.push({ nombre, precio, rellenos: sel, nota, cant: 1 });
         document.querySelectorAll(`#checks-${id} input`).forEach(c => { c.checked = false; c.disabled = false; });
-        if(notaInput) notaInput.value = "";
-        actualizarCarrito();
-    }
-
-    function eliminarDelCarrito(index) {
-        const item = carrito[index];
-        if (item.id_ref) {
-            cantidadesFijas[item.id_ref] = 0;
-            const elQty = document.getElementById(`qty-${item.id_ref}`);
-            if(elQty) elQty.innerText = "0";
-            const elNota = document.getElementById(`nota-${item.id_ref}`);
-            if(elNota) elNota.value = "";
-        }
-        carrito.splice(index, 1);
         actualizarCarrito();
     }
 
     function actualizarCarrito() {
         const res = document.getElementById('resumen');
+        let total = 0;
         if (carrito.length === 0) {
             res.innerHTML = "Tu pedido está vacío";
             document.getElementById('total-val').innerText = "Total: $0.00";
             return;
         }
-
-        let total = 0;
         res.innerHTML = carrito.map((item, index) => {
             total += item.precio;
-            return `
-                <div class="item-carrito">
-                    <div class="info-producto">
-                        <strong>${item.cant}x ${item.nombre}</strong><br>
-                        <small>${item.rellenos ? item.rellenos.join(', ') : ''} ${item.nota ? (item.rellenos ? ' | ' : '') + item.nota : ''}</small>
-                    </div>
-                    <div class="precio-y-borrar">
-                        <span>$${item.precio.toFixed(2)}</span>
-                        <button class="btn-eliminar" onclick="eliminarDelCarrito(${index})">✕</button>
-                    </div>
-                </div>`;
+            return `<div class="item-carrito">
+                <span>${item.cant}x ${item.nombre} ${item.rellenos ? '('+item.rellenos.join(',')+')' : ''}</span>
+                <span>$${item.precio.toFixed(2)}</span>
+            </div>`;
         }).join('');
-
         document.getElementById('total-val').innerText = `Total: $${total.toFixed(2)}`;
     }
 
     function enviarPedido() {
-        if (carrito.length === 0) return alert("Agrega productos.");
-        let msg = "*NUEVO PEDIDO PARA RETIRAR*%0A";
-        msg += "📍 Retiro en: Av. Cazón 375, Tigre%0A%0A";
-        carrito.forEach((item, i) => {
-            msg += `${i+1}. *${item.cant}x ${item.nombre}*%0A`;
-            if(item.rellenos) msg += `   _Rellenos: ${item.rellenos.join(', ')}_%0A`;
-            if(item.nota) msg += `   _Nota: ${item.nota}_%0A`;
-            msg += `%0A`;
+        if (carrito.length === 0) return alert("Carrito vacío");
+        let msg = "*NUEVO PEDIDO*%0A";
+        carrito.forEach(item => {
+            msg += `- ${item.cant}x ${item.nombre}${item.rellenos ? ' ('+item.rellenos.join(', ')+')' : ''}%0A${item.nota ? '  _Nota: '+item.nota+'_%0A' : ''}`;
         });
-        msg += `*${document.getElementById('total-val').innerText}*`;
+        msg += `%0A*${document.getElementById('total-val').innerText}*`;
         window.open(`https://wa.me/5491157440973?text=${msg}`);
     }
 
     init();
 </script>
 </body>
-</html
+</html>
